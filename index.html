@@ -218,6 +218,7 @@ button.fitem:hover{background:rgba(255,255,255,.08)}
 input[type=range]{width:100%;accent-color:var(--accent)}
 /* dialog / lightbox / toast */
 #dlg{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+#dlg .box:has(video){width:min(860px,100%)}
 #dlg .box{width:min(440px,100%);max-height:90vh;overflow:auto;border-radius:18px;padding:20px;background:#15171c;border:1px solid var(--line2)}
 #dlg h3{font-size:17px;margin-bottom:14px}
 #dlg .body{display:flex;flex-direction:column;gap:12px}
@@ -255,6 +256,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <a id="brand" href="#"><span class="logo">360</span><span style="min-width:0"><b id="dealerName"></b><small data-i="brandSub"></small></span></a>
   <div class="hact">
     <select class="inp" id="lang" aria-label="Language"></select>
+    <button class="btn" id="btnHow">🎓<span class="lbl" data-i="howTo"></span></button>
     <button class="btn hidden" id="btnSettings">⚙<span class="lbl" data-i="settings"></span></button>
     <button class="btn pri hidden" id="btnNew">＋<span class="lbl" data-i="addCar"></span></button>
   </div>
@@ -359,7 +361,7 @@ en:{_name:'English',_dir:'ltr',
  make:'Make',model:'Model',price:'Price',fuel_petrol:'Petrol',fuel_diesel:'Diesel',fuel_hybrid:'Hybrid',fuel_electric:'Electric',fuel_gas:'LPG / CNG',
  trans_auto:'Automatic',trans_manual:'Manual',titleOpt:'Listing title (optional)',titlePh:'Auto-built from make, model and year',status:'Status',desc:'Description',descPh:'A short description of the car…',
  dimsLbl:u=>`Dimensions in ${u} (for the garage checker)`,
- spinTip:'Walk around the car in a full circle and take a photo every 10–15° (24–36 photos), from the same distance and height, in landscape. Photos are ordered by file name.',
+ howTo:'How to shoot',howToT:'How to shoot your car — tutorial',howToW:'🎓 Watch: how to shoot',spinTip:'Walk around the car in a full circle and take a photo every 10–15° (24–36 photos), from the same distance and height, in landscape. Photos are ordered by file name.',
  spinUp:'＋ Choose spin photos (or drop them here)',photosN:n=>`${n} photos`,reverse:'⇄ Reverse spin direction',delCur:'Delete current photo',delAll:'Delete all',
  panoTip:'A 360° equirectangular cabin photo (2:1) — from a 360 camera such as Insta360 or Ricoh Theta, or your phone’s Photo Sphere mode.',
  panoUp:has=>has?'＋ Replace panorama':'＋ Choose panorama photo',view:'👁 View',setStart:'Use current direction as start',
@@ -436,7 +438,7 @@ ar:{_name:'العربية',_dir:'rtl',
  make:'الماركة',model:'الموديل',price:'السعر',fuel_petrol:'بنزين',fuel_diesel:'ديزل',fuel_hybrid:'هجين',fuel_electric:'كهربائية',fuel_gas:'غاز',
  trans_auto:'أوتوماتيك',trans_manual:'عادي (مانيوال)',titleOpt:'عنوان الإعلان (اختياري)',titlePh:'يُنشأ تلقائياً من الماركة والموديل والسنة',status:'الحالة',desc:'الوصف',descPh:'وصف قصير للسيارة…',
  dimsLbl:u=>`الأبعاد بـ${u==='m'?'المتر':'القدم'} (لحاسبة الكراج)`,
- spinTip:'صوّر السيارة وأنت تمشي حولها بدائرة كاملة، صورة كل 10–15 درجة (24–36 صورة)، من نفس المسافة والارتفاع وبالوضع الأفقي. تُرتَّب الصور حسب اسم الملف.',
+ howTo:'كيف تصوّر؟',howToT:'كيف تصوّر سيارتك — فيديو تعليمي',howToW:'🎓 شاهد: كيف تصوّر',spinTip:'صوّر السيارة وأنت تمشي حولها بدائرة كاملة، صورة كل 10–15 درجة (24–36 صورة)، من نفس المسافة والارتفاع وبالوضع الأفقي. تُرتَّب الصور حسب اسم الملف.',
  spinUp:'＋ اختر صور الدوران (أو اسحبها هنا)',photosN:n=>`${n} صورة`,reverse:'⇄ عكس اتجاه الدوران',delCur:'حذف الصورة الحالية',delAll:'حذف الكل',
  panoTip:'صورة 360° للمقصورة بصيغة equirectangular (نسبة 2:1) — من كاميرا 360 مثل Insta360 أو Ricoh Theta، أو من وضع Photo Sphere في الهاتف.',
  panoUp:has=>has?'＋ استبدال البانوراما':'＋ اختر صورة البانوراما',view:'👁 عرض',setStart:'اجعل الاتجاه الحالي نقطة البداية',
@@ -538,7 +540,7 @@ function dialog({title,html,ok,cancel,danger=false,onOk}){
   const f=d.querySelector('input,textarea');if(f)setTimeout(()=>f.focus(),50);
   return d;
 }
-function closeDlg(){$('#dlg').classList.add('hidden');}
+function closeDlg(){$$('#dlg video').forEach(v=>{try{v.pause();}catch(e){}});$('#dlg').classList.add('hidden');}
 $('#dlg').addEventListener('click',e=>{if(e.target.id==='dlg')closeDlg();});
 
 /* ================= 3D renderer (pano viewer + demo generator) ================= */
@@ -640,7 +642,7 @@ const stage=$('#stage');
 function car(){return editing?draft:cur;}
 function setView(v,quiet){
   const c=car();if(!c)return;view=v;
-  $('#spinCv').classList.toggle('hidden',v!=='ext');$('#panoCv').classList.toggle('hidden',v!=='int');$('#gal').classList.toggle('hidden',v!=='gal');
+  $('#spinCv').classList.toggle('hidden',v!=='ext');$('#panoCv').classList.toggle('hidden',v!=='int');$('#gal').classList.toggle('hidden',v!=='gal');$('#fxbar').style.display=v==='gal'?'none':'';
   $$('#stabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   $('#dial').classList.toggle('hidden',v!=='ext'||spin.n<2);
   $('#dragHint').textContent=v==='int'?t('dragInt'):t('dragExt');$('#dragHint').style.opacity=v==='gal'?0:$('#dragHint').style.opacity;
@@ -855,6 +857,7 @@ function renderEditor(){
       <label class="f full">${t('desc')}<textarea class="inp" data-k="desc" placeholder="${esc(t('descPh'))}">${esc(c.desc)}</textarea></label>
     </div></div></details>
     <details data-s="spin" ${isOpen('spin',true)}><summary>${t('s_spin')} <em>${(c.spin||[]).length?t('photosN',c.spin.length):''}</em></summary><div class="dbody">
+      <button class="btn sm" id="bHow" style="width:100%">${t('howToW')}</button>
       <p class="note">${t('spinTip')}</p>
       <div style="display:flex;gap:6px"><button class="btn sm" id="bGuided" style="flex:1">${t('guided')}</button><button class="btn sm" id="bVideo" style="flex:1">${t('fromVideo')}</button></div>
       <label class="upl" id="uSpin">${t('spinUp')}<input type="file" accept="image/*" multiple></label>
@@ -913,6 +916,7 @@ function renderEditor(){
   side.querySelectorAll('[data-fxu]').forEach(el=>el.onchange=e=>{const f=e.target.files[0];if(f)addFx(el.dataset.fxu,f);});
   side.querySelectorAll('[data-fxp]').forEach(b=>b.onclick=()=>playFx(b.dataset.fxp));
   side.querySelectorAll('[data-fxd]').forEach(b=>b.onclick=()=>{delete draft.fx[b.dataset.fxd];renderEditor();renderFxBar(draft);});
+  on('#bHow',showHowTo);
   on('#edSave',saveDraft);
   on('#edDel',()=>dialog({title:t('delCarT'),ok:t('delForever'),danger:true,html:`<p class="note">${esc(t('delCarB',carTitle(draft)))}</p>`,onOk:deleteCar}));
 }
@@ -1355,6 +1359,10 @@ $('#q').addEventListener('input',renderHome);
 
 /* ================= settings ================= */
 function applySettings(){const n=S.settings.dealer||t('defaultDealer');$('#dealerName').textContent=n;document.title=n+' — 360°';}
+function showHowTo(){const f=lang==='ar'?'how-to-ar.mp4':'how-to-en.mp4';
+  dialog({title:t('howToT'),ok:t('close'),cancel:lang==='ar'?'English':'العربية',html:`<video src="${f}" controls autoplay playsinline style="width:100%;border-radius:12px;background:#000;display:block"></video>`});
+  const b=$$('#dlg .acts .btn')[1];b.onclick=()=>{const v=$('#dlg video');const ar=/-ar\./.test(v.getAttribute('src'));v.src=ar?'how-to-en.mp4':'how-to-ar.mp4';b.textContent=ar?'العربية':'English';v.play().catch(()=>{});};}
+$('#btnHow').onclick=showHowTo;
 $('#btnSettings').onclick=()=>{const s=S.settings;let demo=s.showDemo!==false;
   const d=dialog({title:t('setT'),html:`<label class="f">${t('setName')}<input class="inp" id="sD" maxlength="60" value="${esc(s.dealer)}"></label>
     <label class="f">${t('setLang')}<select class="inp" id="sL"><option value="">Auto</option>${LANGS.map(k=>`<option value="${k}" ${s.lang===k?'selected':''}>${I18N[k]._name}</option>`).join('')}</select></label>
