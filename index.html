@@ -157,6 +157,20 @@ button.fitem:hover{background:rgba(255,255,255,.08)}
 #stEmpty b{display:block;color:#fff;font-size:17px;margin-bottom:4px}
 #dragHint{position:absolute;top:62px;left:50%;transform:translateX(-50%);font-size:12.5px;color:#cfd4dc;background:rgba(0,0,0,.45);padding:5px 12px;border-radius:999px;z-index:5;pointer-events:none;transition:opacity .6s;white-space:nowrap}
 #addHint{position:absolute;top:62px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;color:#2a1800;background:var(--warn);padding:7px 14px;border-radius:999px;z-index:7;white-space:nowrap}
+.fxbar{position:absolute;top:62px;inset-inline-start:14px;display:flex;flex-direction:column;gap:6px;z-index:6}
+.fxbar button{display:flex;align-items:center;gap:8px;padding:5px 13px 5px 5px;border-radius:999px;background:rgba(16,18,23,.8);backdrop-filter:blur(14px);border:1px solid var(--line);color:#e8ebf0;font-size:12.5px;font-weight:600;white-space:nowrap}
+.fxbar button:hover{border-color:var(--acc,#4fd1c5)}
+.fxbar button i{font-style:normal;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.09);font-size:15px}
+#fxPlay{position:absolute;inset:0;z-index:20;background:rgba(5,6,8,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px}
+#fxPlay h4{margin:0;font-size:17px;color:#fff}
+#fxPlay .fxm{max-width:100%;max-height:calc(100% - 90px);border-radius:14px;background:#000}
+#fxPlay .x{position:absolute;top:12px;inset-inline-end:12px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px}
+#fxPlay audio{width:min(360px,90%)}
+.fxAud{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;font-size:54px;background:rgba(79,209,197,.15);position:relative}
+.fxAud::before,.fxAud::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid rgba(79,209,197,.6);animation:fxr 1.6s infinite}
+.fxAud::after{animation-delay:.8s}
+@keyframes fxr{from{transform:scale(1);opacity:1}to{transform:scale(1.7);opacity:0}}
+.fxrow label.btn{cursor:pointer}
 .dial{position:absolute;bottom:22px;inset-inline-end:18px;width:44px;height:44px;z-index:5;pointer-events:none;opacity:.8}
 /* editor */
 .ed details{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:rgba(255,255,255,.02)}
@@ -232,6 +246,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   .card{bottom:64px}
   #dragHint,#addHint{top:54px}
   .dial{display:none}
+  .fxbar{top:54px;inset-inline-start:10px}.fxbar button{padding:4px}.fxbar button span{display:none}
 }
 </style>
 </head>
@@ -273,6 +288,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div id="addHint" class="hidden" data-i="addHint"></div>
     <svg class="dial" id="dial" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="rgba(0,0,0,.4)" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/><path id="dialArc" fill="none" stroke="#4fd1c5" stroke-width="3" stroke-linecap="round"/><text x="22" y="26" text-anchor="middle" font-size="10" fill="#fff" id="dialTxt">0°</text></svg>
     <div id="hsCard" class="card hidden"></div>
+    <div class="fxbar hidden" id="fxbar"></div>
+    <div id="fxPlay" class="hidden"></div>
     <div id="caption" class="card hidden"><p></p><div class="bar"><i></i></div>
       <div class="cf"><span id="capStep"></span><span><button class="btn sm" id="capVoice"></button><button class="btn sm" id="capNext" data-i="next"></button><button class="btn sm" id="capStop" data-i="end"></button></span></div></div>
     <div class="sbar" id="sbar">
@@ -361,7 +378,10 @@ en:{_name:'English',_dir:'ltr',
  setUnits:'Units',metric:'Metric (km, m)',imperial:'Imperial (mi, ft)',setFin:'Default finance calculator',setLang:'Default language for visitors',setDemo:'Demo car',show:'Show',hide:'Hide',
  bannerLocal:'Preview mode: cars you add here last only until you close the page. Open the page from its Claude link to save and share.',bannerNet:'Showroom data can’t be reached right now — it may be out of date.',bannerLoadFail:'Could not load cars.',
  tourIntro:t=>`Welcome to the 360° tour of the ${t}.`,tourInside:'Now let’s step inside the cabin.',
- tourEnd:'That’s the end of the tour. Thanks for watching!',pointsH:'Interactive points',nPoints:n=>`${n} points`,s_hsP:'5 · Interactive points',
+ tourEnd:'That’s the end of the tour. Thanks for watching!',pointsH:'Interactive points',nPoints:n=>`${n} points`,s_hsP:'5 · Interactive points',fx_engine:'Start engine',fx_horn:'Horn',fx_lights:'Lights',fx_wipers:'Wipers',fx_night:'At night',s_fx:'6 · Live features (sound & lights)',
+ fxTip:'Let buyers hear and see the car working. For each one, record a short video (5–10 seconds) with sound — ask someone to help if needed.',
+ fxH_engine:'Video while starting the car — buyers hear how the engine sounds.',fxH_horn:'A short video or sound of the horn.',fxH_lights:'Video at dusk: headlights, high beams, turn signals.',fxH_wipers:'Video of the front wipers working.',fxH_night:'A photo or video of the car at night with the lights on.',
+ fxAdd:'Add',fxReplace:'Replace',fxBig:'This clip is over 20 MB — record a shorter one (5–10 seconds).',upFx:'Uploading clip',fxBad:'Choose a video, sound or photo file.',
  noName:'Unnamed car',km:'km',mi:'mi',m:'m',ft:'ft',
  demoDesc:'A demo car to try every feature: spin it 360°, step inside the cabin, open the interactive points, or play the guided tour.\n\nTo add your own cars, press “Add car” and upload their photos.',
  demoColor:'Ocean blue',demoEngine:'Dual electric motors — 530 kW',
@@ -377,7 +397,10 @@ en:{_name:'English',_dir:'ltr',
  capNeed:'Take at least 4 photos',upShots:'Uploading photos',
  vidT:'Spin from a video',vidB:'Record one slow, steady circle around the car (phone, drone or RC car) and choose it here. Frames are extracted on your device.',
  vidPick:'＋ Choose video',vidStart:'Start of the circle',vidEnd:'End of the circle',vidCount:'Frames',vidGo:'Extract frames',vidWork:(a,b)=>`Extracting ${a}/${b}…`,
- vidFail:'This video can’t be read in this browser. Try an MP4 (H.264) file.',vidNeed:'Choose a video first',capPick:'What type of car is it?',bannerStandalone:'Test version: cars you add stay until you close the page — permanent saving comes next.',egMake:'e.g. Toyota',egModel:'e.g. Camry',egYear:'e.g. 2022',vinApprox:x=>`✓ Recognised (offline, approximate): ${x} — full details appear once the app is online`,sp_trim:'Trim',sp_bodyClass:'Body class',sp_engine:'Engine',sp_fuel:'Fuel',sp_drive:'Drive',sp_trans:'Transmission',sp_doors:'Doors',sp_seats:'Seats',sp_vtype:'Vehicle type',sp_plant:'Built in',
+ vidFail:'This video can’t be read in this browser. Try an MP4 (H.264) file.',vidNeed:'Choose a video first',capPick:'What type of car is it?',cabTip:'No 360 camera? Sit in the middle of the car and take 8 photos turning on the spot — or record one slow turn as a video.',cabPhone:'📷 Cabin with your phone',cabVideo:'🎬 Cabin from a video',
+ cabAngs:['1 · Windshield','2 · Front right','3 · Passenger window','4 · Rear right','5 · Rear seats','6 · Rear left','7 · Driver window','8 · Dashboard & wheel'],
+ cabHint:'Sit in the middle, hold the phone horizontally at head height. Turn right until the previous photo lines up with the dashed line, then shoot.',cabNeed:'Take all 8 photos to build the cabin view',
+ cabVidT:'Cabin from a video',cabVidB:'Sit in the middle of the car, hold the phone horizontally and turn slowly in one full circle while recording. Choose the video here.',bannerStandalone:'Test version: cars you add stay until you close the page — permanent saving comes next.',egMake:'e.g. Toyota',egModel:'e.g. Camry',egYear:'e.g. 2022',vinApprox:x=>`✓ Recognised (offline, approximate): ${x} — full details appear once the app is online`,sp_trim:'Trim',sp_bodyClass:'Body class',sp_engine:'Engine',sp_fuel:'Fuel',sp_drive:'Drive',sp_trans:'Transmission',sp_doors:'Doors',sp_seats:'Seats',sp_vtype:'Vehicle type',sp_plant:'Built in',
  vin:'VIN (chassis number)',vinPh:'17 letters and numbers',vinBtn:'Decode VIN',vinWork:'Decoding…',vinOk:x=>`✓ Recognised: ${x}`,vinPartial:x=>`✓ Make & year recognised: ${x} — choose the model and body type (full details appear once the app is online)`,
  vinBad:'A VIN has 17 letters and numbers (no I, O or Q).',vinUnknown:'Could not recognise this VIN — fill in the details manually.',bodyType:'Body type',capLevel:'Keep the camera at headlight height and the same distance all the way round.'},
 ar:{_name:'العربية',_dir:'rtl',
@@ -432,7 +455,10 @@ ar:{_name:'العربية',_dir:'rtl',
  setUnits:'الوحدات',metric:'متري (كم، م)',imperial:'إمبراطوري (ميل، قدم)',setFin:'حاسبة التمويل الافتراضية',setLang:'اللغة الافتراضية للزوار',setDemo:'السيارة التجريبية',show:'إظهار',hide:'إخفاء',
  bannerLocal:'وضع المعاينة: السيارات التي تضيفها هنا تبقى حتى إغلاق الصفحة فقط. افتح الصفحة من رابطها في Claude ليتم الحفظ والمشاركة.',bannerNet:'تعذّر الوصول إلى بيانات المعرض حالياً — قد تكون غير محدّثة.',bannerLoadFail:'تعذّر تحميل السيارات.',
  tourIntro:t=>`مرحباً بك في جولة 360° لسيارة ${t}.`,tourInside:'لننتقل الآن إلى داخل المقصورة.',
- tourEnd:'انتهت الجولة. شكراً لمشاهدتك!',pointsH:'النقاط التفاعلية',nPoints:n=>`${n} نقاط`,s_hsP:'5 · النقاط التفاعلية',
+ tourEnd:'انتهت الجولة. شكراً لمشاهدتك!',pointsH:'النقاط التفاعلية',nPoints:n=>`${n} نقاط`,s_hsP:'5 · النقاط التفاعلية',fx_engine:'تشغيل المحرك',fx_horn:'المنبّه',fx_lights:'الأضواء',fx_wipers:'الماسحات',fx_night:'في الليل',s_fx:'6 · مزايا حيّة (صوت وأضواء)',
+ fxTip:'دع المشتري يسمع ويرى السيارة وهي تعمل. صوّر لكل ميزة فيديو قصيراً (5–10 ثوانٍ) بالصوت — واطلب المساعدة من أحد إن احتجت.',
+ fxH_engine:'فيديو أثناء تشغيل السيارة — يسمع المشتري صوت المحرك.',fxH_horn:'فيديو قصير أو تسجيل لصوت المنبّه.',fxH_lights:'فيديو وقت الغروب: الأضواء الأمامية والعالية والإشارات.',fxH_wipers:'فيديو للماسحات الأمامية وهي تعمل.',fxH_night:'صورة أو فيديو للسيارة ليلاً والأضواء مضاءة.',
+ fxAdd:'إضافة',fxReplace:'استبدال',fxBig:'المقطع أكبر من 20 ميغابايت — صوّر مقطعاً أقصر (5–10 ثوانٍ).',upFx:'رفع المقطع',fxBad:'اختر ملف فيديو أو صوت أو صورة.',
  noName:'سيارة بدون اسم',km:'كم',mi:'ميل',m:'م',ft:'قدم',
  demoDesc:'سيارة تجريبية لتجربة كل الميزات: درّها 360°، ادخل المقصورة، افتح النقاط التفاعلية، أو شغّل الجولة الموجّهة.\n\nلإضافة سياراتك اضغط "إضافة سيارة" وارفع صورها.',
  demoColor:'أزرق محيطي',demoEngine:'محركان كهربائيان — 530 kW',
@@ -448,7 +474,10 @@ ar:{_name:'العربية',_dir:'rtl',
  capNeed:'التقط 4 صور على الأقل',upShots:'جارٍ رفع الصور',
  vidT:'الدوران من فيديو',vidB:'سجّل دورة واحدة بطيئة وثابتة حول السيارة (بالهاتف أو الدرون أو سيارة الريموت) ثم اختره هنا. تُستخرج الصور على جهازك.',
  vidPick:'＋ اختر الفيديو',vidStart:'بداية الدورة',vidEnd:'نهاية الدورة',vidCount:'عدد الصور',vidGo:'استخراج الصور',vidWork:(a,b)=>`جارٍ الاستخراج ${a}/${b}…`,
- vidFail:'لا يمكن قراءة هذا الفيديو في هذا المتصفح. جرّب ملف MP4 (H.264).',vidNeed:'اختر فيديو أولاً',capPick:'ما نوع السيارة؟',bannerStandalone:'نسخة تجريبية: السيارات التي تضيفها تبقى حتى إغلاق الصفحة — الحفظ الدائم في الخطوة القادمة.',egMake:'مثال: Toyota',egModel:'مثال: Camry',egYear:'مثال: 2022',vinApprox:x=>`✓ تم التعرّف (بدون اتصال، تقريبي): ${x} — تظهر التفاصيل الكاملة عند تشغيل التطبيق على الإنترنت`,sp_trim:'الفئة',sp_bodyClass:'تصنيف الهيكل',sp_engine:'المحرك',sp_fuel:'الوقود',sp_drive:'نظام الدفع',sp_trans:'ناقل الحركة',sp_doors:'الأبواب',sp_seats:'المقاعد',sp_vtype:'نوع المركبة',sp_plant:'مكان الصنع',
+ vidFail:'لا يمكن قراءة هذا الفيديو في هذا المتصفح. جرّب ملف MP4 (H.264).',vidNeed:'اختر فيديو أولاً',capPick:'ما نوع السيارة؟',cabTip:'لا تملك كاميرا 360؟ اجلس في منتصف السيارة والتقط 8 صور وأنت تدور في مكانك — أو سجّل دورة واحدة بطيئة بالفيديو.',cabPhone:'📷 المقصورة بالهاتف',cabVideo:'🎬 المقصورة من فيديو',
+ cabAngs:['1 · الزجاج الأمامي','2 · أمامي يمين','3 · نافذة الراكب','4 · خلفي يمين','5 · المقاعد الخلفية','6 · خلفي يسار','7 · نافذة السائق','8 · الطبلون والمقود'],
+ cabHint:'اجلس في المنتصف وأمسك الهاتف أفقياً بمستوى رأسك. استدر يميناً حتى تنطبق الصورة السابقة على الخط المتقطع، ثم التقط.',cabNeed:'التقط الصور الثماني كلها لتكوين عرض المقصورة',
+ cabVidT:'المقصورة من فيديو',cabVidB:'اجلس في منتصف السيارة، وأمسك الهاتف أفقياً، واستدر ببطء دورة كاملة وأنت تسجّل. ثم اختر الفيديو هنا.',bannerStandalone:'نسخة تجريبية: السيارات التي تضيفها تبقى حتى إغلاق الصفحة — الحفظ الدائم في الخطوة القادمة.',egMake:'مثال: Toyota',egModel:'مثال: Camry',egYear:'مثال: 2022',vinApprox:x=>`✓ تم التعرّف (بدون اتصال، تقريبي): ${x} — تظهر التفاصيل الكاملة عند تشغيل التطبيق على الإنترنت`,sp_trim:'الفئة',sp_bodyClass:'تصنيف الهيكل',sp_engine:'المحرك',sp_fuel:'الوقود',sp_drive:'نظام الدفع',sp_trans:'ناقل الحركة',sp_doors:'الأبواب',sp_seats:'المقاعد',sp_vtype:'نوع المركبة',sp_plant:'مكان الصنع',
  vin:'رقم الشاصي (VIN)',vinPh:'17 حرفاً ورقماً',vinBtn:'التعرّف على السيارة',vinWork:'جارٍ التعرّف…',vinOk:x=>`✓ تم التعرّف: ${x}`,vinPartial:x=>`✓ تم التعرّف على الماركة والسنة: ${x} — اختر الموديل ونوع الهيكل (تظهر التفاصيل الكاملة عند تشغيل التطبيق على الإنترنت)`,
  vinBad:'رقم الشاصي 17 حرفاً ورقماً (بدون الأحرف I و O و Q).',vinUnknown:'تعذّر التعرّف على هذا الرقم — أدخل البيانات يدوياً.',bodyType:'نوع الهيكل',capLevel:'أبقِ الكاميرا بمستوى المصابيح الأمامية وعلى نفس المسافة طوال الدورة.'}
 };
@@ -530,16 +559,33 @@ function panoLoad(p){
   if(!pano.ready)return;
   pano.cur=p;
   if(panoTex&&!panoTex.isRenderTargetTexture)panoTex.dispose();
+  if(pano.cyl){pano.scene.remove(pano.cyl);pano.cyl.traverse(o=>{if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose();}if(o.geometry)o.geometry.dispose();});pano.cyl=null;}
   panoTex=null;pano.mesh.material.map=null;pano.mesh.material.needsUpdate=true;loadMsg=null;
   pano.yaw=pano.gy=(p&&p.yaw0)||0;pano.pitch=pano.gp=(p&&p.pitch0)||0;pano.fov=pano.gfov=75;
   if(!p){pano.scene.background=null;return;}
   if(p.cube){pano.mesh.visible=false;pano.scene.background=p.cube;return;}
+  if(p.shots){pano.mesh.visible=false;pano.scene.background=new T.Color(0x0b0c0f);buildCyl(p);return;}
   pano.mesh.visible=true;pano.scene.background=new T.Color(0x0b0c0f);loadMsg='loadPano';
   new T.TextureLoader().load(srcOf(p),tex=>{
     if(pano.cur!==p){tex.dispose();return;}
     tex.encoding=T.sRGBEncoding;tex.anisotropy=pano.R.capabilities.getMaxAnisotropy();
     panoTex=tex;pano.mesh.material.map=tex;pano.mesh.material.needsUpdate=true;loadMsg=null;
   },undefined,()=>{if(pano.cur===p)loadMsg='panoFail';});
+}
+function buildCyl(p){
+  const n=p.shots.length,seg=Math.PI*2/n,hf=(p.hfov||62)*Math.PI/180,crop=Math.min(1,seg/hf),R=10,vf=2*Math.atan(Math.tan(hf/2)*3/4),Hh=2*R*Math.tan(vf/2);
+  const g=new T.Group();pano.cyl=g;pano.scene.add(g);let left=n;loadMsg='loadPano';
+  p.shots.forEach((sh,i)=>{
+    const yaw=i*seg,th=Math.PI/2-yaw;
+    const geo=new T.CylinderGeometry(R,R,Hh,24,1,true,th-seg/2-.004,seg+.008);
+    const mat=new T.MeshBasicMaterial({side:T.BackSide,color:0xffffff});
+    const m=new T.Mesh(geo,mat);g.add(m);
+    new T.TextureLoader().load(srcOf(sh),tex=>{
+      if(pano.cyl!==g){tex.dispose();return;}
+      tex.encoding=T.sRGBEncoding;tex.repeat.set(-crop,1);tex.offset.set(1-(1-crop)/2,0);
+      mat.map=tex;mat.needsUpdate=true;if(--left<=0)loadMsg=null;
+    },undefined,()=>{if(--left<=0)loadMsg=null;});
+  });
 }
 function panoResize(){
   if(!pano.ready)return;const w=pano.cv.clientWidth,h=pano.cv.clientHeight;if(!w||!h)return;
@@ -562,6 +608,7 @@ function spinLoad(list,keepFrame){
 const wrap=(i,n)=>((i%n)+n)%n;
 const circ=(d,n)=>{d=wrap(d,n);return d>n/2?d-n:d;};
 const circ2=d=>Math.atan2(Math.sin(d),Math.cos(d));
+const pitchLim=()=>{const c=car();return c&&c.pano&&c.pano.shots?.32:1.4;};
 function frameIdx(){return spin.n?wrap(Math.round(spin.cur),spin.n):0;}
 function spinResize(){const dpr=Math.min(devicePixelRatio||1,2);const w=spin.cv.clientWidth,h=spin.cv.clientHeight;
   spin.cw=w;spin.ch=h;if(spin.cv.width!==Math.round(w*dpr)||spin.cv.height!==Math.round(h*dpr)){spin.cv.width=Math.round(w*dpr);spin.cv.height=Math.round(h*dpr);}}
@@ -618,7 +665,7 @@ function refreshTabs(){
 $$('#stabs button').forEach(b=>b.onclick=()=>{if(b.disabled)return;stopTour();setView(b.dataset.v);});
 function mountCar(c){
   stopTour();hideHsCard();cancelAdd();
-  spinLoad(c.spin||[]);panoLoad(c.pano||null);renderGallery(c);buildHotspots(c);refreshTabs();
+  closeFx();spinLoad(c.spin||[]);panoLoad(c.pano||null);renderGallery(c);buildHotspots(c);refreshTabs();renderFxBar(c);
   const first=(c.spin||[]).length?'ext':c.pano?'int':(c.gallery||[]).length?'gal':'ext';
   $('#dragHint').style.opacity=1;setView(first);requestAnimationFrame(()=>{spinResize();panoResize();});
   clearTimeout(mountCar._t);mountCar._t=setTimeout(()=>$('#dragHint').style.opacity=0,5000);
@@ -688,7 +735,7 @@ function pmove(e){
     if(view==='ext'){
       if(spin.zoom>1.02){spin.px+=dx;spin.py+=dy;clampPan();}
       else if(spin.n>1){const k=spin.n/(Math.max(spin.cw,300)*.9);spin.cur-=dx*k;spin.vel=-dx*k;}
-    }else if(view==='int'){const f=pano.fov/75;pano.gy-=dx*.0045*f;pano.gp=clamp(pano.gp+dy*.0045*f,-1.4,1.4);}
+    }else if(view==='int'){const f=pano.fov/75;pano.gy-=dx*.0045*f;pano.gp=clamp(pano.gp+dy*.0045*f,-pitchLim(),pitchLim());}
   }else if(P.size===2){
     const [a,b]=[...P.values()],d=Math.hypot(a.x-b.x,a.y-b.y);
     if(pinch){const f=d/pinch;if(view==='ext')zoomAt(spin.zoom*f,(a.x+b.x)/2,(a.y+b.y)/2);else pano.gfov=clamp(pano.gfov/f,30,95);}
@@ -815,6 +862,8 @@ function renderEditor(){
       <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" id="sRev">${t('reverse')}</button><button class="btn sm" id="sDelOne">${t('delCur')}</button><button class="btn sm danger" id="sClr">${t('delAll')}</button></div>`:''}
     </div></details>
     <details data-s="pano" ${isOpen('pano',false)}><summary>${t('s_pano')} <em>${c.pano?'✓':''}</em></summary><div class="dbody">
+      <p class="note">${t('cabTip')}</p>
+      <div style="display:flex;gap:6px"><button class="btn sm" id="bCab" style="flex:1">${t('cabPhone')}</button><button class="btn sm" id="bCabVid" style="flex:1">${t('cabVideo')}</button></div>
       <p class="note">${t('panoTip')}</p>
       <label class="upl">${t('panoUp',!!c.pano)}<input type="file" accept="image/*" id="uPano"></label>
       ${c.pano?`<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" id="pView">${t('view')}</button><button class="btn sm" id="pSet">${t('setStart')}</button><button class="btn sm danger" id="pDel">${t('del')}</button></div>`:''}
@@ -828,6 +877,10 @@ function renderEditor(){
       <p class="note">${t('hsTip')}</p>
       <div style="display:flex;gap:6px"><button class="btn sm" id="aExt" style="flex:1">${t('addExt')}</button><button class="btn sm" id="aInt" style="flex:1">${t('addInt')}</button></div>
       <div class="flist" style="margin-top:4px">${(c.hs||[]).map((h,i)=>{const k=KC[h.k]||KC.feat;return `<div class="fitem"><span class="d" style="background:${k.c}">${k.i}</span><p>${esc(h.t)}<small>${h.v==='ext'?t('hsExt',h.f+1):t('hsInt')}</small></p><button class="btn sm" data-hf="${i}">${t('view')}</button><button class="btn sm danger" data-hd="${i}">×</button></div>`;}).join('')}</div>
+    </div></details>
+    <details data-s="fx" ${isOpen('fx',false)}><summary>${t('s_fx')} <em>${Object.keys(c.fx||{}).length||''}</em></summary><div class="dbody">
+      <p class="note">${t('fxTip')}</p>
+      <div class="flist">${FX.map(([k,ic])=>{const it=(c.fx||{})[k];return `<div class="fitem fxrow"><span class="d" style="background:#2b2f38">${ic}</span><p>${t('fx_'+k)}<small>${t('fxH_'+k)}</small></p>${it?`<button class="btn sm" data-fxp="${k}">▶</button>`:''}<label class="btn sm">${it?t('fxReplace'):t('fxAdd')}<input type="file" accept="video/*,audio/*,image/*" data-fxu="${k}" hidden></label>${it?`<button class="btn sm danger" data-fxd="${k}">×</button>`:''}</div>`;}).join('')}</div>
     </div></details>
   </div>
   <div class="sp-foot">
@@ -853,10 +906,13 @@ function renderEditor(){
   side.querySelectorAll('[data-gc]').forEach(el=>el.addEventListener('input',()=>{draft.gallery[+el.dataset.gc].cap=el.value;}));
   side.querySelectorAll('[data-gd]').forEach(b=>b.onclick=()=>{draft.gallery.splice(+b.dataset.gd,1);renderGallery(draft);renderEditor();refreshTabs();});
   on('#vinBtn',decodeVinUI);
-  on('#bGuided',openGuided);on('#bVideo',openVideo);
+  on('#bGuided',openGuided);on('#bVideo',()=>openVideo('ext'));on('#bCab',openCabin);on('#bCabVid',()=>openVideo('int'));
   on('#aExt',()=>startAdd('ext'));on('#aInt',()=>startAdd('int'));
   side.querySelectorAll('[data-hf]').forEach(b=>b.onclick=()=>focusHs(+b.dataset.hf));
   side.querySelectorAll('[data-hd]').forEach(b=>b.onclick=()=>{draft.hs.splice(+b.dataset.hd,1);buildHotspots(draft);renderEditor();hideHsCard();});
+  side.querySelectorAll('[data-fxu]').forEach(el=>el.onchange=e=>{const f=e.target.files[0];if(f)addFx(el.dataset.fxu,f);});
+  side.querySelectorAll('[data-fxp]').forEach(b=>b.onclick=()=>playFx(b.dataset.fxp));
+  side.querySelectorAll('[data-fxd]').forEach(b=>b.onclick=()=>{delete draft.fx[b.dataset.fxd];renderEditor();renderFxBar(draft);});
   on('#edSave',saveDraft);
   on('#edDel',()=>dialog({title:t('delCarT'),ok:t('delForever'),danger:true,html:`<p class="note">${esc(t('delCarB',carTitle(draft)))}</p>`,onOk:deleteCar}));
 }
@@ -901,13 +957,80 @@ async function addGal(files){
   draft.gallery=(draft.gallery||[]).concat(add.map(a=>Object.assign(a,{cap:''})));renderGallery(draft);refreshTabs();renderEditor();
 }
 
+/* ----- live features (engine, horn, lights, wipers, night) ----- */
+const FX=[['engine','🔑'],['horn','📯'],['lights','💡'],['wipers','🌧️'],['night','🌙']],FXK=FX.map(f=>f[0]);
+function fxKind(f){const ty=f.type||'',n=(f.name||'').toLowerCase();
+  if(/^video\//.test(ty)||/\.(mp4|mov|m4v|webm|3gp)$/.test(n))return'video';if(/^audio\//.test(ty)||/\.(mp3|m4a|wav|aac|ogg|amr)$/.test(n))return'audio';if(/^image\//.test(ty))return'image';return'';}
+async function addFx(k,file){
+  const kind=fxKind(file);if(!kind){toast(t('fxBad'));return;}
+  let obj=null;
+  try{
+    if(kind==='image'){setBusy(t('upFx'));obj=await storeImage(file,2000);}
+    else if(S.assets){if(file.size>20*1024*1024){toast(t('fxBig'));return;}setBusy(t('upFx'));const r=await S.assets.upload(file);obj={id:r.id};}
+    else obj={src:URL.createObjectURL(file)};
+  }catch(e){console.warn(e);setBusy(null);toast(t('tFail',1));return;}
+  setBusy(null);if(!editing||!draft)return;
+  draft.fx=draft.fx||{};draft.fx[k]=Object.assign(obj,{kind});
+  const d=$('#side details[data-s=fx]');renderEditor();const d2=$('#side details[data-s=fx]');if(d2)d2.open=true;renderFxBar(draft);
+}
+function renderFxBar(c){
+  const bar=$('#fxbar');if(!bar)return;const fx=(c&&c.fx)||{};const list=FX.filter(([k])=>fx[k]);
+  bar.innerHTML=list.map(([k,ic])=>`<button data-fx="${k}" title="${esc(t('fx_'+k))}"><i>${ic}</i><span>${esc(t('fx_'+k))}</span></button>`).join('');
+  bar.classList.toggle('hidden',!list.length);
+  bar.querySelectorAll('[data-fx]').forEach(b=>b.onclick=()=>playFx(b.dataset.fx));
+}
+let fxTimer=null;
+function closeFx(){const p=$('#fxPlay');clearInterval(fxTimer);fxTimer=null;p.querySelectorAll('video,audio').forEach(m=>{try{m.pause();}catch(e){}});p.innerHTML='';p.classList.add('hidden');}
+function playFx(k){
+  const c=car(),it=c&&c.fx&&c.fx[k];if(!it)return;stopTour();hideHsCard();closeFx();
+  const ic=(FX.find(f=>f[0]===k)||[])[1]||'',p=$('#fxPlay'),src=esc(srcOf(it));
+  let body='';
+  if(it.kind==='video')body=`<video class="fxm" src="${src}" controls autoplay playsinline></video>`;
+  else if(it.kind==='audio')body=`<div class="fxAud">${ic}</div><audio src="${src}" controls autoplay></audio>`;
+  else if(it.kind==='seq')body=`<img class="fxm" id="fxSeq" src="${esc(it.frames[0])}" alt="">${it.audio?`<audio src="${esc(it.audio)}" autoplay></audio>`:''}`;
+  else body=`<img class="fxm" src="${src}" alt="">`;
+  p.innerHTML=`<button class="x" aria-label="close">×</button><h4>${ic} ${esc(t('fx_'+k))}</h4>${body}`;
+  p.classList.remove('hidden');p.querySelector('.x').onclick=closeFx;
+  if(it.kind==='seq'){let i=0;const im=$('#fxSeq');fxTimer=setInterval(()=>{i=(i+1)%it.frames.length;im.src=it.frames[i];},1000/(it.fps||10));}
+}
+/* synthesized demo sounds */
+function wavURL(buf){const d=buf.getChannelData(0),sr=buf.sampleRate,n=d.length,b=new ArrayBuffer(44+n*2),v=new DataView(b);
+  const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
+  w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
+  let pk=0;for(let i=0;i<n;i++)pk=Math.max(pk,Math.abs(d[i]));const g=pk>0?.9/pk:1;
+  for(let i=0;i<n;i++)v.setInt16(44+i*2,Math.max(-1,Math.min(1,d[i]*g))*32767,true);
+  return URL.createObjectURL(new Blob([b],{type:'audio/wav'}));}
+async function synthEngine(){
+  const sr=22050,D=5.2,ac=new OfflineAudioContext(1,Math.round(sr*D),sr);
+  const nb=ac.createBuffer(1,Math.round(sr*D),sr),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  const n1=ac.createBufferSource();n1.buffer=nb;const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=650;bp.Q.value=1.4;const g1=ac.createGain();g1.gain.setValueAtTime(0,0);
+  for(let tt=.12;tt<1.2;tt+=.09){g1.gain.setValueAtTime(.06,tt);g1.gain.linearRampToValueAtTime(.55,tt+.025);g1.gain.linearRampToValueAtTime(.08,tt+.075);}g1.gain.setValueAtTime(.08,1.22);g1.gain.linearRampToValueAtTime(0,1.3);
+  n1.connect(bp).connect(g1).connect(ac.destination);n1.start(0);
+  const wo=ac.createOscillator();wo.type='sawtooth';wo.frequency.value=110;const wg=ac.createGain();wg.gain.setValueAtTime(0,0);wg.gain.linearRampToValueAtTime(.05,.12);wg.gain.setValueAtTime(.05,1.2);wg.gain.linearRampToValueAtTime(0,1.3);wo.connect(wg).connect(ac.destination);wo.start(0);
+  const env=g=>{g.gain.setValueAtTime(0,1.18);g.gain.linearRampToValueAtTime(1,1.3);g.gain.linearRampToValueAtTime(.7,3);g.gain.setValueAtTime(.7,D-.7);g.gain.linearRampToValueAtTime(0,D);};
+  const rev=(f,m)=>{f.setValueAtTime(26*m,1.18);f.linearRampToValueAtTime(78*m,1.65);f.exponentialRampToValueAtTime(30*m,3.0);f.setValueAtTime(30*m,D);};
+  const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(700,1.18);lp.frequency.linearRampToValueAtTime(1500,1.65);lp.frequency.linearRampToValueAtTime(420,3);lp.Q.value=2;
+  const eg=ac.createGain();env(eg);lp.connect(eg).connect(ac.destination);
+  const o1=ac.createOscillator();o1.type='sawtooth';rev(o1.frequency,1);const a1=ac.createGain();a1.gain.value=.5;o1.connect(a1).connect(lp);o1.start(0);
+  const o2=ac.createOscillator();o2.type='square';rev(o2.frequency,.5);const a2=ac.createGain();a2.gain.value=.35;o2.connect(a2).connect(lp);o2.start(0);
+  const n2=ac.createBufferSource();n2.buffer=nb;const lp2=ac.createBiquadFilter();lp2.type='lowpass';lp2.frequency.value=260;const a3=ac.createGain();a3.gain.value=.7;n2.connect(lp2).connect(a3).connect(lp);n2.start(0);
+  const lfo=ac.createOscillator();lfo.frequency.setValueAtTime(9,1.18);lfo.frequency.linearRampToValueAtTime(26,1.65);lfo.frequency.linearRampToValueAtTime(11,3);const lg=ac.createGain();lg.gain.value=.3;lfo.connect(lg).connect(a1.gain);lfo.start(0);
+  return wavURL(await ac.startRendering());}
+async function synthHorn(){
+  const sr=22050,D=1.5,ac=new OfflineAudioContext(1,Math.round(sr*D),sr);
+  const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2600;const g=ac.createGain();g.gain.setValueAtTime(0,0);
+  [[.05,.38],[.55,1.35]].forEach(([a,b])=>{g.gain.setValueAtTime(0,a);g.gain.linearRampToValueAtTime(.5,a+.015);g.gain.setValueAtTime(.5,b);g.gain.linearRampToValueAtTime(0,b+.03);});
+  lp.connect(g).connect(ac.destination);[415,523].forEach(f=>{const o=ac.createOscillator();o.type='square';o.frequency.value=f;o.connect(lp);o.start(0);});
+  return wavURL(await ac.startRendering());}
+
 /* ----- save / delete ----- */
 function clean(c){
   const num=v=>v===''||v==null||isNaN(+v)?'':+v;
   return{title:(c.title||'').trim(),make:(c.make||'').trim(),model:(c.model||'').trim(),year:num(c.year),color:(c.color||'').trim(),desc:(c.desc||'').trim(),vin:(c.vin||'').trim().toUpperCase(),body:c.body||'',specs:Object.fromEntries(Object.entries(c.specs||{}).filter(([k,v])=>SPEC_KEYS.includes(k)&&v).map(([k,v])=>[k,String(v).slice(0,120)])),
     spin:(c.spin||[]).map(s=>s.id?{id:s.id}:{src:s.src}),
-    pano:c.pano?Object.assign(c.pano.id?{id:c.pano.id}:{src:c.pano.src},{yaw0:+(c.pano.yaw0||0),pitch0:+(c.pano.pitch0||0)}):null,
+    pano:c.pano?Object.assign(c.pano.shots?{shots:c.pano.shots.map(x=>x.id?{id:x.id}:{src:x.src}),hfov:+(c.pano.hfov||62)}:(c.pano.id?{id:c.pano.id}:{src:c.pano.src}),{yaw0:+(c.pano.yaw0||0),pitch0:+(c.pano.pitch0||0)}):null,
     gallery:(c.gallery||[]).map(g=>Object.assign(g.id?{id:g.id}:{src:g.src},{cap:(g.cap||'').trim()})),
+    fx:Object.fromEntries(Object.entries(c.fx||{}).filter(([k,v])=>v&&FXK.includes(k)&&v.kind!=='seq'&&(v.id||v.src)).map(([k,v])=>[k,Object.assign(v.id?{id:v.id}:{src:v.src},{kind:v.kind})])),
     hs:(c.hs||[]).map(h=>Object.assign({v:h.v,k:h.k||'feat',t:h.t,d:h.d||''},h.v==='ext'?{f:h.f,x:h.x,y:h.y}:{yaw:h.yaw,pitch:h.pitch})),
     created:c.created||Date.now(),updated:Date.now()};
 }
@@ -926,7 +1049,7 @@ async function saveDraft(){
   toast(t('tSaved'));editing=false;draft=null;location.hash='car-'+c.id;
 }
 async function deleteCar(){
-  const c=draft,ids=[...(c.spin||[]),c.pano,...(c.gallery||[])].filter(x=>x&&x.id).map(x=>x.id);
+  const c=draft,ids=[...(c.spin||[]),c.pano,...(c.gallery||[]),...Object.values(c.fx||{})].filter(x=>x&&x.id).map(x=>x.id);
   if(S.db){try{await S.db.collection('cars').doc(c.id).delete();}catch(e){toast(t('tDelFail'));return false;}
     if(S.assets)for(const id of ids){try{await S.assets.delete(id);}catch(e){}}}
   S.cars=S.cars.filter(x=>x.id!==c.id);editing=false;draft=null;toast(t('tDeleted'));location.hash='';
@@ -1029,6 +1152,22 @@ function silReady(){
     return true;
   }catch(e){console.warn(e);sil.R=null;return false;}
 }
+function traceContour(b,W,H){
+  let s=-1;for(let i=0;i<W*H;i++){if(b[i]){s=i;break;}}if(s<0)return[];
+  const N=[[-1,0],[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1]];
+  const fg=(x,y)=>x>=0&&y>=0&&x<W&&y<H&&b[y*W+x]===1;
+  const ix=(dx,dy)=>N.findIndex(n=>n[0]===dx&&n[1]===dy);
+  let px=s%W,py=(s/W)|0,bi=0;const sx=px,sy=py,pts=[[px,py]];let guard=0;
+  while(guard++<40000){
+    let moved=false;
+    for(let k=1;k<=8;k++){const ci=(bi+k)%8,cx=px+N[ci][0],cy=py+N[ci][1];
+      if(fg(cx,cy)){const pi=(ci+7)%8,bx=px+N[pi][0],by=py+N[pi][1];px=cx;py=cy;bi=ix(bx-px,by-py);if(bi<0)bi=0;moved=true;break;}}
+    if(!moved)break;
+    if(px===sx&&py===sy)break;
+    pts.push([px,py]);
+  }
+  pts.push([sx,sy]);return pts;
+}
 function silOutline(th,type){
   const key=type+':'+cap.sl+':'+cap.sh+':'+th.toFixed(4);if(sil.cache[key])return sil.cache[key];
   Object.values(sil.groups).forEach(g=>g.visible=false);
@@ -1038,22 +1177,26 @@ function silOutline(th,type){
   sil.R.render(sil.scene,sil.cam);
   const W=640,H=360,mk=()=>{const c=document.createElement('canvas');c.width=W;c.height=H;return c;};
   const mask=mk();mask.getContext('2d').drawImage(sil.R.domElement,0,0);
-  const col=mk(),cx=col.getContext('2d');cx.drawImage(mask,0,0);cx.globalCompositeOperation='source-in';cx.fillStyle='#4fd1c5';cx.fillRect(0,0,W,H);
-  const ring=mk(),g=ring.getContext('2d');
-  for(let a=0;a<16;a++)g.drawImage(col,Math.cos(a/16*6.2832)*3.2,Math.sin(a/16*6.2832)*3.2);
-  g.globalCompositeOperation='destination-out';g.drawImage(mask,0,0);
-  const pc=document.createElement('canvas');pc.width=pc.height=9;const px=pc.getContext('2d');px.fillStyle='#fff';px.beginPath();px.arc(4.5,4.5,2.6,0,7);px.fill();
-  g.globalCompositeOperation='destination-in';g.fillStyle=g.createPattern(pc,'repeat');g.fillRect(0,0,W,H);
+  const md=mask.getContext('2d').getImageData(0,0,W,H).data,bin=new Uint8Array(W*H);
+  for(let i=0;i<W*H;i++)bin[i]=md[i*4+3]>110?1:0;
+  const path=traceContour(bin,W,H);
   const out=mk(),o=out.getContext('2d');
-  o.globalAlpha=.12;o.drawImage(col,0,0);o.globalAlpha=1;o.drawImage(ring,0,0);
+  // faint fill so the shape reads
+  const col=mk(),cx=col.getContext('2d');cx.drawImage(mask,0,0);cx.globalCompositeOperation='source-in';cx.fillStyle='#ffffff';cx.fillRect(0,0,W,H);
+  o.globalAlpha=.10;o.drawImage(col,0,0);o.globalAlpha=1;
+  // evenly spaced dots along the contour
+  const dots=[];let acc=0,step=11;
+  for(let i=1;i<path.length;i++){const [x0,y0]=path[i-1],[x1,y1]=path[i];const d=Math.hypot(x1-x0,y1-y0);acc+=d;if(acc>=step){acc-=step;dots.push([x1,y1]);}}
+  o.fillStyle='rgba(0,0,0,.65)';dots.forEach(([x,y])=>{o.beginPath();o.arc(x+.5,y+.5,4.4,0,7);o.fill();});
+  o.fillStyle='#ffffff';dots.forEach(([x,y])=>{o.beginPath();o.arc(x+.5,y+.5,3,0,7);o.fill();});
   return sil.cache[key]=out;
 }
-const cap={n:24,type:'sedan',sl:1,sh:1,i:0,shots:[],urls:[],live:false,stream:null,th0:Math.PI/4};
+const cap={mode:'ext',n:24,type:'sedan',sl:1,sh:1,i:0,shots:[],urls:[],live:false,stream:null,th0:Math.PI/4};
 const capTheta=i=>cap.th0+i*Math.PI*2/cap.n;
 const angleName=th=>t('angs')[wrap(Math.round(Math.atan2(Math.cos(th),Math.sin(th))*180/Math.PI/45),8)];
 function openGuided(){
   if(!silReady()){toast(t('noWebgl'));return;}
-  cap.n=24;cap.sl=cap.sh=1;
+  cap.mode='ext';cap.n=24;cap.sl=cap.sh=1;
   const go=type=>{cap.type=type;if(draft){draft.body=type;const sel=$('#side [data-k=body]');if(sel)sel.value=type;}startCapture();};
   if(draft&&BODY[draft.body]){go(draft.body);return;}
   const d=dialog({title:t('capPick'),cancel:t('cancel'),html:`<p class="note">${t('capLevel')}</p>
@@ -1076,18 +1219,20 @@ async function startCapture(){
 }
 function capStop(){if(cap.stream){cap.stream.getTracks().forEach(x=>x.stop());cap.stream=null;}$('#capVid').srcObject=null;$('#cap').classList.add('hidden');}
 function capRender(){
-  const i=cap.i,th=capTheta(i),has=!!cap.shots[i],done=cap.shots.filter(Boolean).length;
-  $('#capLbl').textContent=angleName(th);$('#capSub').textContent=t('capStep',i+1,cap.n);
-  $('#capHint').textContent=has?t('capHintDone'):cap.live?t('capHintLive'):t('capHintFile');
+  const i=cap.i,th=capTheta(i),has=!!cap.shots[i],done=cap.shots.filter(Boolean).length,cab=cap.mode==='int';
+  $('#capLbl').textContent=cab?t('cabAngs')[i]:angleName(th);$('#capSub').textContent=t('capStep',i+1,cap.n);
+  $('#capHint').textContent=cab?(has?t('capHintDone'):t('cabHint')):has?t('capHintDone'):cap.live?t('capHintLive'):t('capHintFile');
   $('#capRetake').textContent=t('capRetake');$('#capRetake').style.visibility=has?'visible':'hidden';
   $('#capNextB').textContent=has?t('capNext'):t('capSkip');
-  $('#capDone').textContent=t('capFinish',done);$('#capDone').disabled=done<4;
+  $('#capDone').textContent=t('capFinish',done);$('#capDone').disabled=cab?done<cap.n:done<4;
   const img=$('#capImg');if(has){img.src=cap.urls[i];img.classList.remove('hidden');}else img.classList.add('hidden');
   $('#capVid').classList.toggle('hidden',!cap.live||has);
   // overlay
   const ov=$('#capOv'),r=ov.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
   ov.width=Math.max(1,Math.round(r.width*dpr));ov.height=Math.max(1,Math.round(r.height*dpr));
-  const c=ov.getContext('2d');c.clearRect(0,0,ov.width,ov.height);c.drawImage(silOutline(th,cap.type),0,0,ov.width,ov.height);
+  const c=ov.getContext('2d');c.clearRect(0,0,ov.width,ov.height);
+  if(cab){cabOverlay(c,ov.width,ov.height,i);capMapCabin(i);$('#capDots').innerHTML=cap.shots.map((s,k)=>`<i class="${k===i?'c':s?'d':''}"></i>`).join('');return;}
+  c.drawImage(silOutline(th,cap.type),0,0,ov.width,ov.height);
   // map
   const pts=[];for(let k=0;k<cap.n;k++){const a=capTheta(k);pts.push(`<circle cx="${(40+31*Math.sin(a)).toFixed(1)}" cy="${(40+31*Math.cos(a)).toFixed(1)}" r="${k===i?4.2:2.4}" fill="${k===i?'#fff':cap.shots[k]?'#4fd1c5':'rgba(255,255,255,.25)'}"/>`);}
   $('#capMap').innerHTML=`<circle cx="40" cy="40" r="31" fill="none" stroke="rgba(255,255,255,.15)"/><rect x="26" y="33" width="28" height="14" rx="5" fill="#2f3a4a" stroke="#cfd4dc"/><path d="M54 36 L58 40 L54 44 Z" fill="#4fd1c5"/>`+pts.join('');
@@ -1112,22 +1257,49 @@ $('#capNextB').onclick=()=>{cap.i=(cap.i+1)%cap.n;capRender();};
 $('#capDots').onclick=e=>{const k=[...$('#capDots').children].indexOf(e.target);if(k>=0){cap.i=k;capRender();}};
 $('#capX').onclick=capStop;
 $('#capDone').onclick=async()=>{
-  const list=cap.shots.filter(Boolean);if(list.length<4){toast(t('capNeed'));return;}
+  const list=cap.shots.filter(Boolean);
+  if(cap.mode==='int'){if(list.length<cap.n){toast(t('cabNeed'));return;}capStop();
+    const files=list.map((b,k)=>b instanceof File?b:new File([b],`cabin_${k+1}.jpg`,{type:'image/jpeg'}));await addCabin(files,62);return;}
+  if(list.length<4){toast(t('capNeed'));return;}
   capStop();
   const files=list.map((b,k)=>b instanceof File?b:new File([b],`shot_${String(k+1).padStart(2,'0')}.jpg`,{type:'image/jpeg'}));
   await addSpin(files,true);
 };
 addEventListener('resize',()=>{if(!$('#cap').classList.contains('hidden'))capRender();});
 
+/* ================= cabin from phone ================= */
+function openCabin(){cap.mode='int';cap.n=8;startCapture();}
+function cabOverlay(c,W,H,i){
+  // centre line + overlap guide from the previous photo (its right edge on our left edge)
+  const prev=cap.shots[(i-1+cap.n)%cap.n]&&cap.urls[(i-1+cap.n)%cap.n];
+  const ovw=W*.27;
+  if(prev&&i>0){const im=cabOverlay.cache||(cabOverlay.cache={});let img=im[prev];
+    if(!img){img=new Image();img.onload=()=>{if(cap.i===i&&!cap.shots[i])capRender();};img.src=prev;im[prev]=img;}
+    if(img.complete&&img.naturalWidth){c.globalAlpha=.5;c.drawImage(img,img.naturalWidth*(1-.27),0,img.naturalWidth*.27,img.naturalHeight,0,0,ovw,H);c.globalAlpha=1;
+      c.strokeStyle='#ffffff';c.setLineDash([8,8]);c.lineWidth=3;c.beginPath();c.moveTo(ovw,0);c.lineTo(ovw,H);c.stroke();c.setLineDash([]);}}
+  c.strokeStyle='rgba(255,255,255,.55)';c.lineWidth=2;c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();
+  c.beginPath();c.arc(W/2,H/2,18,0,7);c.stroke();
+}
+function capMapCabin(i){
+  const pts=[];for(let k=0;k<cap.n;k++){const a=k/cap.n*Math.PI*2;const x=40+26*Math.sin(a),y=40-26*Math.cos(a);
+    pts.push(`<path d="M40 40 L${(40+31*Math.sin(a-.33)).toFixed(1)} ${(40-31*Math.cos(a-.33)).toFixed(1)} A31 31 0 0 1 ${(40+31*Math.sin(a+.33)).toFixed(1)} ${(40-31*Math.cos(a+.33)).toFixed(1)} Z" fill="${k===i?'rgba(255,255,255,.85)':cap.shots[k]?'rgba(79,209,197,.6)':'rgba(255,255,255,.12)'}"/>`);}
+  $('#capMap').innerHTML=pts.join('')+`<rect x="31" y="26" width="18" height="28" rx="6" fill="#2f3a4a" stroke="#cfd4dc"/><path d="M36 26 L40 20 L44 26 Z" fill="#4fd1c5"/>`;
+}
+async function addCabin(files,hfov){
+  const add=await uploadMany(files,1600,t('upPano'),true);if(add.length<files.length||!editing){if(add.length&&editing)toast(t('tFail',files.length-add.length));if(!add.length)return;}
+  draft.pano={shots:add,hfov,yaw0:0,pitch0:0};panoLoad(draft.pano);refreshTabs();setView('int');renderEditor();
+}
+
 /* ================= spin from video ================= */
-function openVideo(){
-  let url=null,dur=0,n=36;
-  const d=dialog({title:t('vidT'),ok:t('vidGo'),html:`<p class="note">${t('vidB')}</p>
+function openVideo(target){
+  const cabin=target==='int';
+  let url=null,dur=0,n=cabin?12:36;
+  const d=dialog({title:cabin?t('cabVidT'):t('vidT'),ok:t('vidGo'),html:`<p class="note">${cabin?t('cabVidB'):t('vidB')}</p>
     <label class="upl">${t('vidPick')}<input type="file" accept="video/*" id="vF"></label>
     <div class="vidbox hidden" id="vBox"><video id="vV" muted playsinline preload="auto"></video>
       <label class="f" style="margin-top:8px">${t('vidStart')} <b id="vSL"></b><input type="range" id="vS" min="0" max="1000" value="0"></label>
       <label class="f">${t('vidEnd')} <b id="vEL"></b><input type="range" id="vE" min="0" max="1000" value="1000"></label>
-      <div><label class="f">${t('vidCount')}</label><div class="seg" id="vN" style="margin-top:5px">${[24,36,48].map(v=>`<button data-v="${v}" class="${v===n?'on':''}">${v}</button>`).join('')}</div></div>
+      ${cabin?'':`<div><label class="f">${t('vidCount')}</label><div class="seg" id="vN" style="margin-top:5px">${[24,36,48].map(v=>`<button data-v="${v}" class="${v===n?'on':''}">${v}</button>`).join('')}</div></div>`}
     </div><div class="busy hidden" id="vBusy"></div>`,
     onOk:async dd=>{
       const v=dd.querySelector('#vV');if(!url||!dur){toast(t('vidNeed'));return false;}
@@ -1145,7 +1317,7 @@ function openVideo(){
         }
       }catch(e){toast(t('vidFail'));dd.querySelectorAll('.acts .btn').forEach(x=>x.disabled=false);busyEl.classList.add('hidden');return false;}
       URL.revokeObjectURL(url);closeDlg();
-      await addSpin(blobs,true);
+      if(cabin)await addCabin(blobs,62);else await addSpin(blobs,true);
     }});
   const v=d.querySelector('#vV'),fmtT=x=>x.toFixed(1)+'s';
   const upd=(which)=>{const sv=+d.querySelector('#vS').value/1000*dur,ev=+d.querySelector('#vE').value/1000*dur;d.querySelector('#vSL').textContent=fmtT(sv);d.querySelector('#vEL').textContent=fmtT(ev);
@@ -1199,12 +1371,12 @@ function showView(v){$('#home').classList.toggle('hidden',v!=='home');$('#viewer
 let routeKey='';
 function loadingSide(){showView('viewer');$('#side').innerHTML=`<div class="sp"><p class="note">${t('loading')}</p></div>`;}
 function route(force){
-  const h=location.hash.slice(1);
+  const h=location.hash.slice(1);if(!/^(car|edit)-/.test(h))closeFx();
   if(h.startsWith('car-')){
     const id=h.slice(4),c=findCar(id);
     if(!c){if(!S.loaded||(id==='demo'&&!S.demo)){loadingSide();return;}toast(t('tNotFound'));location.hash='';return;}
     showView('viewer');
-    const key='v:'+id+':'+JSON.stringify([c.spin,c.pano&&(c.pano.id||c.pano.src||'cube'),c.gallery,c.hs]);
+    const key='v:'+id+':'+JSON.stringify([c.spin,c.pano&&(c.pano.id||c.pano.src||(c.pano.shots?JSON.stringify(c.pano.shots):'cube')),c.gallery,c.hs,c.fx&&Object.keys(c.fx)]);
     const same=routeKey.startsWith('v:'+id+':');
     editing=false;draft=null;cur=c;
     if(!same||key!==routeKey){mountCar(c);}
@@ -1216,8 +1388,8 @@ function route(force){
     if(editing&&draft&&(id===draft.id||(!id&&routeKey==='e:new'))){if(force===true){refreshTabs();setView(view,true);renderEditor();}return;}
     let c;
     if(id){const src=findCar(id);if(!src){if(!S.loaded)return;toast(t('tNotFound'));location.hash='';return;}if(src.demo){location.hash='car-demo';return;}c=JSON.parse(JSON.stringify(src));}
-    else c={id:newId(),title:'',make:'',model:'',year:'',color:'',desc:'',vin:'',body:'',spin:[],pano:null,gallery:[],hs:[]};
-    c.spin=c.spin||[];c.gallery=c.gallery||[];c.hs=c.hs||[];
+    else c={id:newId(),title:'',make:'',model:'',year:'',color:'',desc:'',vin:'',body:'',spin:[],pano:null,gallery:[],hs:[],fx:{}};
+    c.spin=c.spin||[];c.gallery=c.gallery||[];c.hs=c.hs||[];c.fx=c.fx||{};
     showView('viewer');editing=true;draft=c;cur=null;routeKey=id?'e:'+id:'e:new';busy=null;vinMsg='';
     mountCar(c);renderEditor();
   }else{
@@ -1277,7 +1449,7 @@ function buildDemo(){
   const etex=new T.CanvasTexture(ec);etex.mapping=T.EquirectangularReflectionMapping;etex.encoding=T.sRGBEncoding;
   const pm=new T.PMREMGenerator(R);scene.environment=pm.fromEquirectangular(etex).texture;scene.background=etex;
   scene.fog=new T.Fog(lin('#121316'),16,60);
-  scene.add(new T.HemisphereLight(0xffffff,0x202020,.55));
+  const hemi=new T.HemisphereLight(0xffffff,0x202020,.55);scene.add(hemi);
   const sun=new T.DirectionalLight(0xffffff,2.1);sun.position.set(4,9,5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
   Object.assign(sun.shadow.camera,{left:-6,right:6,top:6,bottom:-6,near:1,far:40});sun.shadow.bias=-.0004;scene.add(sun);
   const ground=new T.Mesh(new T.CircleGeometry(90,96),new T.MeshStandardMaterial({color:lin('#17191d'),roughness:.32,metalness:.35}));
@@ -1339,13 +1511,31 @@ function buildDemo(){
   const stx=new T.CanvasTexture(sc);stx.encoding=T.sRGBEncoding;
   im(new T.BoxGeometry(.03,.23,.4),M.trim,[.37,1.11,0],[0,0,.18]);
   const scr=new T.Mesh(new T.PlaneGeometry(.38,.21),new T.MeshBasicMaterial({map:stx}));scr.position.set(.353,1.11,0);scr.rotation.set(0,-Math.PI/2,0);scr.rotateX(-.18);car.add(scr);
+  // wipers (lie on the windscreen, sweep up)
+  const sv=new T.Vector3(-.83,.56,0).normalize(),nv=new T.Vector3(.56,.83,0).normalize(),bx=new T.Vector3(0,0,-1);
+  const wq=new T.Quaternion().setFromRotationMatrix(new T.Matrix4().makeBasis(bx,sv,nv));const wipers=[];
+  [.66,.02].forEach(z=>{const h=new T.Group();h.position.set(.8,.99,z).addScaledVector(nv,.075);h.quaternion.copy(wq);car.add(h);
+    const r=new T.Group();h.add(r);mesh(new T.BoxGeometry(.62,.022,.02),M.trim,r,[.31,0,0]);mesh(new T.BoxGeometry(.56,.012,.035),M.trim,r,[.33,.0,-.012]);
+    mesh(new T.CylinderGeometry(.03,.03,.03,16).rotateX(Math.PI/2),M.trim,r);r.rotation.z=.07;wipers.push(r);});
+  // night / headlight rig
+  const nc=document.createElement('canvas');nc.width=1024;nc.height=512;const nx=nc.getContext('2d');const ng=nx.createLinearGradient(0,0,0,512);
+  ng.addColorStop(0,'#0b1222');ng.addColorStop(.49,'#070a12');ng.addColorStop(.51,'#050608');ng.addColorStop(1,'#030304');nx.fillStyle=ng;nx.fillRect(0,0,1024,512);
+  nx.fillStyle='rgba(255,210,140,.55)';for(let i=0;i<14;i++)nx.fillRect(30+i*72,232+(i%3)*6,6,4);nx.fillStyle='rgba(230,235,255,.9)';nx.beginPath();nx.arc(780,90,14,0,7);nx.fill();
+  const ntex=new T.CanvasTexture(nc);ntex.mapping=T.EquirectangularReflectionMapping;ntex.encoding=T.sRGBEncoding;const nenv=pm.fromEquirectangular(ntex).texture,denv=scene.environment;
+  const spots=[-1,1].map(s=>{const L=new T.SpotLight(0xfff2dc,0,30,.55,.5,1);L.position.set(2.42,.74,s*.62);L.target.position.set(7,0,s*1.3);scene.add(L,L.target);return L;});
+  const tailL=new T.PointLight(0xff2020,0,3,2);tailL.position.set(-2.7,.8,0);scene.add(tailL);
+  scene.userData={
+    wipers:a=>wipers.forEach(w=>w.rotation.z=a),
+    night:on=>{scene.background=on?ntex:etex;scene.environment=on?nenv:denv;hemi.intensity=on?.16:.55;sun.intensity=on?.45:2.1;sun.color.set(on?0x8fa0ff:0xffffff);scene.fog.color.copy(lin(on?'#040507':'#121316'));
+      if(!on){M.head.emissiveIntensity=1.2;M.head.color.copy(lin('#e8eeff'));M.tail.emissiveIntensity=1.4;spots.forEach(L=>L.intensity=0);tailL.intensity=0;}},
+    lights:on=>{M.head.emissiveIntensity=on?3.4:.03;M.head.color.copy(lin(on?'#e8eeff':'#6c7078'));M.tail.emissiveIntensity=on?2.8:.08;spots.forEach(L=>L.intensity=on?16:0);tailL.intensity=on?.7:0;}};
   return scene;
 }
 function localizeDemo(){
   const r=S.demoRaw;if(!r)return;
   const dx=t('dx'),di=t('di'),dg=t('dg');
   S.demo={id:'demo',demo:true,title:'Nova GT 2026',make:'Nova',model:'GT',year:2026,color:t('demoColor'),desc:t('demoDesc'),spin:r.frames,pano:r.pano,
-    gallery:r.gal.map((g,i)=>({src:g,cap:dg[i]})),
+    gallery:r.gal.map((g,i)=>({src:g,cap:dg[i]})),fx:r.fx||{},
     hs:r.hs.map(h=>Object.assign({},h,{t:(h.v==='ext'?dx:di)[h.n][0],d:(h.v==='ext'?dx:di)[h.n][1]}))};
 }
 async function generateDemo(){
@@ -1375,12 +1565,26 @@ async function generateDemo(){
     [[.45,1.35,3.0,[1.4,.42,.8]],[1.3,1.3,4.0,[1.8,.65,0]],[-2.25,1.25,7.6,[0,.6,0]],[.6,.42,9,[0,.5,0]]].forEach(([th,ph,r,tt])=>{
       const tv=new T.Vector3(...tt);gc.position.setFromSpherical(new T.Spherical(r,ph,th)).add(tv);gc.lookAt(tv);R.render(scene,gc);gal.push(R.domElement.toDataURL('image/jpeg',.86));});
     await tick();
+    // live-feature clips for the demo: wipers, lights, night, engine & horn sounds
+    const fx={};
+    try{const U=scene.userData;
+      const FW=960,FH=540;R.setSize(FW,FH,false);const fc=new T.PerspectiveCamera(30,FW/FH,.1,200),ft=new T.Vector3(.4,1.0,0);fc.position.set(6.6,1.95,0);fc.lookAt(ft);
+      const up=[];for(let i=0;i<9;i++){U.wipers(.07+1.3*Math.sin(i/8*Math.PI/2));R.render(scene,fc);up.push(R.domElement.toDataURL('image/jpeg',.84));if(i%3===2)await tick();}
+      U.wipers(.07);fx.wipers={kind:'seq',fps:14,frames:up.concat(up.slice(1,-1).reverse(),[up[0],up[0],up[0]])};
+      U.night(true);const nc2=new T.PerspectiveCamera(34,FW/FH,.1,200),nt=new T.Vector3(.8,.55,0);nc2.position.set(6.2,1.45,4.6);nc2.lookAt(nt);
+      U.lights(false);R.render(scene,nc2);const off=R.domElement.toDataURL('image/jpeg',.86);U.lights(true);R.render(scene,nc2);const on=R.domElement.toDataURL('image/jpeg',.86);
+      nc2.position.set(-6.4,1.5,4.4);nc2.lookAt(new T.Vector3(-.6,.6,0));R.render(scene,nc2);const back=R.domElement.toDataURL('image/jpeg',.86);
+      U.night(false);
+      fx.lights={kind:'seq',fps:1.25,frames:[off,on,on]};fx.night={kind:'seq',fps:.4,frames:[on,back]};
+      await tick();
+      try{fx.engine={kind:'audio',src:await synthEngine()};fx.horn={kind:'audio',src:await synthHorn()};}catch(e){console.warn('audio',e);}
+    }catch(e){console.warn('fx',e);}
     const crt=new T.WebGLCubeRenderTarget(1024,{generateMipmaps:false});const cc=new T.CubeCamera(.02,100,crt);
     const DRV=new T.Vector3(-.42,1.2,-.38);cc.position.copy(DRV);scene.add(cc);cc.update(R,scene);
     [[[.36,1.11,0],'feat'],[[.13,1.02,-.38],'feat'],[[-.4,.95,.38],'feat'],[[-1.22,.95,0],'feat'],[[.36,.94,.6],'feat']].forEach(([pp,k],idx)=>{
       const d=new T.Vector3(...pp).sub(DRV).normalize();hs.push({v:'int',yaw:+Math.atan2(d.z,d.x).toFixed(4),pitch:+Math.asin(d.y).toFixed(4),k,n:idx});});
     R.shadowMap.enabled=false;R.toneMapping=T.NoToneMapping;R.toneMappingExposure=1;R.setPixelRatio(prevPR);panoResize();
-    S.demoRaw={frames,gal,hs,pano:{cube:crt.texture,yaw0:0,pitch0:-.1}};localizeDemo();
+    S.demoRaw={frames,gal,hs,fx,pano:{cube:crt.texture,yaw0:0,pitch0:-.1}};localizeDemo();
   }catch(e){console.warn('demo failed',e);}
   S.demoBusy=false;route();
 }
