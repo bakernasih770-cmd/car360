@@ -129,6 +129,9 @@ button.fitem:hover{background:rgba(255,255,255,.08)}
 .stabs button:disabled{opacity:.35;cursor:default}
 #hsLayer{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden}
 .hs{position:absolute;left:0;top:0;margin:-15px 0 0 -15px;width:30px;height:30px;border-radius:50%;pointer-events:auto;display:grid;place-items:center;border:2px solid #fff;font-size:15px;font-weight:700;line-height:1;transition:opacity .2s,background .2s;box-shadow:0 2px 12px rgba(0,0,0,.45)}
+.hs.fxhs{background:rgba(79,209,197,.9);color:#06221f;font-size:16px;width:36px;height:36px;margin:-18px 0 0 -18px;animation:fxpulse 2s infinite}
+@keyframes fxpulse{0%{box-shadow:0 0 0 0 rgba(79,209,197,.7)}70%{box-shadow:0 0 0 14px rgba(79,209,197,0)}100%{box-shadow:0 0 0 0 rgba(79,209,197,0)}}
+.hs.fxhs .tip{opacity:1;bottom:44px}
 .hs.k-feat{background:rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(6px)}
 .hs.k-ok{background:var(--ok);color:#06210f}
 .hs.k-minor{background:var(--warn);color:#2a1800}
@@ -171,6 +174,7 @@ button.fitem:hover{background:rgba(255,255,255,.08)}
 .fxAud::after{animation-delay:.8s}
 @keyframes fxr{from{transform:scale(1);opacity:1}to{transform:scale(1.7);opacity:0}}
 .fxrow label.btn{cursor:pointer}
+.fxrow{flex-wrap:wrap}.fxrow p{flex:1 1 calc(100% - 44px)}.fxacts{display:flex;gap:6px;flex-wrap:wrap;width:100%;padding-inline-start:34px}.fxacts .btn{flex:none}
 .dial{position:absolute;bottom:22px;inset-inline-end:18px;width:44px;height:44px;z-index:5;pointer-events:none;opacity:.8}
 /* editor */
 .ed details{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:rgba(255,255,255,.02)}
@@ -383,7 +387,7 @@ en:{_name:'English',_dir:'ltr',
  tourEnd:'That’s the end of the tour. Thanks for watching!',pointsH:'Interactive points',nPoints:n=>`${n} points`,s_hsP:'5 · Interactive points',fx_engine:'Start engine',fx_horn:'Horn',fx_lights:'Lights',fx_wipers:'Wipers',fx_night:'At night',s_fx:'6 · Live features (sound & lights)',
  fxTip:'Let buyers hear and see the car working. For each one, record a short video (5–10 seconds) with sound — ask someone to help if needed.',
  fxH_engine:'Video while starting the car — buyers hear how the engine sounds.',fxH_horn:'A short video or sound of the horn.',fxH_lights:'Video at dusk: headlights, high beams, turn signals.',fxH_wipers:'Video of the front wipers working.',fxH_night:'A photo or video of the car at night with the lights on.',
- fxAdd:'Add',fxReplace:'Replace',fxBig:'This clip is over 20 MB — record a shorter one (5–10 seconds).',upFx:'Uploading clip',fxBad:'Choose a video, sound or photo file.',
+ fxAdd:'Add',fxMore:'＋ Another feature',fxMoreT:'Add another feature',fxMoreB:'Pick one or type your own — only add what this car really has.',fxName:'Feature name',fxNamePh:'e.g. Sunroof',fxCustomH:'Record a short video of it working.',fxPlace:'📍 Place',fxPlaced:'📍 Placed — tap it in the 360° view',fxPlaceHint:n=>`Tap where the ${n} control is (e.g. on the dashboard) — Esc to cancel`,fxPlacedT:'Placed. Buyers can now tap that spot.',fxNeedView:'Add the 360° photos or cabin first.',fxPlaceTip:'Then press 📍 Place and tap the spot in the car — the start button, the middle of the steering wheel, the wiper stalk — so buyers press it like the real thing.',fxReplace:'Replace',fxBig:'This clip is over 20 MB — record a shorter one (5–10 seconds).',upFx:'Uploading clip',fxBad:'Choose a video, sound or photo file.',
  noName:'Unnamed car',km:'km',mi:'mi',m:'m',ft:'ft',
  demoDesc:'A demo car to try every feature: spin it 360°, step inside the cabin, open the interactive points, or play the guided tour.\n\nTo add your own cars, press “Add car” and upload their photos.',
  demoColor:'Ocean blue',demoEngine:'Dual electric motors — 530 kW',
@@ -460,7 +464,7 @@ ar:{_name:'العربية',_dir:'rtl',
  tourEnd:'انتهت الجولة. شكراً لمشاهدتك!',pointsH:'النقاط التفاعلية',nPoints:n=>`${n} نقاط`,s_hsP:'5 · النقاط التفاعلية',fx_engine:'تشغيل المحرك',fx_horn:'المنبّه',fx_lights:'الأضواء',fx_wipers:'الماسحات',fx_night:'في الليل',s_fx:'6 · مزايا حيّة (صوت وأضواء)',
  fxTip:'دع المشتري يسمع ويرى السيارة وهي تعمل. صوّر لكل ميزة فيديو قصيراً (5–10 ثوانٍ) بالصوت — واطلب المساعدة من أحد إن احتجت.',
  fxH_engine:'فيديو أثناء تشغيل السيارة — يسمع المشتري صوت المحرك.',fxH_horn:'فيديو قصير أو تسجيل لصوت المنبّه.',fxH_lights:'فيديو وقت الغروب: الأضواء الأمامية والعالية والإشارات.',fxH_wipers:'فيديو للماسحات الأمامية وهي تعمل.',fxH_night:'صورة أو فيديو للسيارة ليلاً والأضواء مضاءة.',
- fxAdd:'إضافة',fxReplace:'استبدال',fxBig:'المقطع أكبر من 20 ميغابايت — صوّر مقطعاً أقصر (5–10 ثوانٍ).',upFx:'رفع المقطع',fxBad:'اختر ملف فيديو أو صوت أو صورة.',
+ fxAdd:'إضافة',fxMore:'＋ ميزة أخرى',fxMoreT:'إضافة ميزة أخرى',fxMoreB:'اختر واحدة أو اكتب ميزتك — أضف فقط ما في هذه السيارة فعلاً.',fxName:'اسم الميزة',fxNamePh:'مثلاً: فتحة السقف',fxCustomH:'صوّر فيديو قصيراً لها وهي تعمل.',fxPlace:'📍 حدّد مكانه',fxPlaced:'📍 مكانه محدّد — يُضغط في عرض 360°',fxPlaceHint:n=>`اضغط على مكان ${n} (مثلاً على الداشبورد) — Esc للإلغاء`,fxPlacedT:'تم. يستطيع المشتري الآن الضغط على هذا المكان.',fxNeedView:'أضف صور الدوران أو المقصورة أولاً.',fxPlaceTip:'ثم اضغط «📍 حدّد مكانه» واضغط على مكانه في السيارة — زر التشغيل، وسط المقود، ذراع الماسحات — ليضغطه المشتري كأنه حقيقي.',fxReplace:'استبدال',fxBig:'المقطع أكبر من 20 ميغابايت — صوّر مقطعاً أقصر (5–10 ثوانٍ).',upFx:'رفع المقطع',fxBad:'اختر ملف فيديو أو صوت أو صورة.',
  noName:'سيارة بدون اسم',km:'كم',mi:'ميل',m:'م',ft:'قدم',
  demoDesc:'سيارة تجريبية لتجربة كل الميزات: درّها 360°، ادخل المقصورة، افتح النقاط التفاعلية، أو شغّل الجولة الموجّهة.\n\nلإضافة سياراتك اضغط "إضافة سيارة" وارفع صورها.',
  demoColor:'أزرق محيطي',demoEngine:'محركان كهربائيان — 530 kW',
@@ -692,6 +696,9 @@ function buildHotspots(c){
     b.onclick=e=>{e.stopPropagation();stopTour();showHsCard(i);};
     L.appendChild(b);hsEls.push({h,el:b,i});
   });
+  fxItems(c).forEach(({k,ic,name,it})=>{if(!hasFxMedia(it)||!it.pos)return;const b=document.createElement('button');
+    b.className='hs fxhs';b.innerHTML=`${ic}<span class="tip">${esc(name)}</span>`;b.onclick=e=>{e.stopPropagation();if(adding)return;playFx(k);};
+    L.appendChild(b);hsEls.push({h:it.pos,el:b,i:-1});});
 }
 const pv=T?new T.Vector3():null;
 function placeHotspots(){
@@ -760,6 +767,7 @@ function stageClick(e){
     const d=rc.ray.direction;h={v:'int',yaw:+Math.atan2(d.z,d.x).toFixed(4),pitch:+Math.asin(clamp(d.y,-1,1)).toFixed(4)};
   }
   if(!h)return;
+  if(addingFx){const k=addingFx;if(draft.fx&&draft.fx[k]){draft.fx[k].pos=h;}cancelAdd();buildHotspots(draft);renderEditor();toast(t('fxPlacedT'));return;}
   Object.assign(h,{k:'feat',t:'',d:''});
   hsDialog(h,()=>{draft.hs.push(h);buildHotspots(draft);renderEditor();cancelAdd();showHsCard(draft.hs.length-1);},true);
 }
@@ -775,7 +783,13 @@ function startAdd(v){
   adding=v;setView(v);stage.classList.add('adding');$('#addHint').classList.remove('hidden');
   if(innerWidth<860)stage.scrollIntoView({behavior:'smooth'});
 }
-function cancelAdd(){adding=null;stage.classList.remove('adding');$('#addHint').classList.add('hidden');}
+let addingFx=null;
+function placeFx(k){
+  const inside=k!=='night',hasI=!!draft.pano,hasE=!!(draft.spin||[]).length;
+  const v=inside?(hasI?'int':hasE?'ext':null):(hasE?'ext':hasI?'int':null);if(!v)return toast(t('fxNeedView'));
+  startAdd(v);addingFx=k;$('#addHint').textContent=t('fxPlaceHint',fxInfo(draft,k).name);
+}
+function cancelAdd(){addingFx=null;$('#addHint').textContent=t('addHint');adding=null;stage.classList.remove('adding');$('#addHint').classList.add('hidden');}
 
 $('#btnHs').onclick=()=>{hsOn=!hsOn;$('#btnHs').classList.toggle('on',hsOn);};
 $('#btnReset').onclick=()=>{stopTour();spin.zoom=1;spin.px=spin.py=0;pano.gfov=75;const p=car()&&car().pano;pano.gy=(p&&p.yaw0)||0;pano.gp=(p&&p.pitch0)||0;spinToFrame(0,900);};
@@ -881,9 +895,10 @@ function renderEditor(){
       <div style="display:flex;gap:6px"><button class="btn sm" id="aExt" style="flex:1">${t('addExt')}</button><button class="btn sm" id="aInt" style="flex:1">${t('addInt')}</button></div>
       <div class="flist" style="margin-top:4px">${(c.hs||[]).map((h,i)=>{const k=KC[h.k]||KC.feat;return `<div class="fitem"><span class="d" style="background:${k.c}">${k.i}</span><p>${esc(h.t)}<small>${h.v==='ext'?t('hsExt',h.f+1):t('hsInt')}</small></p><button class="btn sm" data-hf="${i}">${t('view')}</button><button class="btn sm danger" data-hd="${i}">×</button></div>`;}).join('')}</div>
     </div></details>
-    <details data-s="fx" ${isOpen('fx',false)}><summary>${t('s_fx')} <em>${Object.keys(c.fx||{}).length||''}</em></summary><div class="dbody">
-      <p class="note">${t('fxTip')}</p>
-      <div class="flist">${FX.map(([k,ic])=>{const it=(c.fx||{})[k];return `<div class="fitem fxrow"><span class="d" style="background:#2b2f38">${ic}</span><p>${t('fx_'+k)}<small>${t('fxH_'+k)}</small></p>${it?`<button class="btn sm" data-fxp="${k}">▶</button>`:''}<label class="btn sm">${it?t('fxReplace'):t('fxAdd')}<input type="file" accept="video/*,audio/*,image/*" data-fxu="${k}" hidden></label>${it?`<button class="btn sm danger" data-fxd="${k}">×</button>`:''}</div>`;}).join('')}</div>
+    <details data-s="fx" ${isOpen('fx',false)}><summary>${t('s_fx')} <em>${Object.values(c.fx||{}).filter(hasFxMedia).length||''}</em></summary><div class="dbody">
+      <p class="note">${t('fxTip')} ${t('fxPlaceTip')}</p>
+      <div class="flist">${fxItems(c).map(({k,ic,name,hint,it,custom})=>{const m=hasFxMedia(it);return `<div class="fitem fxrow"><span class="d" style="background:#2b2f38">${ic}</span><p>${esc(name)}<small>${m&&it.pos?t('fxPlaced'):hint}</small></p><div class="fxacts">${m?`<button class="btn sm" data-fxp="${k}">▶</button><button class="btn sm" data-fxl="${k}">${t('fxPlace')}</button>`:''}<label class="btn sm">${m?t('fxReplace'):t('fxAdd')}<input type="file" accept="video/*,audio/*,image/*" data-fxu="${k}" hidden></label>${m||custom?`<button class="btn sm danger" data-fxd="${k}">×</button>`:''}</div></div>`;}).join('')}</div>
+      <button class="btn sm" id="bFxMore" style="width:100%">${t('fxMore')}</button>
     </div></details>
   </div>
   <div class="sp-foot">
@@ -915,7 +930,9 @@ function renderEditor(){
   side.querySelectorAll('[data-hd]').forEach(b=>b.onclick=()=>{draft.hs.splice(+b.dataset.hd,1);buildHotspots(draft);renderEditor();hideHsCard();});
   side.querySelectorAll('[data-fxu]').forEach(el=>el.onchange=e=>{const f=e.target.files[0];if(f)addFx(el.dataset.fxu,f);});
   side.querySelectorAll('[data-fxp]').forEach(b=>b.onclick=()=>playFx(b.dataset.fxp));
-  side.querySelectorAll('[data-fxd]').forEach(b=>b.onclick=()=>{delete draft.fx[b.dataset.fxd];renderEditor();renderFxBar(draft);});
+  side.querySelectorAll('[data-fxl]').forEach(b=>b.onclick=()=>placeFx(b.dataset.fxl));
+  on('#bFxMore',addFxMore);
+  side.querySelectorAll('[data-fxd]').forEach(b=>b.onclick=()=>{delete draft.fx[b.dataset.fxd];buildHotspots(draft);renderEditor();renderFxBar(draft);});
   on('#bHow',showHowTo);
   on('#edSave',saveDraft);
   on('#edDel',()=>dialog({title:t('delCarT'),ok:t('delForever'),danger:true,html:`<p class="note">${esc(t('delCarB',carTitle(draft)))}</p>`,onOk:deleteCar}));
@@ -963,6 +980,22 @@ async function addGal(files){
 
 /* ----- live features (engine, horn, lights, wipers, night) ----- */
 const FX=[['engine','🔑'],['horn','📯'],['lights','💡'],['wipers','🌧️'],['night','🌙']],FXK=FX.map(f=>f[0]);
+const FX_SUG=[['⏱️','Dashboard & mileage (no warning lights)','الداشبورد والعداد (بلا لمبات تحذير)'],['❄️','A/C blowing cold','المكيّف يبرّد'],['🌤️','Sunroof','فتحة السقف'],['📷','Backup camera','كاميرا الرجوع'],
+  ['📱','Screen & CarPlay','الشاشة وCarPlay'],['🚪','Power tailgate','الباب الخلفي الكهربائي'],['🔥','Heated seats','تدفئة المقاعد'],['💺','Third-row seats','الصف الثالث من المقاعد'],['🪟','Power windows','النوافذ الكهربائية'],['🔊','Sound system','نظام الصوت']];
+const isCustomFx=k=>/^x[a-z0-9]+$/.test(k),hasFxMedia=it=>!!(it&&(it.id||it.src||it.frames));
+function fxItems(c){const fx=(c&&c.fx)||{};
+  return FX.map(([k,ic])=>({k,ic,name:t('fx_'+k),hint:t('fxH_'+k),it:fx[k],custom:false}))
+    .concat(Object.keys(fx).filter(isCustomFx).map(k=>({k,ic:fx[k].ic||'⭐',name:fx[k].name||'',hint:t('fxCustomH'),it:fx[k],custom:true})));}
+const fxInfo=(c,k)=>fxItems(c).find(f=>f.k===k)||{ic:'',name:''};
+function addFxMore(){
+  let ic='⭐';const sug=FX_SUG.map((x,i)=>`<button class="btn sm" data-sg="${i}" style="margin:0 6px 6px 0">${x[0]} ${esc(lang==='ar'?x[2]:x[1])}</button>`).join('');
+  const d=dialog({title:t('fxMoreT'),ok:t('fxAdd'),html:`<p class="note" style="margin-bottom:10px">${t('fxMoreB')}</p><div style="display:flex;flex-wrap:wrap;margin-bottom:8px">${sug}</div>
+    <label class="f">${t('fxName')}<input class="inp" id="fxn" maxlength="60" placeholder="${esc(t('fxNamePh'))}"></label>`,
+    onOk:dd=>{const n=dd.querySelector('#fxn').value.trim();if(!n){dd.querySelector('#fxn').focus();return false;}
+      const k='x'+Date.now().toString(36);draft.fx=draft.fx||{};draft.fx[k]={name:n,ic};renderEditor();const ds=$('#side details[data-s=fx]');if(ds)ds.open=true;}});
+  d.querySelectorAll('[data-sg]').forEach(b=>b.onclick=()=>{const x=FX_SUG[+b.dataset.sg];ic=x[0];d.querySelector('#fxn').value=lang==='ar'?x[2]:x[1];});
+  d.querySelector('#fxn').addEventListener('input',()=>{ic='⭐';});
+}
 function fxKind(f){const ty=f.type||'',n=(f.name||'').toLowerCase();
   if(/^video\//.test(ty)||/\.(mp4|mov|m4v|webm|3gp)$/.test(n))return'video';if(/^audio\//.test(ty)||/\.(mp3|m4a|wav|aac|ogg|amr)$/.test(n))return'audio';if(/^image\//.test(ty))return'image';return'';}
 async function addFx(k,file){
@@ -974,26 +1007,26 @@ async function addFx(k,file){
     else obj={src:URL.createObjectURL(file)};
   }catch(e){console.warn(e);setBusy(null);toast(t('tFail',1));return;}
   setBusy(null);if(!editing||!draft)return;
-  draft.fx=draft.fx||{};draft.fx[k]=Object.assign(obj,{kind});
+  draft.fx=draft.fx||{};const prev=draft.fx[k]||{},keep={};['name','ic','pos'].forEach(x=>{if(prev[x])keep[x]=prev[x];});draft.fx[k]=Object.assign(keep,obj,{kind});
   const d=$('#side details[data-s=fx]');renderEditor();const d2=$('#side details[data-s=fx]');if(d2)d2.open=true;renderFxBar(draft);
 }
 function renderFxBar(c){
-  const bar=$('#fxbar');if(!bar)return;const fx=(c&&c.fx)||{};const list=FX.filter(([k])=>fx[k]);
-  bar.innerHTML=list.map(([k,ic])=>`<button data-fx="${k}" title="${esc(t('fx_'+k))}"><i>${ic}</i><span>${esc(t('fx_'+k))}</span></button>`).join('');
+  const bar=$('#fxbar');if(!bar)return;const fx=(c&&c.fx)||{};const list=fxItems(c).filter(f=>hasFxMedia(f.it));
+  bar.innerHTML=list.map(({k,ic,name})=>`<button data-fx="${k}" title="${esc(name)}"><i>${ic}</i><span>${esc(name)}</span></button>`).join('');
   bar.classList.toggle('hidden',!list.length);
   bar.querySelectorAll('[data-fx]').forEach(b=>b.onclick=()=>playFx(b.dataset.fx));
 }
 let fxTimer=null;
 function closeFx(){const p=$('#fxPlay');clearInterval(fxTimer);fxTimer=null;p.querySelectorAll('video,audio').forEach(m=>{try{m.pause();}catch(e){}});p.innerHTML='';p.classList.add('hidden');}
 function playFx(k){
-  const c=car(),it=c&&c.fx&&c.fx[k];if(!it)return;stopTour();hideHsCard();closeFx();
-  const ic=(FX.find(f=>f[0]===k)||[])[1]||'',p=$('#fxPlay'),src=esc(srcOf(it));
+  const c=car(),it=c&&c.fx&&c.fx[k];if(!hasFxMedia(it))return;stopTour();hideHsCard();closeFx();
+  const inf=fxInfo(c,k),ic=inf.ic,p=$('#fxPlay'),src=esc(srcOf(it));
   let body='';
   if(it.kind==='video')body=`<video class="fxm" src="${src}" controls autoplay playsinline></video>`;
   else if(it.kind==='audio')body=`<div class="fxAud">${ic}</div><audio src="${src}" controls autoplay></audio>`;
   else if(it.kind==='seq')body=`<img class="fxm" id="fxSeq" src="${esc(it.frames[0])}" alt="">${it.audio?`<audio src="${esc(it.audio)}" autoplay></audio>`:''}`;
   else body=`<img class="fxm" src="${src}" alt="">`;
-  p.innerHTML=`<button class="x" aria-label="close">×</button><h4>${ic} ${esc(t('fx_'+k))}</h4>${body}`;
+  p.innerHTML=`<button class="x" aria-label="close">×</button><h4>${ic} ${esc(inf.name)}</h4>${body}`;
   p.classList.remove('hidden');p.querySelector('.x').onclick=closeFx;
   if(it.kind==='seq'){let i=0;const im=$('#fxSeq');fxTimer=setInterval(()=>{i=(i+1)%it.frames.length;im.src=it.frames[i];},1000/(it.fps||10));}
 }
@@ -1034,7 +1067,7 @@ function clean(c){
     spin:(c.spin||[]).map(s=>s.id?{id:s.id}:{src:s.src}),
     pano:c.pano?Object.assign(c.pano.shots?{shots:c.pano.shots.map(x=>x.id?{id:x.id}:{src:x.src}),hfov:+(c.pano.hfov||62)}:(c.pano.id?{id:c.pano.id}:{src:c.pano.src}),{yaw0:+(c.pano.yaw0||0),pitch0:+(c.pano.pitch0||0)}):null,
     gallery:(c.gallery||[]).map(g=>Object.assign(g.id?{id:g.id}:{src:g.src},{cap:(g.cap||'').trim()})),
-    fx:Object.fromEntries(Object.entries(c.fx||{}).filter(([k,v])=>v&&FXK.includes(k)&&v.kind!=='seq'&&(v.id||v.src)).map(([k,v])=>[k,Object.assign(v.id?{id:v.id}:{src:v.src},{kind:v.kind})])),
+    fx:Object.fromEntries(Object.entries(c.fx||{}).filter(([k,v])=>v&&(FXK.includes(k)||isCustomFx(k))&&v.kind!=='seq'&&(v.id||v.src)).map(([k,v])=>[k,Object.assign(v.id?{id:v.id}:{src:v.src},{kind:v.kind},isCustomFx(k)?{name:String(v.name||'').slice(0,60),ic:String(v.ic||'⭐').slice(0,4)}:{},v.pos?{pos:(v.pos.v==='ext'?{v:'ext',f:v.pos.f,x:v.pos.x,y:v.pos.y}:{v:'int',yaw:v.pos.yaw,pitch:v.pos.pitch})}:{})])),
     hs:(c.hs||[]).map(h=>Object.assign({v:h.v,k:h.k||'feat',t:h.t,d:h.d||''},h.v==='ext'?{f:h.f,x:h.x,y:h.y}:{yaw:h.yaw,pitch:h.pitch})),
     created:c.created||Date.now(),updated:Date.now()};
 }
@@ -1589,8 +1622,12 @@ async function generateDemo(){
     }catch(e){console.warn('fx',e);}
     const crt=new T.WebGLCubeRenderTarget(1024,{generateMipmaps:false});const cc=new T.CubeCamera(.02,100,crt);
     const DRV=new T.Vector3(-.42,1.2,-.38);cc.position.copy(DRV);scene.add(cc);cc.update(R,scene);
-    [[[.36,1.11,0],'feat'],[[.13,1.02,-.38],'feat'],[[-.4,.95,.38],'feat'],[[-1.22,.95,0],'feat'],[[.36,.94,.6],'feat']].forEach(([pp,k],idx)=>{
+    [[[.36,1.11,0],'feat'],[[.11,1.19,-.31],'feat'],[[-.4,.95,.38],'feat'],[[-1.22,.95,0],'feat'],[[.36,.94,.6],'feat']].forEach(([pp,k],idx)=>{
       const d=new T.Vector3(...pp).sub(DRV).normalize();hs.push({v:'int',yaw:+Math.atan2(d.z,d.x).toFixed(4),pitch:+Math.asin(d.y).toFixed(4),k,n:idx});});
+    const ipos=pp=>{const d=new T.Vector3(...pp).sub(DRV).normalize();return{v:'int',yaw:+Math.atan2(d.z,d.x).toFixed(4),pitch:+Math.asin(d.y).toFixed(4)};};
+    if(fx.engine)fx.engine.pos=ipos([.355,.84,.16]);if(fx.horn)fx.horn.pos=ipos([.1,1.0,-.38]);
+    if(fx.wipers)fx.wipers.pos=ipos([.17,.96,-.15]);if(fx.lights)fx.lights.pos=ipos([.3,.93,-.66]);
+    if(fx.night){const hl=hs.find(h=>h.v==='ext'&&h.n===0);if(hl)fx.night.pos={v:'ext',f:hl.f,x:+(hl.x-.04).toFixed(4),y:+(hl.y+.06).toFixed(4)};}
     R.shadowMap.enabled=false;R.toneMapping=T.NoToneMapping;R.toneMappingExposure=1;R.setPixelRatio(prevPR);panoResize();
     S.demoRaw={frames,gal,hs,fx,pano:{cube:crt.texture,yaw0:0,pitch0:-.1}};localizeDemo();
   }catch(e){console.warn('demo failed',e);}
