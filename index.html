@@ -424,7 +424,7 @@ en:{_name:'English',_dir:'ltr',
  dg:['Wheels & brakes','Front & lighting','Rear view','Top view'],
  guided:'📷 Guided capture with outlines',fromVideo:'🎬 Build spin from a video',orText:'or',
  capSetT:'Guided capture',capSetB:'For each angle, an outline of the car appears. Line the real car up with it, then take the photo. Hold the phone horizontally and keep the same distance.',
- capCount:'Number of angles',capBody:'Body type',body_sedan:'Sedan',body_coupe:'Coupe',body_hatch:'Hatchback',body_suv:'SUV',body_pickup:'Pickup',body_van:'Van',capLen:'Length',capHgt:'Height',capFitNote:'Adjust the shape until it looks like your car model — the outline only needs to be close, not exact.',capStart:'Start',
+ capCount:'Number of angles',capBody:'Body type',body_sedan:'Sedan',body_coupe:'Coupe',body_hatch:'Hatchback',body_suv:'SUV',body_pickup:'Pickup',body_van:'Van',body_room:'Room',body_hall:'Hall',spaceL:'Space shape',spaceAuto:'Car (from the VIN)',edgeFix:a=>`Lined up with the earlier photos (corrected ${a}°)`,capLen:'Length',capHgt:'Height',capFitNote:'Adjust the shape until it looks like your car model — the outline only needs to be close, not exact.',capStart:'Start',
  angs:['Front','Front right','Right side','Rear right','Rear','Rear left','Left side','Front left'],
  capStep:(i,n)=>`Angle ${i} of ${n}`,capShot:'Take photo',capRetake:'↺ Retake',capNext:'Next ›',capSkip:'Skip ›',capFinish:n=>`✓ Finish — use ${n} photos`,
  capHintLive:'Line the car up with the outline, then press the shutter.',capHintFile:'Press the shutter — your camera opens. Match the outline shown here.',capHintDone:'Check the outline matches. Retake if needed, or go to the next angle.',
@@ -501,7 +501,7 @@ ar:{_name:'العربية',_dir:'rtl',
  dg:['الجنوط والمكابح','المقدمة والإضاءة','المنظر الخلفي','منظر علوي'],
  guided:'📷 تصوير موجّه بالخطوط',fromVideo:'🎬 إنشاء الدوران من فيديو',orText:'أو',
  capSetT:'التصوير الموجّه',capSetB:'لكل زاوية يظهر شكل السيارة مرسوماً بالخطوط. طابق السيارة الحقيقية معه ثم التقط الصورة. أمسك الهاتف أفقياً وحافظ على نفس المسافة.',
- capCount:'عدد الزوايا',capBody:'نوع الهيكل',body_sedan:'سيدان',body_coupe:'كوبيه',body_hatch:'هاتشباك',body_suv:'دفع رباعي',body_pickup:'بيك أب',body_van:'فان',capLen:'الطول',capHgt:'الارتفاع',capFitNote:'عدّل الشكل حتى يشبه موديل سيارتك — يكفي أن يكون الشكل قريباً، لا مطابقاً تماماً.',capStart:'ابدأ',
+ capCount:'عدد الزوايا',capBody:'نوع الهيكل',body_sedan:'سيدان',body_coupe:'كوبيه',body_hatch:'هاتشباك',body_suv:'دفع رباعي',body_pickup:'بيك أب',body_van:'فان',body_room:'غرفة',body_hall:'قاعة',spaceL:'شكل المكان',spaceAuto:'سيارة (من رقم الشاصي)',edgeFix:a=>`طُوبقت مع الصور السابقة (تصحيح ${a}°)`,capLen:'الطول',capHgt:'الارتفاع',capFitNote:'عدّل الشكل حتى يشبه موديل سيارتك — يكفي أن يكون الشكل قريباً، لا مطابقاً تماماً.',capStart:'ابدأ',
  angs:['الأمام','أمامي يمين','الجانب الأيمن','خلفي يمين','الخلف','خلفي يسار','الجانب الأيسر','أمامي يسار'],
  capStep:(i,n)=>`الزاوية ${i} من ${n}`,capShot:'التقط',capRetake:'↺ إعادة',capNext:'التالي ›',capSkip:'تخطَّ ›',capFinish:n=>`✓ إنهاء — استخدام ${n} صورة`,
  capHintLive:'طابق السيارة مع الخطوط ثم اضغط زر التصوير.',capHintFile:'اضغط زر التصوير فتفتح الكاميرا. طابق الشكل الظاهر هنا.',capHintDone:'تأكد أن الخطوط مطابقة. أعد التصوير إن لزم، أو انتقل للزاوية التالية.',
@@ -968,6 +968,7 @@ function renderEditor(){
     </div></details>
     <details data-s="pano" ${isOpen('pano',false)}><summary>${t('s_pano')} <em>${c.pano?'✓':''}</em></summary><div class="dbody">
       <p class="note">${t('cabTip')}</p>
+      <label class="f">${t('spaceL')}<select class="inp" id="spaceSel"><option value="">${t('spaceAuto')}</option>${Object.keys(CAGE).map(k=>`<option value="${k}" ${c.space===k?'selected':''}>${t('body_'+k)}</option>`).join('')}</select></label>
       <div style="display:flex;gap:6px"><button class="btn sm" id="bCab" style="flex:1">${t('cabPhone')}</button><button class="btn sm" id="bCabVid" style="flex:1">${t('cabVideo')}</button></div>
       ${c.pano&&c.pano.shots?`<div style="display:flex;gap:6px"><label class="btn sm" style="flex:1;cursor:pointer">${c.pano.up?t('capUpOk'):t('capUp')}<input type="file" accept="image/*" capture="environment" data-cap="up" hidden></label><label class="btn sm" style="flex:1;cursor:pointer">${c.pano.down?t('capDownOk'):t('capDown')}<input type="file" accept="image/*" capture="environment" data-cap="down" hidden></label></div><p class="note">${t('capTip')}</p>`:''}
       ${c.pano&&c.pano.tiles?`<label class="f">${t('fitL')} <b id="fitV">${Math.round(c.pano.hfov||64)}°</b><input type="range" id="fitR" min="45" max="100" step="1" value="${Math.round(c.pano.hfov||64)}" style="width:100%"></label><p class="note">${t('fitTip')}</p><label class="f">${t('cageL')}<select class="inp" id="cageSel"><option value="">${t('cageOff')}</option>${Object.keys(CAGE).map(k=>`<option value="${k}" ${c.pano.cab===k?'selected':''}>${t('body_'+k)}</option>`).join('')}</select></label>`:''}
@@ -1026,6 +1027,7 @@ function renderEditor(){
   side.querySelectorAll('[data-fxd]').forEach(b=>b.onclick=()=>{delete draft.fx[b.dataset.fxd];buildHotspots(draft);renderEditor();renderFxBar(draft);});
   on('#bHow',showHowTo);
   side.querySelectorAll('[data-cap]').forEach(el=>el.onchange=e=>{const f=e.target.files[0];if(f)addCap(el.dataset.cap,f);});
+  const sps=$('#spaceSel');if(sps)sps.onchange=()=>{draft.space=sps.value||'';};
   const cs=$('#cageSel');if(cs)cs.onchange=()=>{const y=pano.gy,pp=pano.gp;const np=Object.assign({},draft.pano);if(cs.value)np.cab=cs.value;else delete np.cab;draft.pano=np;panoLoad(np);pano.yaw=pano.gy=y;pano.pitch=pano.gp=pp;};
   const fr=$('#fitR');if(fr){fr.oninput=()=>{$('#fitV').textContent=fr.value+'°';};fr.onchange=()=>{const y=pano.gy,pp=pano.gp,f=pano.gfov;draft.pano=Object.assign({},draft.pano,{hfov:+fr.value});panoLoad(draft.pano);pano.yaw=pano.gy=y;pano.pitch=pano.gp=pp;pano.fov=pano.gfov=f;};}
   on('#bCam360',()=>dialog({title:t('cam360T'),html:t('cam360B'),ok:t('cam360Pick'),onOk:()=>{$('#uPano').click();}}));
@@ -1425,7 +1427,7 @@ $('#capShot').onclick=()=>{
   else $('#capFile').click();
 };
 $('#capFile').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)capSet(f);};
-$('#capRetake').onclick=()=>{const i=cap.i;if(grid.fp)delete grid.fp[i];if(cap.urls[i])URL.revokeObjectURL(cap.urls[i]);cap.shots[i]=null;cap.urls[i]=null;capRender();};
+$('#capRetake').onclick=()=>{const i=cap.i;if(grid.fp)delete grid.fp[i];if(grid.pins)delete grid.pins[i];if(cap.urls[i])URL.revokeObjectURL(cap.urls[i]);cap.shots[i]=null;cap.urls[i]=null;capRender();};
 $('#capNextB').onclick=()=>{cap.i=(cap.i+1)%cap.n;capRender();};
 $('#capDots').onclick=e=>{const k=[...$('#capDots').children].indexOf(e.target);if(k>=0){cap.i=k;capRender();}};
 $('#capX').onclick=capStop;
@@ -1453,7 +1455,8 @@ addEventListener('resize',()=>{if(!$('#cap').classList.contains('hidden'))capRen
 /* ================= cabin cage: a rounded-box shape like the inside of a car ================= */
 // distances from the eye (metres): forward, back, up, down, side. Rounded-box exponent n.
 const CAGE={sedan:{f:.85,b:1.05,u:.38,d:.82,s:.72},coupe:{f:.8,b:.8,u:.33,d:.78,s:.7},hatch:{f:.85,b:.95,u:.42,d:.82,s:.72},
-  suv:{f:.95,b:1.35,u:.46,d:.9,s:.76},pickup:{f:.9,b:.75,u:.45,d:.9,s:.76},van:{f:1.05,b:1.9,u:.6,d:.92,s:.8}};
+  suv:{f:.95,b:1.35,u:.46,d:.9,s:.76},pickup:{f:.9,b:.75,u:.45,d:.9,s:.76},van:{f:1.05,b:1.9,u:.6,d:.92,s:.8},
+  room:{f:1.9,b:1.9,u:1.3,d:1.2,s:1.8},hall:{f:5,b:5,u:2.6,d:1.25,s:4}};
 const CAGE_N=4,ARM=.22;
 function cageR(d,k){const c=CAGE[k]||CAGE.sedan;const a=d.x>=0?c.f:c.b,b=d.y>=0?c.u:c.d;
   return 1/Math.pow(Math.pow(Math.abs(d.x/a),CAGE_N)+Math.pow(Math.abs(d.y/b),CAGE_N)+Math.pow(Math.abs(d.z/c.s),CAGE_N),1/CAGE_N);}
@@ -1483,6 +1486,54 @@ function shotFootprint(q,k,aspect){const o=new T.Vector3(0,0,-ARM).applyQuaterni
   const edge=(x0,y0,x1,y1)=>{for(let j=0;j<10;j++){const u=j/10;P.push(cageHit(o,new T.Vector3((x0+(x1-x0)*u)*th,(y0+(y1-y0)*u)*tv,-1).normalize().applyQuaternion(q),k));}};
   edge(-1,-1,1,-1);edge(1,-1,1,1);edge(1,1,-1,1);edge(-1,1,-1,-1);return P;}
 
+/* ---- edge outlines: find the outlines in each photo, pin them in space, use them to line up the next photo ---- */
+const EW=192,EH=108;
+async function edgeMap(blob){
+  const bm=await createImageBitmap(blob),cv=document.createElement('canvas');cv.width=EW;cv.height=EH;const cx=cv.getContext('2d');cx.drawImage(bm,0,0,EW,EH);bm.close&&bm.close();
+  const d=cx.getImageData(0,0,EW,EH).data,g=new Float32Array(EW*EH),m=new Float32Array(EW*EH);
+  for(let i=0;i<EW*EH;i++)g[i]=.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2];
+  const hist=[];for(let y=1;y<EH-1;y++)for(let x=1;x<EW-1;x++){const i=y*EW+x;
+    const gx=g[i-EW+1]+2*g[i+1]+g[i+EW+1]-g[i-EW-1]-2*g[i-1]-g[i+EW-1],gy=g[i+EW-1]+2*g[i+EW]+g[i+EW+1]-g[i-EW-1]-2*g[i-EW]-g[i-EW+1];m[i]=Math.hypot(gx,gy);hist.push(m[i]);}
+  hist.sort((a,b)=>a-b);const thr=Math.max(60,hist[Math.floor(hist.length*.9)]||0),mask=new Uint8Array(EW*EH);for(let i=0;i<EW*EH;i++)mask[i]=m[i]>=thr?1:0;
+  // soft version for scoring: a small blur so near misses still count
+  let a=Float32Array.from(mask),b=new Float32Array(EW*EH);
+  for(let pass=0;pass<2;pass++){for(let y=0;y<EH;y++)for(let x=0;x<EW;x++){let s=0,n=0;for(let k=-2;k<=2;k++){const xx=x+k;if(xx>=0&&xx<EW){s+=a[y*EW+xx];n++;}}b[y*EW+x]=s/n;}
+    for(let y=0;y<EH;y++)for(let x=0;x<EW;x++){let s=0,n=0;for(let k=-2;k<=2;k++){const yy=y+k;if(yy>=0&&yy<EH){s+=b[yy*EW+x];n++;}}a[y*EW+x]=s/n;}}
+  return{mask,soft:a};}
+function pinEdges(mask,q,k){const th=Math.tan(G_HF*D2R/2),tv=th*EH/EW,o=new T.Vector3(0,0,-ARM).applyQuaternion(q),pts=[];const idx=[];
+  for(let y=2;y<EH-2;y+=2)for(let x=2;x<EW-2;x+=2)if(mask[y*EW+x])idx.push([x,y]);
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  for(const [x,y] of idx.slice(0,1600)){const r=new T.Vector3(((x+.5)/EW*2-1)*th,(1-(y+.5)/EH*2)*tv,-1).normalize().applyQuaternion(q);pts.push(cageHit(o,r,k));}
+  return pts;}
+// search a small turn of the new photo so the pinned outlines from earlier photos fall on its own edges
+function registerShot(i,soft,q){
+  // phones drift mainly around the vertical axis (the compass); pitch and roll come from gravity and stay good.
+  // So we look for a small turn around the vertical axis (plus a hair of pitch) that puts the pinned outlines on this photo's own edges.
+  const th=Math.tan(G_HF*D2R/2),tv=th*EH/EW,Y=new T.Vector3(0,1,0),X=new T.Vector3(1,0,0);
+  const proj=(qc)=>{const eye=new T.Vector3(0,0,-ARM).applyQuaternion(qc),inv=qc.clone().invert();return pt=>{const v=pt.clone().sub(eye).applyQuaternion(inv);if(v.z>-.01)return null;return[(v.x/-v.z/th+1)/2*EW,(1-v.y/-v.z/tv)/2*EH];};};
+  const p0=proj(q),P=[];
+  for(const k in grid.pins){if(+k===i||!cap.shots[k])continue;for(const pt of grid.pins[k]){const uv=p0(pt);if(uv&&uv[0]>=6&&uv[0]<EW-6&&uv[1]>=6&&uv[1]<EH-6)P.push(pt);}}
+  if(P.length<40)return null;
+  const cand=(a,b)=>new T.Quaternion().setFromAxisAngle(Y,a*D2R).multiply(q).multiply(new T.Quaternion().setFromAxisAngle(X,b*D2R));
+  const score=(a,b)=>{const pr=proj(cand(a,b));let s=0;for(const pt of P){const uv=pr(pt);if(!uv)continue;const u=uv[0],w=uv[1];if(u<1||u>=EW-1||w<1||w>=EH-1)continue;s+=soft[(w|0)*EW+(u|0)];}return s/P.length;};
+  const s0=score(0,0),sc=[];let best=[0,0],bs=s0;
+  for(let a=-3;a<=3;a+=.25){const v=score(a,0);sc.push([a,v]);if(v>bs){bs=v;best=[a,0];}}
+  const c0=best[0];for(let a=-.2;a<=.2;a+=.05){const v=score(c0+a,0);if(v>bs){bs=v;best=[c0+a,0];}}
+  // trust it only if it is clearly better than no change and clearly better than any other, distant, candidate (repeated patterns)
+  const rival=Math.max(0,...sc.filter(([a])=>Math.abs(a-best[0])>1.25).map(x=>x[1]));
+  if(bs<s0*1.15||bs<rival*1.06||Math.abs(best[0])<.15)return null;
+  return{q:cand(best[0],best[1]),world:new T.Quaternion().setFromAxisAngle(Y,best[0]*D2R),deg:Math.hypot(best[0],best[1])};}
+async function analyzeShot(i){
+  const blob=cap.shots[i];if(!blob||!cap.qs[i])return;const k=cap.body||'sedan';
+  try{const em=await edgeMap(blob);if(cap.shots[i]!==blob)return;let q=new T.Quaternion(...cap.qs[i]);
+    const fix=registerShot(i,em.soft,q);
+    if(fix){const corr=fix.world;q=fix.q;cap.qs[i]=[q.x,q.y,q.z,q.w].map(v=>+v.toFixed(5));
+      if(grid.align)grid.align=corr.multiply(grid.align); // the sensors drifted: correct them for the next photos too
+      grid.fp[i]=shotFootprint(q,k);toast(t('edgeFix',fix.deg.toFixed(1)));}
+    grid.pins[i]=pinEdges(em.mask,q,k);
+  }catch(e){console.warn('edges',e);}
+}
+
 /* ================= cabin grid capture (photo-sphere style) ================= */
 const D2R=Math.PI/180,G_HF=64;
 const GT=(()=>{const a=[],row=(r,n,p,p0,p1)=>{for(let k=0;k<n;k++){const y=k*360/n;a.push({r,y,p,k,n,y0:y-180/n,y1:y+180/n,p0,p1});}};
@@ -1502,9 +1553,9 @@ function gCur(){return grid.q&&grid.align?grid.align.clone().multiply(grid.q):nu
 function openCabin(){
   // iOS asks for motion permission; this must run inside the tap
   try{if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')DeviceOrientationEvent.requestPermission().catch(()=>{});}catch(e){}
-  grid.q=null;grid.align=null;grid.on=false;grid.hold=0;grid.thumbs={};grid.fp={};
+  grid.q=null;grid.align=null;grid.on=false;grid.hold=0;grid.thumbs={};grid.fp={};grid.pins={};
   removeEventListener('deviceorientation',gOrient,true);addEventListener('deviceorientation',gOrient,true);
-  cap.mode='grid';cap.n=GT.length;cap.body=(draft&&BODY[draft.body])?draft.body:'sedan';cap.qs=new Array(cap.n).fill(null);$('#cap').classList.add('grid');startCapture().then(()=>{cancelAnimationFrame(grid.raf);gLoop();});
+  cap.mode='grid';cap.n=GT.length;cap.body=(draft&&CAGE[draft.space])?draft.space:(draft&&BODY[draft.body]&&CAGE[draft.body])?draft.body:'sedan';cap.qs=new Array(cap.n).fill(null);$('#cap').classList.add('grid');startCapture().then(()=>{cancelAnimationFrame(grid.raf);gLoop();});
 }
 function gNext(from){for(let s=1;s<=cap.n;s++){const k=(from+s)%cap.n;if(!cap.shots[k])return k;}return from;}
 function gRender(){
@@ -1551,6 +1602,10 @@ function gOverlay(){
     const x=W/2+pv.x/-pv.z*f,y=H/2-pv.y/-pv.z*f;if(pen)c.lineTo(x,y);else{c.moveTo(x,y);pen=true;}}if(close&&all)c.closePath();return all;};
   // 1) what the photos already taken really cover (teal) — any gap shows as an uncovered hole
   for(const k in (grid.fp||{})){if(!cap.shots[k])continue;const all=path(grid.fp[k],true);if(all){c.fillStyle='rgba(79,209,197,.16)';c.fill();}c.lineWidth=1.5*dpr;c.strokeStyle='rgba(79,209,197,.75)';c.stroke();}
+  // 1b) outlines found in earlier photos, pinned in space: line the real edges up with them
+  { const vd=new T.Vector3(0,0,-1).applyQuaternion(q),sz=2*dpr;c.fillStyle='rgba(255,214,90,.9)';
+    for(const k in (grid.pins||{})){if(!cap.shots[k])continue;const pk=grid.pins[k];for(let j=0;j<pk.length;j+=2){const pt=pk[j];pv.copy(pt).sub(eyeP);if(pv.dot(vd)<=0)continue;pv.applyQuaternion(inv);
+      const x=W/2+pv.x/-pv.z*f,y=H/2-pv.y/-pv.z*f;if(x<0||x>W||y<0||y>H)continue;c.fillRect(x-sz/2,y-sz/2,sz,sz);}}}
   // 2) the cells still to shoot (dashed), and the current one (bold) — curved like the cage
   GT.forEach((g,k)=>{if(k===cap.i||cap.shots[k])return;path(cellOutline(k,body),true);c.lineWidth=1.5*dpr;c.strokeStyle='rgba(255,255,255,.35)';c.setLineDash([6*dpr,6*dpr]);c.stroke();c.setLineDash([]);});
   { const g=GT[cap.i],v=gDir(g).applyQuaternion(inv);
@@ -1571,7 +1626,7 @@ function gLoop(){
 function gOnShot(i){
   if(grid.q){if(!grid.align){const d=new T.Vector3(0,0,-1).applyQuaternion(grid.q);const h=new T.Vector3(d.x,0,d.z).normalize(),g=gDir(GT[i]),gh=new T.Vector3(g.x,0,g.z);
       if(gh.lengthSq()<1e-6)gh.set(1,0,0);grid.align=new T.Quaternion().setFromUnitVectors(h,gh.normalize());}
-    const q=gCur();cap.qs[i]=[q.x,q.y,q.z,q.w].map(v=>+v.toFixed(5));grid.fp=grid.fp||{};grid.fp[i]=shotFootprint(q,cap.body||'sedan');}
+    const q=gCur();cap.qs[i]=[q.x,q.y,q.z,q.w].map(v=>+v.toFixed(5));grid.fp=grid.fp||{};grid.fp[i]=shotFootprint(q,cap.body||'sedan');grid.pins=grid.pins||{};delete grid.pins[i];analyzeShot(i);}
   else cap.qs[i]=null;
 }
 $('#capGrid').onclick=e=>{const r=e.target.getBoundingClientRect(),yy=((e.clientX-r.left)/r.width-.5)*360,pp=(.5-(e.clientY-r.top)/r.height)*180;
