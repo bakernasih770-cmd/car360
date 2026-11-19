@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>اختبار المسح الشبكي</title>
+<style>
+  body{margin:0;background:#0b0c0f;color:#e8ebf0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center}
+  .card{max-width:440px;padding:24px;text-align:center}
+  h1{font-size:21px;margin:0 0 10px}
+  p{color:#aab2bf;line-height:1.8;font-size:14.5px;margin:8px 0}
+  button{font:inherit;font-weight:700;border:0;border-radius:14px;padding:14px 22px;cursor:pointer}
+  .pri{background:#4fd1c5;color:#06221f;font-size:17px;width:100%;margin-top:14px}
+  #status{margin-top:16px;padding:12px;border-radius:12px;background:rgba(255,255,255,.06);font-size:14px;line-height:1.8;text-align:start}
+  .ok{color:#48e08a}.no{color:#ff7a7a}.warn{color:#f6c453}
+  #ov{position:fixed;inset:0;pointer-events:none;display:none}
+  #ov .bar{position:absolute;left:0;right:0;bottom:18px;display:flex;gap:10px;justify-content:center;pointer-events:auto}
+  #ov .bar button{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.3);font-size:15px}
+  #ov .bar .pin{background:#4fd1c5;color:#06221f;border:0}
+  #ov .msg{position:absolute;top:14px;left:12px;right:12px;text-align:center;background:rgba(0,0,0,.55);border-radius:10px;padding:8px 10px;font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>اختبار المسح الشبكي 🟩</h1>
+  <p>هذه الصفحة تختبر هل يستطيع هاتفك قياس عمق الأشياء أمام الكاميرا، ورسم شبكة خضراء تلتصق بأشكالها.</p>
+  <button class="pri" id="go">ابدأ الاختبار</button>
+  <div id="status">جاري فحص الهاتف…</div>
+</div>
+<div id="ov">
+  <div class="msg" id="omsg">حرّك الهاتف ببطء يميناً ويساراً قليلاً ليفهم المكان…</div>
+  <div class="bar"><button class="pin" id="pin">📌 ثبّت الشبكة</button><button id="clr">مسح</button><button id="end">خروج</button></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+const st=document.getElementById('status'),go=document.getElementById('go');
+const line=(cls,txt)=>`<div class="${cls}">${txt}</div>`;
+let report=[];
+function show(){st.innerHTML=report.join('');}
+
+async function check(){
+  report=[];
+  if(!window.isSecureContext){report.push(line('no','✗ يجب فتح الصفحة من رابط https'));show();return false;}
+  if(!navigator.xr){report.push(line('no','✗ هذا المتصفح لا يدعم الواقع المعزز (WebXR). افتح الصفحة في Google Chrome على Android.'));show();return false;}
+  report.push(line('ok','✓ المتصفح يدعم WebXR'));
+  let ar=false;try{ar=await navigator.xr.isSessionSupported('immersive-ar');}catch(e){}
+  if(!ar){report.push(line('no','✗ الهاتف لا يدعم الواقع المعزز. قد تحتاج تثبيت «Google Play Services for AR» من متجر Play، أو أن هذا الطراز غير مدعوم.'));show();return false;}
+  report.push(line('ok','✓ الهاتف يدعم الواقع المعزز (ARCore)'));
+  report.push(line('warn','… قياس العمق يُختبر عند الضغط على «ابدأ»'));show();return true;
+}
+check();
+
+/* ---------- AR session with depth ---------- */
+const GW=48,GH=36,MAXJ=.12; // grid size, max depth jump (relative) to join two points
+let renderer,scene,camera,live,pinned=[],session=null,frameN=0,depthOK=null;
+function setup(){
+  renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(window.devicePixelRatio);renderer.setSize(innerWidth,innerHeight);
+  renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local');document.body.appendChild(renderer.domElement);
+  scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.01,50);
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(GW*GH*4*3),3));g.setDrawRange(0,0);
+  live=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:0x5aff7a,transparent:true,opacity:.85}));live.frustumCulled=false;scene.add(live);
+}
+const invP=new THREE.Matrix4(),vm=new THREE.Matrix4(),v4=new THREE.Vector4(),P=[];
+for(let i=0;i<GW*GH;i++)P.push(new THREE.Vector3());
+function updateMesh(frame,view,di){
+  invP.fromArray(view.projectionMatrix).invert();vm.fromArray(view.transform.matrix);
+  const ok=new Uint8Array(GW*GH),D=new Float32Array(GW*GH);
+  for(let j=0;j<GH;j++)for(let i=0;i<GW;i++){
+    const x=(i+.5)/GW,y=(j+.5)/GH;let d=0;try{d=di.getDepthInMeters(x,y);}catch(e){d=0;}
+    const k=j*GW+i;if(!(d>.1&&d<8)){ok[k]=0;continue;}
+    v4.set(x*2-1,1-y*2,-1,1).applyMatrix4(invP);const dx=v4.x/v4.w,dy=v4.y/v4.w,dz=v4.z/v4.w,s=d/-dz;
+    P[k].set(dx*s,dy*s,dz*s).applyMatrix4(vm);ok[k]=1;D[k]=d;}
+  const pos=live.geometry.attributes.position.array;let n=0;
+  const seg=(a,b)=>{if(!ok[a]||!ok[b])return;if(Math.abs(D[a]-D[b])>MAXJ*Math.max(D[a],D[b]))return;
+    pos[n++]=P[a].x;pos[n++]=P[a].y;pos[n++]=P[a].z;pos[n++]=P[b].x;pos[n++]=P[b].y;pos[n++]=P[b].z;};
+  for(let j=0;j<GH;j++)for(let i=0;i<GW;i++){const k=j*GW+i;if(i<GW-1)seg(k,k+1);if(j<GH-1)seg(k,k+GW);}
+  live.geometry.attributes.position.needsUpdate=true;live.geometry.setDrawRange(0,n/3);
+}
+async function start(){
+  if(!(await check()))return;
+  if(!renderer)setup();
+  const ov=document.getElementById('ov'),omsg=document.getElementById('omsg');
+  try{
+    session=await navigator.xr.requestSession('immersive-ar',{requiredFeatures:['local'],optionalFeatures:['depth-sensing','dom-overlay'],
+      depthSensing:{usagePreference:['cpu-optimized'],dataFormatPreference:['luminance-alpha','float32']},domOverlay:{root:ov}});
+  }catch(e){report.push(line('no','✗ تعذّر بدء الواقع المعزز: '+(e&&e.message||e)));show();return;}
+  ov.style.display='block';
+  const hasDepth=session.enabledFeatures?session.enabledFeatures.includes('depth-sensing'):(session.depthUsage==='cpu-optimized');
+  await renderer.xr.setSession(session);
+  session.addEventListener('end',()=>{ov.style.display='none';renderer.setAnimationLoop(null);session=null;
+    report=report.filter(r=>!r.includes('…'));report.push(depthOK?line('ok','✓ قياس العمق يعمل — هاتفك يستطيع المسح الشبكي!'):line('no','✗ قياس العمق غير مدعوم في هذا الهاتف (التتبع يعمل، لكن بدون شبكة).'));show();});
+  if(!hasDepth){omsg.textContent='هاتفك لا يدعم قياس العمق من المتصفح — التتبع يعمل لكن لا يمكن رسم الشبكة.';depthOK=false;}
+  renderer.setAnimationLoop((t,frame)=>{
+    if(frame&&hasDepth&&(frameN++%3===0)){
+      const ref=renderer.xr.getReferenceSpace(),pose=frame.getViewerPose(ref);
+      if(pose){const view=pose.views[0];let di=null;try{di=frame.getDepthInformation(view);}catch(e){}
+        if(di){if(!depthOK){depthOK=true;omsg.textContent='✓ الشبكة تلتصق بالأشكال. اضغط 📌 لتثبيتها في مكانها ثم حرّك الهاتف.';}updateMesh(frame,view,di);}}
+    }
+    renderer.render(scene,camera);
+  });
+}
+go.onclick=start;
+document.getElementById('end').onclick=()=>{if(session)session.end();};
+document.getElementById('pin').onclick=()=>{ // freeze the current mesh where it is in the room, keep scanning
+  const g=live.geometry.clone();const m=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:0x4fd1c5,transparent:true,opacity:.55}));m.frustumCulled=false;scene.add(m);pinned.push(m);};
+document.getElementById('clr').onclick=()=>{pinned.forEach(m=>{scene.remove(m);m.geometry.dispose();});pinned=[];};
+})();
+</script>
+</body>
+</html>
