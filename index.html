@@ -433,7 +433,7 @@ en:{_name:'English',_dir:'ltr',
  vidPick:'＋ Choose video',vidStart:'Start of the circle',vidEnd:'End of the circle',vidCount:'Frames',vidGo:'Extract frames',vidWork:(a,b)=>`Extracting ${a}/${b}…`,
  vidFail:'This video can’t be read in this browser. Try an MP4 (H.264) file.',vidNeed:'Choose a video first',capPick:'What type of car is it?',cam360:'📸 Have a 360 camera? (optional)',cam360T:'Shoot the cabin with a 360 camera',cam360B:`<ol class="note" style="padding-inline-start:18px;line-height:1.9"><li>Put the camera <b>in the middle of the car at head height</b> — on a small stand between the front seats, or on the headrest.</li><li>Close the doors, then take the photo <b>from your phone with the camera's app</b> (Insta360, Ricoh Theta…). You don't need to sit inside — the camera sees everything: roof, floor and all seats.</li><li>In the camera's app, <b>export the photo as JPG</b> (2:1 shape), then choose it here.</li></ol><p class="note" style="margin-top:8px">Good, affordable cameras: Insta360 X3/X4, Ricoh Theta SC2/X.</p>`,cam360Pick:'Choose 360 photo',capUp:'＋ Roof photo',capUpOk:'✓ Roof photo',capDown:'＋ Floor photo',capDownOk:'✓ Floor photo',capTip:'Roof: point the phone straight up. Floor: point it straight down. In both, keep the top of the phone toward the windshield.',cam360Raw:'This is the camera’s raw file. Open it in the camera app, export it as JPG, then choose the JPG.',cam360Ratio:'This photo is not 360° (it should be twice as wide as it is tall). It may look stretched.',cabTip:'Just your phone: sit in the middle of the car and take 8 photos turning on the spot — or record one slow turn as a video. Then add a roof and a floor photo for a full view.',cabPhone:'📷 Cabin with your phone',cabVideo:'🎬 Cabin from a video',
  cabAngs:['1 · Windshield','2 · Front right','3 · Passenger window','4 · Rear right','5 · Rear seats','6 · Rear left','7 · Driver window','8 · Dashboard & wheel','9 · Roof (optional)','10 · Floor (optional)'],
- labT:'Experiments',labB:'Test whether your phone can measure depth and draw a live mesh on shapes (Android + Chrome).',labScan:'Mesh scanning test',cageL:'Cabin shape',cageOff:'Round (no shape)',fitL:'Photo size (fit)',fitTip:'If the photos overlap wrongly or leave gaps, drag this until the edges line up.',wSteps:['Car','Exterior','Interior','Ready'],wNext:'Next →',wBack:'← Back',wSkip:'Skip →',wMore:'More details ▾',wOther:'Other ways ▾',wNeedCar:'Enter the VIN (or make and model) first.',wNeedSpin:'Take at least 4 photos around the car first.',wReady:'Your tour is ready!',wReadyB:'Save it now — or add extras first: engine sound, A/C, more photos, points.',wExtras:'＋ Add extras (optional)',wSumSpin:n=>`✓ ${n} exterior photos`,wSumCab:'✓ Interior',wNoCab:'— No interior (optional)',gRow:{mid:'Eye level',up:'Upper',low:'Lower',up2:'High',low2:'Low',roof:'Roof',floor:'Floor'},gDir4:['front','right','rear','left'],lvlL:'Straighten: tilt the phone a little to the left',lvlR:'Straighten: tilt the phone a little to the right',gDir8:['front','front-right','right','rear-right','rear','rear-left','left','front-left'],gDir5:['front','front-right','rear-right','rear-left','front-left'],gDir7:['front','front-right','right','rear-right','rear-left','left','front-left'],gDir:['front','front-right','rear-right','rear','rear-left','front-left'],gFirst:'Sit in the middle, hold the phone (upright or sideways) and aim at the windshield. Take the first photo — it sets the direction. Tip: turn the phone around its camera lens (keep the lens in one spot), not around your body.',stLoad:'Getting the photo matcher ready…',stAlign:'Lining up the photos by their content',stDone:(m,n)=>`Lined up by content (${m} of ${n} photos)`,stSkip:'Kept the sensor placement — the content match wasn’t clearer',gAim:'Turn the phone (around its lens) until the dot is inside the small centre ring and the level line is green. Hold still: the photo is taken by itself.',gNoSensor:'Aim at the highlighted square on the map, then press the shutter.',gSideways:'Turn the phone sideways ↻',gNeed:'Take all the eye-level photos first (middle row).',gFin:n=>`Finish — use ${n} photos`,cabHintUp:'Point the phone straight UP at the roof, top of the phone toward the windshield.',cabHintDown:'Point the phone straight DOWN at the floor, top of the phone toward the windshield.',cabHint:'Sit in the middle, hold the phone horizontally at head height. Turn right until the previous photo lines up with the dashed line, then shoot.',cabNeed:'Take all 8 photos to build the cabin view',
+ labT:'Experiments',labB:'Test whether your phone can measure depth and draw a live mesh on shapes (Android + Chrome).',labScan:'Mesh scanning test',cageL:'Cabin shape',cageOff:'Round (no shape)',fitL:'Photo size (fit)',fitTip:'If the photos overlap wrongly or leave gaps, drag this until the edges line up.',wSteps:['Car','Exterior','Interior','Ready'],wNext:'Next →',wBack:'← Back',wSkip:'Skip →',wMore:'More details ▾',wOther:'Other ways ▾',wNeedCar:'Enter the VIN (or make and model) first.',wNeedSpin:'Take at least 4 photos around the car first.',wReady:'Your tour is ready!',wReadyB:'Save it now — or add extras first: engine sound, A/C, more photos, points.',wExtras:'＋ Add extras (optional)',wSumSpin:n=>`✓ ${n} exterior photos`,wSumCab:'✓ Interior',wNoCab:'— No interior (optional)',gRow:{mid:'Eye level',up:'Upper',low:'Lower',up2:'High',low2:'Low',roof:'Roof',floor:'Floor'},gDir4:['front','right','rear','left'],tiltNow:'Phone',tiltNeed:'Needed',lvlL:'Straighten: tilt the phone a little to the left',lvlR:'Straighten: tilt the phone a little to the right',gDir8:['front','front-right','right','rear-right','rear','rear-left','left','front-left'],gDir5:['front','front-right','rear-right','rear-left','front-left'],gDir7:['front','front-right','right','rear-right','rear-left','left','front-left'],gDir:['front','front-right','rear-right','rear','rear-left','front-left'],gFirst:'Sit in the middle, hold the phone sideways and aim at the windshield. Take the first photo — it sets the direction. Tip: turn the phone around its camera lens (keep the lens in one spot), not around your body.',stLoad:'Getting the photo matcher ready…',stAlign:'Lining up the photos by their content',stDone:(m,n)=>`Lined up by content (${m} of ${n} photos)`,stLive:(m,n)=>`Lined up while shooting (${m} of ${n} photos matched the earlier ones)`,stSkip:'Kept the sensor placement — the content match wasn’t clearer',gAim:'Keep the phone sideways. Turn it (around its lens) until the moving point sits exactly on the centre point and the level line is green. Hold still: the photo is taken by itself.',gNoSensor:'Aim at the highlighted square on the map, then press the shutter.',gSideways:'Turn the phone sideways ↻',ghMatch:'Matches the earlier photo ✓',ghMove:'Move slowly until the clear picture lines up with the video',ghFlat:'Plain area — using the sensors',gNeed:'Take all the eye-level photos first (middle row).',gFin:n=>`Finish — use ${n} photos`,cabHintUp:'Point the phone straight UP at the roof, top of the phone toward the windshield.',cabHintDown:'Point the phone straight DOWN at the floor, top of the phone toward the windshield.',cabHint:'Sit in the middle, hold the phone horizontally at head height. Turn right until the previous photo lines up with the dashed line, then shoot.',cabNeed:'Take all 8 photos to build the cabin view',
  cabVidT:'Cabin from a video',cabVidB:'Sit in the middle of the car, hold the phone horizontally and turn slowly in one full circle while recording. Choose the video here.',bannerStandalone:'Test version: cars you add stay until you close the page — permanent saving comes next.',egMake:'e.g. Toyota',egModel:'e.g. Camry',egYear:'e.g. 2022',vinApprox:x=>`✓ Recognised (offline, approximate): ${x} — full details appear once the app is online`,sp_trim:'Trim',sp_bodyClass:'Body class',sp_engine:'Engine',sp_fuel:'Fuel',sp_drive:'Drive',sp_trans:'Transmission',sp_doors:'Doors',sp_seats:'Seats',sp_vtype:'Vehicle type',sp_plant:'Built in',
  vin:'VIN (chassis number)',vinPh:'17 letters and numbers',vinBtn:'Decode VIN',vinWork:'Decoding…',vinOk:x=>`✓ Recognised: ${x}`,vinPartial:x=>`✓ Make & year recognised: ${x} — choose the model and body type (full details appear once the app is online)`,
  vinBad:'A VIN has 17 letters and numbers (no I, O or Q).',vinUnknown:'Could not recognise this VIN — fill in the details manually.',bodyType:'Body type',capLevel:'Keep the camera at headlight height and the same distance all the way round.'},
@@ -510,7 +510,7 @@ ar:{_name:'العربية',_dir:'rtl',
  vidPick:'＋ اختر الفيديو',vidStart:'بداية الدورة',vidEnd:'نهاية الدورة',vidCount:'عدد الصور',vidGo:'استخراج الصور',vidWork:(a,b)=>`جارٍ الاستخراج ${a}/${b}…`,
  vidFail:'لا يمكن قراءة هذا الفيديو في هذا المتصفح. جرّب ملف MP4 (H.264).',vidNeed:'اختر فيديو أولاً',capPick:'ما نوع السيارة؟',cam360:'📸 لديك كاميرا 360؟ (اختياري)',cam360T:'تصوير المقصورة بكاميرا 360',cam360B:`<ol class="note" style="padding-inline-start:18px;line-height:1.9"><li>ضع الكاميرا <b>في منتصف السيارة بمستوى الرأس</b> — على حامل صغير بين المقعدين الأماميين أو على مسند الرأس.</li><li>أغلق الأبواب، ثم التقط الصورة <b>من هاتفك عبر تطبيق الكاميرا</b> (Insta360 أو Ricoh Theta…). لا تحتاج أن تجلس داخل السيارة — الكاميرا ترى كل شيء: السقف والأرضية وكل المقاعد.</li><li>في تطبيق الكاميرا <b>صدّر الصورة بصيغة JPG</b> (نسبة 2:1)، ثم اخترها هنا.</li></ol><p class="note" style="margin-top:8px">كاميرات جيدة بسعر معقول: Insta360 X3/X4، Ricoh Theta SC2/X.</p>`,cam360Pick:'اختر صورة 360',capUp:'＋ صورة السقف',capUpOk:'✓ صورة السقف',capDown:'＋ صورة الأرضية',capDownOk:'✓ صورة الأرضية',capTip:'السقف: وجّه الهاتف للأعلى تماماً. الأرضية: وجّهه للأسفل تماماً. وفي الحالتين اجعل أعلى الهاتف باتجاه الزجاج الأمامي.',cam360Raw:'هذا ملف الكاميرا الخام. افتحه في تطبيق الكاميرا وصدّره بصيغة JPG، ثم اختر ملف JPG.',cam360Ratio:'هذه الصورة ليست 360° (يجب أن يكون عرضها ضعف ارتفاعها). قد تظهر ممطوطة.',cabTip:'بهاتفك فقط: اجلس في منتصف السيارة والتقط 8 صور وأنت تدور في مكانك — أو سجّل دورة واحدة بطيئة بالفيديو. ثم أضف صورة للسقف وصورة للأرضية لعرض كامل.',cabPhone:'📷 المقصورة بالهاتف',cabVideo:'🎬 المقصورة من فيديو',
  cabAngs:['1 · الزجاج الأمامي','2 · أمامي يمين','3 · نافذة الراكب','4 · خلفي يمين','5 · المقاعد الخلفية','6 · خلفي يسار','7 · نافذة السائق','8 · الطبلون والمقود','9 · السقف (اختياري)','10 · الأرضية (اختياري)'],
- labT:'تجارب',labB:'اختبر هل يستطيع هاتفك قياس العمق ورسم شبكة حية على الأشكال (Android + Chrome).',labScan:'اختبار المسح الشبكي',cageL:'شكل المقصورة',cageOff:'كروي (بدون شكل)',fitL:'حجم الصور (المطابقة)',fitTip:'إذا تداخلت الصور بشكل خاطئ أو ظهرت فراغات، حرّك هذا حتى تتطابق الحواف.',wSteps:['السيارة','الخارج','المقصورة','جاهز'],wNext:'التالي ←',wBack:'→ رجوع',wSkip:'تخطٍّ ←',wMore:'تفاصيل أكثر ▾',wOther:'طرق أخرى ▾',wNeedCar:'أدخل رقم الشاصي (أو الماركة والموديل) أولاً.',wNeedSpin:'التقط 4 صور على الأقل حول السيارة أولاً.',wReady:'جولتك جاهزة!',wReadyB:'احفظها الآن — أو أضف إضافات أولاً: صوت المحرك، المكيّف، صور أكثر، نقاط.',wExtras:'＋ أضف إضافات (اختياري)',wSumSpin:n=>`✓ ${n} صورة خارجية`,wSumCab:'✓ المقصورة',wNoCab:'— بدون مقصورة (اختياري)',gRow:{mid:'مستوى النظر',up:'علوي',low:'سفلي',up2:'أعلى',low2:'أسفل',roof:'السقف',floor:'الأرضية'},gDir4:['أمام','يمين','خلف','يسار'],lvlL:'استقِم: أمِل الهاتف قليلاً لليسار',lvlR:'استقِم: أمِل الهاتف قليلاً لليمين',gDir8:['أمام','أمام يمين','يمين','خلف يمين','خلف','خلف يسار','يسار','أمام يسار'],gDir5:['أمام','أمام يمين','خلف يمين','خلف يسار','أمام يسار'],gDir7:['أمام','أمام يمين','يمين','خلف يمين','خلف يسار','يسار','أمام يسار'],gDir:['أمام','أمام يمين','خلف يمين','خلف','خلف يسار','أمام يسار'],gFirst:'اجلس في المنتصف وأمسك الهاتف (عمودياً أو أفقياً) ووجّهه نحو الزجاج الأمامي. التقط الصورة الأولى — فهي تحدّد الاتجاه. نصيحة: أدر الهاتف حول عدسته (أبقِ العدسة في نقطة واحدة)، لا حول جسمك.',stLoad:'تجهيز مطابقة الصور…',stAlign:'مطابقة الصور حسب محتواها',stDone:(m,n)=>`طُوبقت حسب المحتوى (${m} من ${n} صورة)`,stSkip:'أُبقي ترتيب الحساسات — المطابقة بالمحتوى لم تكن أوضح',gAim:'أدر الهاتف (حول عدسته) حتى تدخل النقطة الدائرة الصغيرة وتصير المسطرة خضراء. اثبت لحظة: تُلتقط الصورة وحدها.',gNoSensor:'وجّه الهاتف نحو المربع المحدّد على الخريطة، ثم اضغط زر التصوير.',gSideways:'أدر الهاتف أفقياً ↻',gNeed:'التقط أولاً كل صور مستوى النظر (الصف الأوسط).',gFin:n=>`إنهاء — استخدام ${n} صورة`,cabHintUp:'وجّه الهاتف للأعلى تماماً نحو السقف، وأعلى الهاتف باتجاه الزجاج الأمامي.',cabHintDown:'وجّه الهاتف للأسفل تماماً نحو الأرضية، وأعلى الهاتف باتجاه الزجاج الأمامي.',cabHint:'اجلس في المنتصف وأمسك الهاتف أفقياً بمستوى رأسك. استدر يميناً حتى تنطبق الصورة السابقة على الخط المتقطع، ثم التقط.',cabNeed:'التقط الصور الثماني كلها لتكوين عرض المقصورة',
+ labT:'تجارب',labB:'اختبر هل يستطيع هاتفك قياس العمق ورسم شبكة حية على الأشكال (Android + Chrome).',labScan:'اختبار المسح الشبكي',cageL:'شكل المقصورة',cageOff:'كروي (بدون شكل)',fitL:'حجم الصور (المطابقة)',fitTip:'إذا تداخلت الصور بشكل خاطئ أو ظهرت فراغات، حرّك هذا حتى تتطابق الحواف.',wSteps:['السيارة','الخارج','المقصورة','جاهز'],wNext:'التالي ←',wBack:'→ رجوع',wSkip:'تخطٍّ ←',wMore:'تفاصيل أكثر ▾',wOther:'طرق أخرى ▾',wNeedCar:'أدخل رقم الشاصي (أو الماركة والموديل) أولاً.',wNeedSpin:'التقط 4 صور على الأقل حول السيارة أولاً.',wReady:'جولتك جاهزة!',wReadyB:'احفظها الآن — أو أضف إضافات أولاً: صوت المحرك، المكيّف، صور أكثر، نقاط.',wExtras:'＋ أضف إضافات (اختياري)',wSumSpin:n=>`✓ ${n} صورة خارجية`,wSumCab:'✓ المقصورة',wNoCab:'— بدون مقصورة (اختياري)',gRow:{mid:'مستوى النظر',up:'علوي',low:'سفلي',up2:'أعلى',low2:'أسفل',roof:'السقف',floor:'الأرضية'},gDir4:['أمام','يمين','خلف','يسار'],tiltNow:'الهاتف',tiltNeed:'المطلوب',lvlL:'استقِم: أمِل الهاتف قليلاً لليسار',lvlR:'استقِم: أمِل الهاتف قليلاً لليمين',gDir8:['أمام','أمام يمين','يمين','خلف يمين','خلف','خلف يسار','يسار','أمام يسار'],gDir5:['أمام','أمام يمين','خلف يمين','خلف يسار','أمام يسار'],gDir7:['أمام','أمام يمين','يمين','خلف يمين','خلف يسار','يسار','أمام يسار'],gDir:['أمام','أمام يمين','خلف يمين','خلف','خلف يسار','أمام يسار'],gFirst:'اجلس في المنتصف وأمسك الهاتف أفقياً ووجّهه نحو الزجاج الأمامي. التقط الصورة الأولى — فهي تحدّد الاتجاه. نصيحة: أدر الهاتف حول عدسته (أبقِ العدسة في نقطة واحدة)، لا حول جسمك.',stLoad:'تجهيز مطابقة الصور…',stAlign:'مطابقة الصور حسب محتواها',stDone:(m,n)=>`طُوبقت حسب المحتوى (${m} من ${n} صورة)`,stLive:(m,n)=>`طُوبقت أثناء التصوير (${m} من ${n} صورة تطابقت مع ما قبلها)`,stSkip:'أُبقي ترتيب الحساسات — المطابقة بالمحتوى لم تكن أوضح',gAim:'أبقِ الهاتف أفقياً. أدره (حول عدسته) حتى تنطبق النقطة المتحركة على النقطة الثابتة في المنتصف وتصير المسطرة خضراء. اثبت لحظة: تُلتقط الصورة وحدها.',gNoSensor:'وجّه الهاتف نحو المربع المحدّد على الخريطة، ثم اضغط زر التصوير.',gSideways:'أدر الهاتف أفقياً ↻',ghMatch:'تطابقت مع الصورة السابقة ✓',ghMove:'حرّك ببطء حتى تنطبق الصورة الشفافة على الفيديو',ghFlat:'منطقة بلا تفاصيل — الاعتماد على الحساس',gNeed:'التقط أولاً كل صور مستوى النظر (الصف الأوسط).',gFin:n=>`إنهاء — استخدام ${n} صورة`,cabHintUp:'وجّه الهاتف للأعلى تماماً نحو السقف، وأعلى الهاتف باتجاه الزجاج الأمامي.',cabHintDown:'وجّه الهاتف للأسفل تماماً نحو الأرضية، وأعلى الهاتف باتجاه الزجاج الأمامي.',cabHint:'اجلس في المنتصف وأمسك الهاتف أفقياً بمستوى رأسك. استدر يميناً حتى تنطبق الصورة السابقة على الخط المتقطع، ثم التقط.',cabNeed:'التقط الصور الثماني كلها لتكوين عرض المقصورة',
  cabVidT:'المقصورة من فيديو',cabVidB:'اجلس في منتصف السيارة، وأمسك الهاتف أفقياً، واستدر ببطء دورة كاملة وأنت تسجّل. ثم اختر الفيديو هنا.',bannerStandalone:'نسخة تجريبية: السيارات التي تضيفها تبقى حتى إغلاق الصفحة — الحفظ الدائم في الخطوة القادمة.',egMake:'مثال: Toyota',egModel:'مثال: Camry',egYear:'مثال: 2022',vinApprox:x=>`✓ تم التعرّف (بدون اتصال، تقريبي): ${x} — تظهر التفاصيل الكاملة عند تشغيل التطبيق على الإنترنت`,sp_trim:'الفئة',sp_bodyClass:'تصنيف الهيكل',sp_engine:'المحرك',sp_fuel:'الوقود',sp_drive:'نظام الدفع',sp_trans:'ناقل الحركة',sp_doors:'الأبواب',sp_seats:'المقاعد',sp_vtype:'نوع المركبة',sp_plant:'مكان الصنع',
  vin:'رقم الشاصي (VIN)',vinPh:'17 حرفاً ورقماً',vinBtn:'التعرّف على السيارة',vinWork:'جارٍ التعرّف…',vinOk:x=>`✓ تم التعرّف: ${x}`,vinPartial:x=>`✓ تم التعرّف على الماركة والسنة: ${x} — اختر الموديل ونوع الهيكل (تظهر التفاصيل الكاملة عند تشغيل التطبيق على الإنترنت)`,
  vinBad:'رقم الشاصي 17 حرفاً ورقماً (بدون الأحرف I و O و Q).',vinUnknown:'تعذّر التعرّف على هذا الرقم — أدخل البيانات يدوياً.',bodyType:'نوع الهيكل',capLevel:'أبقِ الكاميرا بمستوى المصابيح الأمامية وعلى نفس المسافة طوال الدورة.'}
@@ -593,6 +593,7 @@ function panoLoad(p){
   if(!pano.ready)return;
   pano.cur=p;
   if(panoTex&&!panoTex.isRenderTargetTexture)panoTex.dispose();
+  pano.bakeTok=null;if(pano.rt){pano.rt.dispose();pano.rt=null;}
   if(pano.cyl){pano.scene.remove(pano.cyl);pano.cyl.traverse(o=>{if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose();}if(o.geometry)o.geometry.dispose();});pano.cyl=null;}
   panoTex=null;pano.mesh.material.map=null;pano.mesh.material.needsUpdate=true;loadMsg=null;
   pano.yaw=pano.gy=(p&&p.yaw0)||0;pano.pitch=pano.gp=(p&&p.pitch0)||0;pano.fov=pano.gfov=75;
@@ -636,8 +637,48 @@ function buildCage(p){
     },undefined,()=>{if(--left<=0)loadMsg=null;});
   });
 }
+/* weighted blend into an equirectangular image (GPU). Weight is highest at a photo's centre and fades to 0 at its edges,
+   so neighbouring photos melt into each other with no hard edge and no dark gap where they overlap. */
+const BAKE_VS=`varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`;
+const BAKE_ACC=`uniform sampler2D map;uniform mat3 wc;uniform vec2 th;uniform float sc;uniform vec4 cg;uniform float cs;uniform vec3 ok;uniform float useC;varying vec2 vUv;
+float cr(vec3 d){float a=d.x>=0.?cg.x:cg.y,b=d.y>=0.?cg.z:cg.w;return 1./pow(pow(abs(d.x/a),4.)+pow(abs(d.y/b),4.)+pow(abs(d.z/cs),4.),.25);}
+void main(){float phi=vUv.x*6.28318530718,the=(1.-vUv.y)*3.14159265359;vec3 d=vec3(cos(phi)*sin(the),cos(the),sin(phi)*sin(the));
+  vec3 p=useC>.5?wc*(d*cr(d)-ok):wc*d;if(p.z>-.001)discard;vec2 n=p.xy/(-p.z)/th;vec2 t=n*.5+.5;if(t.x<0.||t.x>1.||t.y<0.||t.y>1.)discard;
+  float e=min(min(t.x,1.-t.x),min(t.y,1.-t.y));float w=smoothstep(0.,.22,e)+.0005;gl_FragColor=vec4(texture2D(map,t).rgb*w,w)*sc;}`;
+const BAKE_FIN=`uniform sampler2D acc;uniform vec3 bg;varying vec2 vUv;
+void main(){vec4 a=texture2D(acc,vUv);gl_FragColor=a.a>.0004?vec4(a.rgb/a.a,1.):vec4(bg,1.);}`;
 function buildTiles(p){
   if(p.cab)return buildCage(p);
+  return bakeTiles(p);}
+function bakeTiles(p){
+  const hf=(p.hfov||64)*D2R,tl=Math.tan(hf/2),token={};pano.bakeTok=token;loadMsg='loadPano';
+  Promise.all(p.tiles.map(tl0=>new Promise(r=>new T.TextureLoader().load(srcOf(tl0),r,undefined,()=>r(null))))).then(texs=>{
+    if(pano.bakeTok!==token||pano.cur!==p){texs.forEach(t=>t&&t.dispose());return;}
+    const R=pano.R,W=2048,H=1024,gl2=R.capabilities.isWebGL2,half=gl2||!!R.extensions.get('EXT_color_buffer_half_float');
+    const type=half?T.HalfFloatType:T.UnsignedByteType,sc=half?1:.25;
+    const rtA=new T.WebGLRenderTarget(W,H,{type,format:T.RGBAFormat,depthBuffer:false,stencilBuffer:false,minFilter:T.NearestFilter,magFilter:T.NearestFilter});
+    const rtB=new T.WebGLRenderTarget(W,H,{format:T.RGBAFormat,depthBuffer:false,stencilBuffer:false,minFilter:T.LinearMipmapLinearFilter,magFilter:T.LinearFilter,generateMipmaps:true});
+    rtB.texture.encoding=T.sRGBEncoding;
+    const cam=new T.OrthographicCamera(-1,1,1,-1,0,1),scn=new T.Scene(),geo=new T.PlaneGeometry(2,2);
+    const cgv=p.space&&CAGE[p.space],arm=p.arm||0;
+    const accM=new T.ShaderMaterial({uniforms:{map:{value:null},wc:{value:new T.Matrix3()},th:{value:new T.Vector2()},sc:{value:sc},cg:{value:cgv?new T.Vector4(cgv.f,cgv.b,cgv.u,cgv.d):new T.Vector4(1,1,1,1)},cs:{value:cgv?cgv.s:1},ok:{value:new T.Vector3()},useC:{value:cgv&&arm?1:0}},vertexShader:BAKE_VS,fragmentShader:BAKE_ACC,
+      blending:T.CustomBlending,blendEquation:T.AddEquation,blendSrc:T.OneFactor,blendDst:T.OneFactor,blendSrcAlpha:T.OneFactor,blendDstAlpha:T.OneFactor,transparent:true,depthTest:false,depthWrite:false});
+    const quad=new T.Mesh(geo,accM);quad.frustumCulled=false;scn.add(quad);
+    const oldCol=R.getClearColor(new T.Color()),oldA=R.getClearAlpha();
+    const oldAC=R.autoClear;R.autoClear=false;R.setRenderTarget(rtA);R.setClearColor(0x000000,0);R.clear(true,false,false);
+    let bg=new T.Color(0x202226);
+    p.tiles.forEach((tl0,i)=>{const tex=texs[i];if(!tex)return;
+      const iw=tex.image.width,ih=tex.image.height;accM.uniforms.map.value=tex;accM.uniforms.th.value.set(iw>=ih?tl:tl*iw/ih,iw>=ih?tl*ih/iw:tl);
+      accM.uniforms.wc.value.setFromMatrix4(new T.Matrix4().makeRotationFromQuaternion(tileQuat(tl0).invert()));accM.uniforms.ok.value.set(0,0,-arm).applyQuaternion(tileQuat(tl0));accM.uniformsNeedUpdate=true;R.render(scn,cam);
+      if(i===0){try{const cc=document.createElement('canvas');cc.width=cc.height=1;const cx=cc.getContext('2d');cx.drawImage(tex.image,0,0,1,1);const d=cx.getImageData(0,0,1,1).data;bg=new T.Color(d[0]/255,d[1]/255,d[2]/255);}catch(e){}}});
+    quad.material=new T.ShaderMaterial({uniforms:{acc:{value:rtA.texture},bg:{value:new T.Vector3(bg.r,bg.g,bg.b)}},vertexShader:BAKE_VS,fragmentShader:BAKE_FIN,depthTest:false,depthWrite:false});
+    R.setRenderTarget(rtB);R.render(scn,cam);R.setRenderTarget(null);R.setClearColor(oldCol,oldA);R.autoClear=oldAC;
+    accM.dispose();quad.material.dispose();geo.dispose();rtA.dispose();texs.forEach(t=>t&&t.dispose());
+    if(pano.bakeTok!==token||pano.cur!==p){rtB.dispose();return;}
+    if(pano.rt)pano.rt.dispose();pano.rt=rtB;
+    pano.mesh.material.map=rtB.texture;pano.mesh.material.needsUpdate=true;pano.mesh.visible=true;pano.scene.background=bg.clone().convertSRGBToLinear();loadMsg=null;
+  });}
+function buildTilesPlanes(p){
   const R=10,hf=(p.hfov||64)*D2R,L=2*R*Math.tan(hf/2),g=new T.Group();pano.cyl=g;pano.scene.add(g);let left=p.tiles.length;loadMsg='loadPano';
   const ord={roof:0,floor:0,up2:1,low2:1,up:2,low:2,mid:3};
   p.tiles.forEach((tl,i)=>{
@@ -1390,7 +1431,7 @@ async function startCapture(){
   $('#capVid').classList.toggle('hidden',!cap.live);
   capRender();
 }
-function capStop(){$('#cap').classList.remove('grid');cancelAnimationFrame(grid.raf);removeEventListener('deviceorientation',gOrient,true);if(cap.stream){cap.stream.getTracks().forEach(x=>x.stop());cap.stream=null;}$('#capVid').srcObject=null;$('#cap').classList.add('hidden');}
+function capStop(){try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock();}catch(e){}try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}catch(e){}$('#cap').classList.remove('grid');cancelAnimationFrame(grid.raf);removeEventListener('deviceorientation',gOrient,true);if(cap.stream){cap.stream.getTracks().forEach(x=>x.stop());cap.stream=null;}$('#capVid').srcObject=null;$('#cap').classList.add('hidden');}
 function capRender(){
   if(cap.mode==='grid')return gRender();
   const i=cap.i,th=capTheta(i),has=!!cap.shots[i],done=cap.shots.filter(Boolean).length,cab=cap.mode==='int';
@@ -1420,7 +1461,8 @@ function capSet(blob){
   if(cap.mode==='grid'){setTimeout(()=>{if(cap.shots[i]&&cap.i===i){cap.i=gNext(i);capRender();}},cap.live?650:300);return;}
   if(cap.live&&cap.i<cap.n-1)setTimeout(()=>{if(cap.shots[i]&&cap.i===i){cap.i++;capRender();}},700);
 }
-$('#capShot').onclick=()=>{
+$('#capShot').onclick=e=>{if(cap.mode==='grid'&&cap.live&&innerHeight>innerWidth){toast(t('gSideways'));return;}capShotGo(e);};
+const capShotGo=()=>{
   if(cap.live){const v=$('#capVid');if(!v.videoWidth)return;const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;
     c.getContext('2d').drawImage(v,0,0);c.toBlob(b=>b&&capSet(b),'image/jpeg',.9);
     if(cap.shots[cap.i]){} }
@@ -1437,15 +1479,17 @@ $('#capDone').onclick=async()=>{
     const idx=[];cap.shots.forEach((b,k)=>{if(b)idx.push(k);});const qs=cap.qs.slice();capStop();
     const files=idx.map(k=>cap.shots[k] instanceof File?cap.shots[k]:new File([cap.shots[k]],`cabin_${String(k+1).padStart(2,'0')}.jpg`,{type:'image/jpeg'}));
     let fixed=null;
-    try{fixed=await runStitch(files,idx.map(k=>qs[k]),G_HF);}catch(e){console.warn('stitch',e);}
+    // most photos were already lined up with the live see-through match → keep those places (no slow re-matching)
+    const live=idx.filter(k=>(grid.lmOk||{})[k]||k===idx[0]).length>=Math.ceil(idx.length*.6);
+    if(!live){try{fixed=await runStitch(files,idx.map(k=>qs[k]),GHF,(grid.hfE||[]).length>0);}catch(e){console.warn('stitch',e);}}
     const add=await uploadMany(files,1600,t('upPano'),true);if(!add.length||!editing)return;
     // use the content result only when most photos found their place (otherwise keep sensors + cabin shape)
     const ok=fixed&&fixed.mode==='heading'&&fixed.matched.filter(Boolean).length>=Math.ceil(idx.length*.6);
     const tiles=add.map((a,j)=>{const g=GT[idx[j]],q=ok?fixed.qs[j]:qs[idx[j]];return Object.assign({},a,{r:g.r,y:g.y,p:g.p},q?{q}:{});});
     // lined up by content → photos meet as seen from one point (round); otherwise keep the cabin shape to hide some of the error
-    draft.pano=Object.assign({tiles,hfov:ok?fixed.hfov:G_HF,yaw0:0,pitch0:0},ok?{}:{cab:cap.body||'sedan'});
+    draft.pano={tiles,hfov:live?GHF:ok?fixed.hfov:((fixed&&fixed.fovEst)||GHF),yaw0:0,pitch0:0,space:cap.body||'sedan',arm:ARM};
     panoLoad(draft.pano);refreshTabs();setView('int');renderEditor();
-    toast(ok?t('stDone',fixed.matched.filter(Boolean).length,idx.length):t('stSkip'));return;}
+    toast(live?t('stLive',idx.filter(k=>(grid.lmOk||{})[k]||k===idx[0]).length,idx.length):ok?t('stDone',fixed.matched.filter(Boolean).length,idx.length):t('stSkip'));return;}
   if(cap.mode==='int'){const ring=cap.shots.slice(0,8);if(ring.filter(Boolean).length<8){toast(t('cabNeed'));return;}
     const asFile=(b,n)=>b instanceof File?b:new File([b],n,{type:'image/jpeg'});const up=cap.shots[8],down=cap.shots[9];capStop();
     await addCabin(ring.map((b,k)=>asFile(b,`cabin_${k+1}.jpg`)),62);
@@ -1490,7 +1534,7 @@ function cellOutline(i,k){const key=i+k;if(cellCache[key])return cellCache[key];
   st(g.y1,g.y0).forEach(y=>P.push(cagePt(y,g.p1,k)));st(g.p1,g.p0).forEach(p=>P.push(cagePt(g.y0,p,k)));return cellCache[key]=P;}
 // what a photo really covered: rays through the photo's border, from where the phone was, onto the cage
 // half-width/half-height (as tangents) of a photo: the camera's angle of view is along its longer side
-function camTan(aspect){const tl=Math.tan(G_HF*D2R/2);aspect=aspect||16/9;return aspect>=1?[tl,tl/aspect]:[tl*aspect,tl];}
+function camTan(aspect){const tl=Math.tan(GHF*D2R/2);aspect=aspect||16/9;return aspect>=1?[tl,tl/aspect]:[tl*aspect,tl];}
 function shotFootprint(q,k,aspect){const o=new T.Vector3(0,0,-ARM).applyQuaternion(q),[th,tv]=camTan(aspect),P=[];
   const edge=(x0,y0,x1,y1)=>{for(let j=0;j<10;j++){const u=j/10;P.push(cageHit(o,new T.Vector3((x0+(x1-x0)*u)*th,(y0+(y1-y0)*u)*tv,-1).normalize().applyQuaternion(q),k));}};
   edge(-1,-1,1,-1);edge(1,-1,1,1);edge(1,1,-1,1);edge(-1,1,-1,-1);return P;}
@@ -1535,7 +1579,7 @@ function registerShot(i,soft,q,EW,EH){
 async function analyzeShot(i){
   const blob=cap.shots[i];if(!blob||!cap.qs[i])return;const k=cap.body||'sedan';
   try{const em=await edgeMap(blob);if(cap.shots[i]!==blob)return;let q=new T.Quaternion(...cap.qs[i]);
-    const fix=registerShot(i,em.soft,q,em.w,em.h);
+    const fix=null; // the old edge-outline correction pushed photos the wrong way; the live see-through match replaces it
     if(fix){const corr=fix.world;q=fix.q;cap.qs[i]=[q.x,q.y,q.z,q.w].map(v=>+v.toFixed(5));
       if(grid.align)grid.align=corr.multiply(grid.align); // the sensors drifted: correct them for the next photos too
       grid.fp[i]=shotFootprint(q,k,em.w/em.h);toast(t('edgeFix',fix.deg.toFixed(1)));}
@@ -1544,17 +1588,17 @@ async function analyzeShot(i){
 }
 
 /* ---- content-based stitching runs in a background worker (OpenCV) ---- */
-function runStitch(files,qs,hfov){return new Promise(res=>{let w;try{w=new Worker('stitch-worker.js');}catch(e){res(null);return;}
+function runStitch(files,qs,hfov,fixFov){return new Promise(res=>{let w;try{w=new Worker('stitch-worker.js');}catch(e){res(null);return;}
   const stop=v=>{try{w.terminate();}catch(e){}setBusy(null);res(v);};const timer=setTimeout(()=>stop(null),150000);
   setBusy(t('stLoad'));
   w.onmessage=e=>{const d=e.data;if(d.progress){const p=d.progress,w8={load:[0,5],features:[5,45],match:[45,90],solve:[90,100]}[p.stage]||[0,100];
       setBusy(`${t('stAlign')} ${Math.round(w8[0]+(w8[1]-w8[0])*(p.n?p.i/p.n:0))}%`);return;}
     clearTimeout(timer);stop(d.result||null);};
   w.onerror=()=>{clearTimeout(timer);stop(null);};
-  w.postMessage({images:files,qs,hfov});});}
+  w.postMessage({images:files,qs,hfov,fixFov:!!fixFov});});}
 
 /* ================= cabin grid capture (photo-sphere style) ================= */
-const D2R=Math.PI/180,G_HF=64,ALIGN_DEG=1.2,LEVEL_DEG=1.5; // auto-capture only when the aim is within 1.2° of the target
+let GHF=64;const D2R=Math.PI/180,G_HF=64,ALIGN_DEG=.6,LEVEL_DEG=1.5,PT_R=8; // both points are the same size (radius in CSS px) // the two points must meet within 0.6° (~2–3 mm on the screen) // auto-capture only when the aim is within 1.2° of the target
 function makeGT(portrait){const a=[],row=(r,n,p,p0,p1)=>{for(let k=0;k<n;k++){const y=k*360/n;a.push({r,y,p,k,n,y0:y-180/n,y1:y+180/n,p0,p1});}};
   if(!portrait){ // sideways: photo ~64° wide × 39° tall — rows overlap ~28% so they can be matched by content
     row('mid',8,0,-14,14);row('up',7,28,14,42);row('low',7,-28,-42,-14);row('up2',5,56,42,73);row('low2',5,-56,-73,-42);
@@ -1574,13 +1618,16 @@ function devQuat(e){
   return q.multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0,0,1),-or));
 }
 function gOrient(e){if(e.alpha==null&&e.beta==null)return;grid.q=devQuat(e);grid.on=true;}
-function gCur(){return grid.q&&grid.align?grid.align.clone().multiply(grid.q):null;}
+function gCur(){if(!grid.q||!grid.align)return null;const q=grid.align.clone().multiply(grid.q);return grid.lc&&grid.lcI===cap.i?grid.lc.clone().multiply(q):q;}
 function openCabin(){
   // iOS asks for motion permission; this must run inside the tap
   try{if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')DeviceOrientationEvent.requestPermission().catch(()=>{});}catch(e){}
-  grid.q=null;grid.align=null;grid.on=false;grid.hold=0;grid.thumbs={};grid.fp={};grid.pins={};
+  grid.q=null;grid.align=null;grid.on=false;grid.hold=0;grid.thumbs={};grid.fp={};grid.pins={};grid.gh={};grid.lm=null;grid.hfE=[];grid.lmOk={};grid.lc=null;GHF=G_HF;
   removeEventListener('deviceorientation',gOrient,true);addEventListener('deviceorientation',gOrient,true);
-  GT=makeGT(innerHeight>innerWidth);for(const k in cellCache)delete cellCache[k];cap.asp=[];
+  // the cabin is always shot with the phone sideways
+  try{const el=document.documentElement;const go=el.requestFullscreen?el.requestFullscreen({navigationUI:'hide'}):null;
+    if(go&&go.then)go.then(()=>{try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{});}catch(e){}}).catch(()=>{});}catch(e){}
+  GT=makeGT(false);for(const k in cellCache)delete cellCache[k];cap.asp=[];
   cap.mode='grid';cap.n=GT.length;cap.body=(draft&&CAGE[draft.space])?draft.space:(draft&&BODY[draft.body]&&CAGE[draft.body])?draft.body:'sedan';cap.qs=new Array(cap.n).fill(null);$('#cap').classList.add('grid');startCapture().then(()=>{cancelAnimationFrame(grid.raf);gLoop();});
 }
 function gNext(from){for(let s=1;s<=cap.n;s++){const k=(from+s)%cap.n;if(!cap.shots[k])return k;}return from;}
@@ -1610,6 +1657,97 @@ function gMap(){
   const q=gCur();if(q){const d=new T.Vector3(0,0,-1).applyQuaternion(q),yy=Math.atan2(d.z,d.x)/D2R,pp=Math.asin(clamp(d.y,-1,1))/D2R;
     c.fillStyle='#f6c453';c.beginPath();c.arc(X(yy),Y(pp),9,0,7);c.fill();c.strokeStyle='#000';c.lineWidth=2;c.stroke();}
 }
+/* ===== the "ghost": the earlier photos shown see-through over the live video, in the place they must land.
+   The phone also compares the video with them by itself (normalised correlation on a small grey copy) and moves the
+   target point to where the content really matches — so the sensors' drift (left/right AND up/down) is removed before the photo is taken. */
+function grayOf(src,L){const sw=src.videoWidth||src.naturalWidth||src.width,sh=src.videoHeight||src.naturalHeight||src.height;if(!sw||!sh)return null;
+  const w=sw>=sh?L:Math.max(8,Math.round(L*sw/sh)),h=sw>=sh?Math.max(8,Math.round(L*sh/sw)):L;
+  const cv=grayOf.cv||(grayOf.cv=document.createElement('canvas'));cv.width=w;cv.height=h;const cx=cv.getContext('2d',{willReadFrequently:true});cx.drawImage(src,0,0,w,h);
+  const d=cx.getImageData(0,0,w,h).data,g=new Float32Array(w*h);for(let i=0;i<w*h;i++)g[i]=.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2];return{g,w,h};}
+function tanOf(w,h,hf){const tl=Math.tan(hf*D2R/2);return w>=h?[tl,tl*h/w]:[tl*w/h,tl];}
+// how far each pixel's ray goes before it meets the cabin shape (the cage) — so the phone's own movement
+// (it turns around your hand, not around its lens) is taken into account: near things shift more than far ones
+function ghDepth(cur,q,hf){const [th,tv]=tanOf(cur.w,cur.h,hf),k=cap.body||'sedan',o=new T.Vector3(0,0,-ARM).applyQuaternion(q),r=new T.Vector3(),W=cur.w,H=cur.h,D=new Float32Array(W*H);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){r.set((2*(x+.5)/W-1)*th,(1-2*(y+.5)/H)*tv,-1).applyQuaternion(q);const P=cageHit(o,r,k);D[y*W+x]=P.sub(o).dot(r)/r.lengthSq();}
+  return D;}
+// correlation between the live (grey) frame seen from camera pose qc and the earlier photos (each with its own pose)
+function ghNcc(cur,qc,nbs,hf,step,dep){const [th,tv]=tanOf(cur.w,cur.h,hf),Q=new T.Matrix4().makeRotationFromQuaternion(qc).elements,oc=new T.Vector3(0,0,-ARM).applyQuaternion(qc);
+  const M=nbs.map(nb=>{const m=new T.Matrix4().makeRotationFromQuaternion(nb.q).elements,ok=new T.Vector3(0,0,-ARM).applyQuaternion(nb.q),[a,b]=tanOf(nb.w,nb.h,hf);return{m,a,b,nb,dx:oc.x-ok.x,dy:oc.y-ok.y,dz:oc.z-ok.z};});
+  let n=0,sa=0,sb=0,saa=0,sbb=0,sab=0;const W=cur.w,H=cur.h;
+  for(let y=1;y<H-1;y+=step){const ry=(1-2*(y+.5)/H)*tv;for(let x=1;x<W-1;x+=step){const rx=(2*(x+.5)/W-1)*th;
+    // world ray of this pixel, and the point on the cage it sees
+    const wx=Q[0]*rx+Q[4]*ry-Q[8],wy=Q[1]*rx+Q[5]*ry-Q[9],wz=Q[2]*rx+Q[6]*ry-Q[10],t=dep?dep[y*W+x]:0;
+    for(const o of M){const e=o.m;let vx,vy,vz;
+      if(dep){const X=wx*t+o.dx,Y=wy*t+o.dy,Z=wz*t+o.dz;vx=e[0]*X+e[1]*Y+e[2]*Z;vy=e[4]*X+e[5]*Y+e[6]*Z;vz=e[8]*X+e[9]*Y+e[10]*Z;}
+      else{vx=e[0]*wx+e[1]*wy+e[2]*wz;vy=e[4]*wx+e[5]*wy+e[6]*wz;vz=e[8]*wx+e[9]*wy+e[10]*wz;}
+      if(vz>-.02)continue;
+      const u=(vx/-vz/o.a+1)/2*o.nb.w-.5,v=(1-vy/-vz/o.b)/2*o.nb.h-.5;if(u<1||v<1||u>o.nb.w-2||v>o.nb.h-2)continue;
+      const u0=u|0,v0=v|0,fu=u-u0,fv=v-v0,G=o.nb.g,k=v0*o.nb.w+u0,bv=(G[k]*(1-fu)+G[k+1]*fu)*(1-fv)+(G[k+o.nb.w]*(1-fu)+G[k+o.nb.w+1]*fu)*fv,av=cur.g[y*W+x];
+      n++;sa+=av;sb+=bv;saa+=av*av;sbb+=bv*bv;sab+=av*bv;break;}}}
+  if(n<20)return{r:-1,n};const va=saa-sa*sa/n,vb=sbb-sb*sb/n;if(va<=1e-3||vb<=1e-3)return{r:-1,n,flat:true};
+  return{r:(sab-sa*sb/n)/Math.sqrt(va*vb),n,cov:n*step*step/(W*H),flat:Math.sqrt(va/n)<6||Math.sqrt(vb/n)<6};}
+const GY=new T.Vector3(0,1,0),GX=new T.Vector3(1,0,0);
+function ghTurn(q,a,b){return new T.Quaternion().setFromAxisAngle(GY,a*D2R).multiply(q).multiply(new T.Quaternion().setFromAxisAngle(GX,b*D2R));}
+// search a small turn (left/right a, up/down b) of the camera that makes the video line up with the earlier photos
+function ghSearch(cur,q,nbs,hf,R,st,fineR,fineSt){let best=null,sc=[];const dep=ghDepth(cur,q,hf);
+  for(let a=-R;a<=R+1e-6;a+=st)for(let b=-R;b<=R+1e-6;b+=st){const m=ghNcc(cur,ghTurn(q,a,b),nbs,hf,2,dep);sc.push([a,b,m.r]);if(m.r>-1&&(!best||m.r>best.r))best={a,b,r:m.r,cov:m.cov,flat:m.flat};}
+  if(!best)return null;const c0=[best.a,best.b];
+  for(let a=-fineR;a<=fineR+1e-6;a+=fineSt)for(let b=-fineR;b<=fineR+1e-6;b+=fineSt){const m=ghNcc(cur,ghTurn(q,c0[0]+a,c0[1]+b),nbs,hf,1,dep);if(m.r>best.r)best={a:c0[0]+a,b:c0[1]+b,r:m.r,cov:m.cov,flat:m.flat};}
+  const rival=Math.max(-1,...sc.filter(([a,b])=>Math.hypot(a-c0[0],b-c0[1])>Math.max(1.2,st*2.1)).map(x=>x[2]));best.rival=rival;return best;}
+function ghNbs(i,q){const g=q?new T.Vector3(0,0,-1).applyQuaternion(q):gDir(GT[i]),out=[];
+  for(const k in (grid.gh||{})){if(+k===i||!cap.shots[k]||!cap.qs[k])continue;const qk=new T.Quaternion(...cap.qs[k]),d=new T.Vector3(0,0,-1).applyQuaternion(qk),ang=Math.acos(clamp(d.dot(g),-1,1))/D2R;
+    if(ang<GHF*.98)out.push({k:+k,ang,q:qk,g:grid.gh[k].sm.g,w:grid.gh[k].sm.w,h:grid.gh[k].sm.h,img:grid.gh[k].img});}
+  return out.sort((a,b)=>a.ang-b.ang).slice(0,4);}
+// make the see-through copy and the small grey copy of a photo just taken; then refine the camera angle from it
+async function ghMake(i){const blob=cap.shots[i];if(!blob)return;
+  try{const bm=await createImageBitmap(blob);if(cap.shots[i]!==blob){bm.close&&bm.close();return;}
+    const L=480,w=bm.width>=bm.height?L:Math.round(L*bm.width/bm.height),h=bm.width>=bm.height?Math.round(L*bm.height/bm.width):L,cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(bm,0,0,w,h);bm.close&&bm.close();
+    grid.gh=grid.gh||{};grid.gh[i]={img:cv,sm:grayOf(cv,160)};
+    const sm=grid.gh[i].sm;sm.g=Float32Array.from(sm.g);
+    if((grid.hfE||[]).length<5&&cap.qs[i]&&(!(grid.hfE||[]).length||(grid.lmOk||{})[i]))setTimeout(()=>ghFov(i),30);
+  }catch(e){console.warn('ghost',e);}}
+// the phone camera's real field of view: try several and keep the one where this photo and its neighbours line up best
+function ghFov(i){const gh=grid.gh[i];if(!gh||!cap.qs[i])return;const q=new T.Quaternion(...cap.qs[i]),nbs=ghNbs(i,q);if(!nbs.length)return;
+  const cur={g:gh.sm.g,w:gh.sm.w,h:gh.sm.h},res=[];
+  for(let hf=52;hf<=86;hf+=2){const b=ghSearch(cur,q,nbs,hf,1.5,.5,.25,.25);if(b)res.push([hf,b.r]);}
+  if(res.length<5)return;res.sort((a,b)=>b[1]-a[1]);const [h0,r0]=res[0];if(r0<.55)return;
+  const far=res.filter(([h])=>Math.abs(h-h0)>=8).map(x=>x[1]);if(far.length&&r0-Math.max(...far)<.02)return;
+  let bh=h0,br=r0;for(let hf=h0-1.5;hf<=h0+1.5;hf+=.5){const b=ghSearch(cur,q,nbs,hf,.75,.25,.1,.1);if(b&&b.r>br){br=b.r;bh=hf;}}
+  grid.hfE.push(bh);const e=grid.hfE.slice().sort((a,b)=>a-b),m=e[Math.floor((e.length-1)/2)],old=GHF;if(e.length>=2||Math.abs(m-GHF)>3)GHF=clamp(m,48,92);
+  // photos taken before the angle was known were placed with the wrong angle: line them up again from their own content
+  if(Math.abs(GHF-old)>1)for(const k in grid.gh){if(+k===0||(grid.lmOk||{})[k])continue;ghRefine(+k);}}
+function ghRefine(j){const gh=grid.gh[j];if(!gh||!cap.qs[j])return;const q=new T.Quaternion(...cap.qs[j]),nbs=ghNbs(j,q).filter(nb=>nb.k<j||(grid.lmOk||{})[nb.k]||nb.k===0);if(!nbs.length)return;
+  const b=ghSearch({g:gh.sm.g,w:gh.sm.w,h:gh.sm.h},q,nbs,GHF,3,.5,.5,.1);if(!b||b.flat||b.cov<.08||b.r<.5||b.r-b.rival<.06)return;
+  const qn=ghTurn(q,b.a,b.b);cap.qs[j]=[qn.x,qn.y,qn.z,qn.w].map(v=>+v.toFixed(5));grid.fp[j]=shotFootprint(qn,cap.body||'sedan',gh.sm.w/gh.sm.h);(grid.lmOk=grid.lmOk||{})[j]=true;}
+// live: compare the video with the earlier photos and correct the aim (runs a few times a second near the target)
+function ghLive(){const q=gCur(),src=grid.frameSrc?grid.frameSrc():$('#capVid');if(!q||!src)return;
+  const nbs=ghNbs(cap.i,q);if(!nbs.length){grid.lm={t:performance.now(),none:true};return;}
+  const cur=grayOf(src,160);if(!cur)return;
+  const b=ghSearch(cur,q,nbs,GHF,3,.5,.5,.1),now=performance.now();
+  if(!b||b.flat||b.cov<.08||b.r<.5||b.r-b.rival<.06){grid.lm={t:now,ok:false,flat:!!(b&&b.flat),r:b?b.r:-1};return;}
+  // the sensors are off by this much: correct them (also for every later photo)
+  // left/right drift is the compass: it carries over to every later photo. Up/down is corrected for this photo only
+  // (carried over to a photo facing another way it would turn into a tilt).
+  grid.align=new T.Quaternion().setFromAxisAngle(GY,b.a*.85*D2R).multiply(grid.align);
+  const P=q.clone().multiply(new T.Quaternion().setFromAxisAngle(GX,b.b*.85*D2R)).multiply(q.clone().invert());
+  grid.lc=P.multiply(grid.lc&&grid.lcI===cap.i?grid.lc:new T.Quaternion());grid.lcI=cap.i;
+  grid.lm={t:now,ok:true,a:b.a,b:b.b,r:b.r,err:Math.hypot(b.a,b.b)};}
+function triImg(c,img,s,d){c.save();c.beginPath();c.moveTo(d[0][0],d[0][1]);c.lineTo(d[1][0],d[1][1]);c.lineTo(d[2][0],d[2][1]);c.closePath();c.clip();
+  const [x0,y0]=s[0],[x1,y1]=s[1],[x2,y2]=s[2],den=(x1-x0)*(y2-y0)-(x2-x0)*(y1-y0);if(Math.abs(den)<1e-9){c.restore();return;}
+  const a=((d[1][0]-d[0][0])*(y2-y0)-(d[2][0]-d[0][0])*(y1-y0))/den,b=((d[2][0]-d[0][0])*(x1-x0)-(d[1][0]-d[0][0])*(x2-x0))/den,
+        cc=((d[1][1]-d[0][1])*(y2-y0)-(d[2][1]-d[0][1])*(y1-y0))/den,dd=((d[2][1]-d[0][1])*(x1-x0)-(d[1][1]-d[0][1])*(x2-x0))/den;
+  c.setTransform(a,cc,b,dd,d[0][0]-a*x0-b*y0,d[0][1]-cc*x0-dd*y0);c.drawImage(img,0,0);c.restore();}
+function drawGhost(c,W,H,f,q){const nbs=ghNbs(cap.i,q);if(!nbs.length)return false;
+  const off=grid.gcv||(grid.gcv=document.createElement('canvas'));off.width=W;off.height=H;const o=off.getContext('2d');o.clearRect(0,0,W,H);
+  const inv=q.clone().invert(),v=new T.Vector3(),NX=10,NY=6;
+  for(const nb of nbs.slice().reverse()){const img=nb.img,iw=img.width,ih=img.height,[a,b]=tanOf(iw,ih,GHF),P=[];
+    const ok=new T.Vector3(0,0,-ARM).applyQuaternion(nb.q),oc=new T.Vector3(0,0,-ARM).applyQuaternion(q),kb=cap.body||'sedan';
+    for(let j=0;j<=NY;j++){P.push([]);for(let i=0;i<=NX;i++){v.set((2*i/NX-1)*a,(1-2*j/NY)*b,-1).applyQuaternion(nb.q);v.copy(cageHit(ok,v,kb)).sub(oc).applyQuaternion(inv);P[j].push(v.z<-.05?[W/2+v.x/-v.z*f,H/2-v.y/-v.z*f]:null);}}
+    for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const p00=P[j][i],p10=P[j][i+1],p01=P[j+1][i],p11=P[j+1][i+1];if(!p00||!p10||!p01||!p11)continue;
+      const s00=[i/NX*iw,j/NY*ih],s10=[(i+1)/NX*iw,j/NY*ih],s01=[i/NX*iw,(j+1)/NY*ih],s11=[(i+1)/NX*iw,(j+1)/NY*ih];
+      // a hair of overlap between the triangles so no seams show
+      triImg(o,img,[s00,s10,s11],[p00,p10,p11]);triImg(o,img,[s00,s11,s01],[p00,p11,p01]);}}
+  c.save();c.globalAlpha=.5;c.drawImage(off,0,0);c.restore();return true;}
 function gOverlay(){
   const ov=$('#capOv'),r=ov.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
   const W=ov.width=Math.max(1,Math.round(r.width*dpr)),H=ov.height=Math.max(1,Math.round(r.height*dpr)),c=ov.getContext('2d');c.clearRect(0,0,W,H);
@@ -1618,9 +1756,11 @@ function gOverlay(){
   // upright or sideways both work
   const q=gCur();if(!q||!cap.live)return false;
   const vid=$('#capVid');let f;
-  if(vid&&vid.videoWidth){const sc=Math.max(W/vid.videoWidth,H/vid.videoHeight);f=(Math.max(vid.videoWidth,vid.videoHeight)/2)/Math.tan(G_HF*D2R/2)*sc;}
-  else f=(Math.max(W,H)/2)/Math.tan(G_HF*D2R/2);
+  if(vid&&vid.videoWidth){const sc=Math.max(W/vid.videoWidth,H/vid.videoHeight);f=(Math.max(vid.videoWidth,vid.videoHeight)/2)/Math.tan(GHF*D2R/2)*sc;}
+  else f=(Math.max(W,H)/2)/Math.tan(GHF*D2R/2);
   const inv=q.clone().invert();let aligned=false;
+  { const gd=gDir(GT[cap.i]),cd=new T.Vector3(0,0,-1).applyQuaternion(q),near=Math.acos(clamp(gd.dot(cd),-1,1))/D2R;grid.err=near;
+    grid.ghOn=near<8&&drawGhost(c,W,H,f,q);}
   { // the virtual cage, seen from where the phone actually is (a little in front of your body)
     const eye=new T.Vector3(0,0,-ARM).applyQuaternion(q),v=new T.Vector3();c.lineWidth=2*dpr;c.strokeStyle='rgba(120,240,230,.7)';c.shadowColor='rgba(0,0,0,.8)';c.shadowBlur=3*dpr;
     for(const pl of cageLines(cap.body||'sedan')){c.beginPath();let pen=false;
@@ -1639,44 +1779,67 @@ function gOverlay(){
   GT.forEach((g,k)=>{if(k===cap.i||cap.shots[k])return;path(cellOutline(k,body),true);c.lineWidth=1.5*dpr;c.strokeStyle='rgba(255,255,255,.35)';c.setLineDash([6*dpr,6*dpr]);c.stroke();c.setLineDash([]);});
   { const g=GT[cap.i],v=gDir(g).applyQuaternion(inv);
     if(v.z<-.15){const sx=W/2+v.x/-v.z*f,sy=H/2-v.y/-v.z*f;
-      // the dot must sit INSIDE the small centre ring (≈1°), not just near it
-      const errDeg=Math.acos(Math.max(-1,Math.min(1,-v.z/v.length())))/D2R,ringR=Math.max(9*dpr,f*Math.tan(ALIGN_DEG*D2R));
-      // level ruler: how much the phone leans sideways (gravity measures this precisely)
+      // two points: a fixed point at the lens centre and the target point. The photo is taken only when they sit on top of each other.
+      const errDeg=Math.acos(Math.max(-1,Math.min(1,-v.z/v.length())))/D2R,tolPx=Math.max(4*dpr,f*Math.tan(ALIGN_DEG*D2R));
+      const portrait=innerHeight>innerWidth;
       const useLevel=Math.abs(g.p)<70,rv=new T.Vector3(1,0,0).applyQuaternion(q),rollDeg=Math.asin(Math.max(-1,Math.min(1,rv.y)))/D2R,levelOK=!useLevel||Math.abs(rollDeg)<LEVEL_DEG;
-      aligned=errDeg<ALIGN_DEG&&levelOK;const near=errDeg<ALIGN_DEG*4;
-      if(useLevel){ // a line that stays level with the world: it tilts on screen when the phone leans
-        const cd=new T.Vector3(0,0,-1).applyQuaternion(q),cy=Math.atan2(cd.z,cd.x),cp=Math.asin(Math.max(-1,Math.min(1,cd.y)));
-        const pr=(yy)=>{const w=dirOf(yy,cp).applyQuaternion(inv);return w.z<-.05?[W/2+w.x/-w.z*f,H/2-w.y/-w.z*f]:null;};
-        const a1=pr(cy-.12),a2=pr(cy+.12);
-        if(a1&&a2){const ang=Math.atan2(a2[1]-a1[1],a2[0]-a1[0]),L=Math.min(W,H)*.34;
-          c.save();c.translate(W/2,H/2);
-          // fixed reference marks (the phone's own level)
-          c.strokeStyle='rgba(255,255,255,.75)';c.lineWidth=3*dpr;c.beginPath();c.moveTo(-L-14*dpr,0);c.lineTo(-L+10*dpr,0);c.moveTo(L-10*dpr,0);c.lineTo(L+14*dpr,0);c.stroke();
-          // the world's level line
-          c.rotate(ang);c.strokeStyle=levelOK?'#48e08a':'#f6c453';c.lineWidth=3*dpr;c.beginPath();c.moveTo(-L,0);c.lineTo(-ringR-6*dpr,0);c.moveTo(ringR+6*dpr,0);c.lineTo(L,0);c.stroke();
-          c.restore();
-          if(!levelOK){c.fillStyle='rgba(0,0,0,.55)';c.font=`700 ${14*dpr}px system-ui,sans-serif`;c.textAlign='center';const tx=t(rollDeg>0?'lvlR':'lvlL');const tw=c.measureText(tx).width+18*dpr;
-            c.fillRect(W/2-tw/2,H/2+ringR+22*dpr,tw,26*dpr);c.fillStyle='#f6c453';c.fillText(tx,W/2,H/2+ringR+40*dpr);}}}
-      path(cellOutline(cap.i,body),true);c.lineWidth=(aligned?6:4)*dpr;c.strokeStyle=aligned?'#48e08a':'#fff';c.stroke();
-      // centre target: the ring the dot has to enter
-      c.lineWidth=3*dpr;c.strokeStyle=aligned?'#48e08a':near?'#f6c453':'rgba(255,255,255,.85)';c.beginPath();c.arc(W/2,H/2,ringR,0,7);c.stroke();
-      c.fillStyle=aligned?'#48e08a':near?'#f6c453':'#fff';c.beginPath();c.arc(sx,sy,6*dpr,0,7);c.fill();
-      if(aligned&&grid.hold>0){c.beginPath();c.arc(W/2,H/2,ringR+9*dpr,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.min(1,grid.hold));c.strokeStyle='#48e08a';c.lineWidth=5*dpr;c.stroke();}}
+      aligned=!portrait&&errDeg<ALIGN_DEG&&levelOK;const near=errDeg<ALIGN_DEG*5;
+      path(cellOutline(cap.i,body),true);c.lineWidth=(aligned?6:3)*dpr;c.strokeStyle=aligned?'#48e08a':'rgba(255,255,255,.8)';c.stroke();
+      // sight lines through the lens centre (like a gun-sight), and level line
+      const col=aligned?'#48e08a':near?'#f6c453':'#ffffff';
+      if(useLevel){const cd=new T.Vector3(0,0,-1).applyQuaternion(q),cy=Math.atan2(cd.z,cd.x),cp=Math.asin(Math.max(-1,Math.min(1,cd.y)));
+        const pr=(yy)=>{const w=dirOf(yy,cp).applyQuaternion(inv);return w.z<-.05?[W/2+w.x/-w.z*f,H/2-w.y/-w.z*f]:null;};const a1=pr(cy-.12),a2=pr(cy+.12);
+        if(a1&&a2){const ang=Math.atan2(a2[1]-a1[1],a2[0]-a1[0]);c.save();c.translate(W/2,H/2);c.rotate(ang);c.strokeStyle=levelOK?'rgba(72,224,138,.9)':'#f6c453';c.lineWidth=2*dpr;
+          c.beginPath();c.moveTo(-W,0);c.lineTo(-22*dpr,0);c.moveTo(22*dpr,0);c.lineTo(W,0);c.stroke();c.restore();}
+        if(!levelOK){c.fillStyle='rgba(0,0,0,.6)';c.font=`700 ${14*dpr}px system-ui,sans-serif`;c.textAlign='center';const tx=t(rollDeg>0?'lvlR':'lvlL');const tw=c.measureText(tx).width+18*dpr;
+          c.fillRect(W/2-tw/2,H/2+34*dpr,tw,26*dpr);c.fillStyle='#f6c453';c.fillText(tx,W/2,H/2+52*dpr);}}
+      // pitch ladder (like a pilot's display): numbered lines every 10° that move with the phone's tilt, plus the target line
+      { const cd=new T.Vector3(0,0,-1).applyQuaternion(q),cy=Math.atan2(cd.z,cd.x),cpD=Math.asin(Math.max(-1,Math.min(1,cd.y)))/D2R;
+        const P=(yy,pp)=>{const w=dirOf(yy,pp*D2R).applyQuaternion(inv);return w.z<-.05?[W/2+w.x/-w.z*f,H/2-w.y/-w.z*f]:null;};
+        const phoneAng=pp=>Math.round(90-Math.abs(pp)),arrow=pp=>pp>0.5?' ↑':pp<-0.5?' ↓':'';
+        c.font=`600 ${11*dpr}px system-ui,sans-serif`;c.textAlign='left';
+        for(let pp=Math.ceil((cpD-35)/10)*10;pp<=cpD+35;pp+=10){if(pp<-85||pp>85)continue;
+          const L1=P(cy-.16,pp),L2=P(cy-.07,pp),R1=P(cy+.07,pp),R2=P(cy+.16,pp);if(!L1||!R2)continue;
+          c.strokeStyle='rgba(255,255,255,.45)';c.lineWidth=1.5*dpr;c.beginPath();c.moveTo(L1[0],L1[1]);c.lineTo(L2[0],L2[1]);c.moveTo(R1[0],R1[1]);c.lineTo(R2[0],R2[1]);c.stroke();
+          c.fillStyle='rgba(255,255,255,.7)';c.fillText(phoneAng(pp)+'°'+arrow(pp),R2[0]+5*dpr,R2[1]+4*dpr);}
+        // target tilt line
+        const tp=g.p,TL1=P(cy-.2,tp),TR2=P(cy+.2,tp),pitchOK=Math.abs(cpD-tp)<ALIGN_DEG;
+        if(TL1&&TR2&&Math.abs(tp)<85){c.strokeStyle=pitchOK?'#48e08a':'#4fd1c5';c.lineWidth=2.5*dpr;c.setLineDash([10*dpr,6*dpr]);c.beginPath();c.moveTo(TL1[0],TL1[1]);
+          for(let k=1;k<=8;k++){const pt=P(cy-.2+.4*k/8,tp);if(pt)c.lineTo(pt[0],pt[1]);}c.stroke();c.setLineDash([]);}
+        // read-out: phone tilt now vs the tilt this photo needs
+        const iso=x=>'\u2066'+x+'\u2069',now=phoneAng(cpD),need=phoneAng(tp),txt=`${t('tiltNow')} ${iso(now+'°'+arrow(cpD))}   ·   ${t('tiltNeed')} ${iso(need+'°'+arrow(tp))}`;
+        c.font=`700 ${15*dpr}px system-ui,sans-serif`;c.textAlign='center';const tw=c.measureText(txt).width+24*dpr,ty=H/2-78*dpr;
+        c.fillStyle='rgba(0,0,0,.6)';c.fillRect(W/2-tw/2,ty-20*dpr,tw,30*dpr);c.fillStyle=pitchOK?'#48e08a':Math.abs(cpD-tp)<4?'#f6c453':'#ffffff';c.fillText(txt,W/2,ty);}
+      c.strokeStyle='rgba(255,255,255,.55)';c.lineWidth=1.5*dpr;c.beginPath();c.moveTo(W/2,H/2-60*dpr);c.lineTo(W/2,H/2-14*dpr);c.moveTo(W/2,H/2+14*dpr);c.lineTo(W/2,H/2+60*dpr);c.stroke();
+      // the target point and a thin line from it to the centre, so you can see which way to turn
+      if(!aligned){c.strokeStyle=col;c.globalAlpha=.6;c.lineWidth=1.5*dpr;c.setLineDash([4*dpr,4*dpr]);c.beginPath();c.moveTo(W/2,H/2);c.lineTo(sx,sy);c.stroke();c.setLineDash([]);c.globalAlpha=1;
+        c.fillStyle=col;c.beginPath();c.arc(sx,sy,PT_R*dpr,0,7);c.fill();c.strokeStyle='#000';c.lineWidth=1.5*dpr;c.stroke();}
+      // the fixed centre point
+      if(aligned){c.fillStyle='#48e08a';c.beginPath();c.arc(W/2,H/2,PT_R*dpr,0,7);c.fill();c.strokeStyle='#000';c.lineWidth=1.5*dpr;c.stroke();}
+      else{c.strokeStyle='#000';c.lineWidth=4.5*dpr;c.beginPath();c.arc(W/2,H/2,PT_R*dpr,0,7);c.stroke();c.strokeStyle='#ffffff';c.lineWidth=2.5*dpr;c.beginPath();c.arc(W/2,H/2,PT_R*dpr,0,7);c.stroke();}
+      if(grid.ghOn&&grid.lm&&performance.now()-grid.lm.t<800&&!grid.lm.none){const ok=grid.lm.ok&&grid.lm.err<.35,tx=ok?t('ghMatch'):grid.lm.flat?t('ghFlat'):t('ghMove');
+        c.font=`700 ${14*dpr}px system-ui,sans-serif`;c.textAlign='center';const tw=c.measureText(tx).width+20*dpr,ty=H/2+(levelOK?44:78)*dpr;
+        c.fillStyle='rgba(0,0,0,.6)';c.fillRect(W/2-tw/2,ty-18*dpr,tw,26*dpr);c.fillStyle=ok?'#48e08a':'#f6c453';c.fillText(tx,W/2,ty);}
+      if(aligned&&grid.hold>0){c.beginPath();c.arc(W/2,H/2,18*dpr,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.min(1,grid.hold));c.strokeStyle='#48e08a';c.lineWidth=4*dpr;c.stroke();}
+      if(portrait&&cap.live){c.fillStyle='rgba(0,0,0,.6)';c.fillRect(0,H*.38,W,64*dpr);c.fillStyle='#fff';c.font=`700 ${19*dpr}px system-ui,sans-serif`;c.textAlign='center';c.fillText(t('gSideways'),W/2,H*.38+40*dpr);}}
     else{path(cellOutline(cap.i,body),true);c.lineWidth=4*dpr;c.strokeStyle='#fff';c.stroke();}}
   return aligned;
 }
 function gLoop(){
   if($('#cap').classList.contains('hidden')||cap.mode!=='grid'){removeEventListener('deviceorientation',gOrient,true);return;}
   const now=performance.now(),dt=Math.min(.1,(now-(grid.lastT||now))/1000);grid.lastT=now;
-  const al=gOverlay();if(now-(grid.mapT||0)>150){grid.mapT=now;gMap();}
-  if(al&&!cap.shots[cap.i]&&!grid.busy){grid.hold+=dt/.6;if(grid.hold>=1){grid.hold=0;grid.busy=true;$('#capShot').click();setTimeout(()=>grid.busy=false,900);}}else grid.hold=0;
+  let al=gOverlay();if(now-(grid.mapT||0)>150){grid.mapT=now;gMap();}
+  if(!cap.shots[cap.i]&&cap.live&&grid.err<8&&now-(grid.ghT||0)>220){grid.ghT=now;try{ghLive();}catch(e){console.warn('ghLive',e);}}
+  if(al){grid.alT=grid.alT||now;const lm=grid.lm,fresh=lm&&now-lm.t<700;
+    const contentOK=!fresh||lm.none||(lm.ok&&lm.err<.35)||(!lm.ok&&now-grid.alT>2500);if(!contentOK)al=false;}else grid.alT=0;
+  if(al&&!cap.shots[cap.i]&&!grid.busy){grid.hold+=dt/.45;if(grid.hold>=1){grid.hold=0;grid.busy=true;$('#capShot').click();setTimeout(()=>grid.busy=false,900);}}else grid.hold=0;
   grid.raf=requestAnimationFrame(gLoop);
 }
 function gOnShot(i){
   if(grid.q){if(!grid.align){const d=new T.Vector3(0,0,-1).applyQuaternion(grid.q);const h=new T.Vector3(d.x,0,d.z).normalize(),g=gDir(GT[i]),gh=new T.Vector3(g.x,0,g.z);
       if(gh.lengthSq()<1e-6)gh.set(1,0,0);grid.align=new T.Quaternion().setFromUnitVectors(h,gh.normalize());}
     const vv=$('#capVid'),asp=(cap.live&&vv.videoWidth)?vv.videoWidth/vv.videoHeight:16/9;(cap.asp=cap.asp||[])[i]=asp;
-    const q=gCur();cap.qs[i]=[q.x,q.y,q.z,q.w].map(v=>+v.toFixed(5));grid.fp=grid.fp||{};grid.fp[i]=shotFootprint(q,cap.body||'sedan',asp);grid.pins=grid.pins||{};delete grid.pins[i];analyzeShot(i);}
+    const q=gCur();cap.qs[i]=[q.x,q.y,q.z,q.w].map(v=>+v.toFixed(5));const lm=grid.lm;(grid.lmOk=grid.lmOk||{})[i]=!!(lm&&lm.ok&&performance.now()-lm.t<900&&lm.err<.5);grid.fp=grid.fp||{};grid.fp[i]=shotFootprint(q,cap.body||'sedan',asp);grid.pins=grid.pins||{};delete grid.pins[i];analyzeShot(i);setTimeout(()=>ghMake(i),0);}
   else cap.qs[i]=null;
 }
 $('#capGrid').onclick=e=>{const r=e.target.getBoundingClientRect(),yy=((e.clientX-r.left)/r.width-.5)*360,pp=(.5-(e.clientY-r.top)/r.height)*180;
