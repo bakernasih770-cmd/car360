@@ -88,8 +88,9 @@ async function stitch({images,qs,hfov,fixFov,tol,fullSolve}){
   { const f0=fOf(feats[0],fov);
     links=links.filter(L=>{if(L.pa.length<20)return false;const A=L.pa.map(p=>ray(p[0],p[1],feats[L.i].W,feats[L.i].H,fOf(feats[L.i],fov))),B=L.pb.map(p=>ray(p[0],p[1],feats[L.j].W,feats[L.j].H,fOf(feats[L.j],fov))),R=horn(A,B);
       const res=A.map((a,k)=>{const r=qrot(R,a),b=B[k];return Math.acos(Math.min(1,r[0]*b[0]+r[1]*b[1]+r[2]*b[2]))*f0;}).sort((x,y)=>x-y);return res[res.length>>1]<TOL.pre;}); }
+  let fovEst=null;
   if(links.length>=3&&!fixFov){let best=1e9;for(let v=40;v<=100;v+=2){const e=residual(v);if(e<best){best=e;fov=v;}}
-    const c0=fov;for(let v=c0-1.5;v<=c0+1.5;v+=.25){const e=residual(v);if(e<best){best=e;fov=v;}}}
+    const c0=fov;for(let v=c0-1.5;v<=c0+1.5;v+=.25){const e=residual(v);if(e<best){best=e;fov=v;}}fovEst=+fov.toFixed(2);}
   const FOVNOW=fov,f=fOf(feats[0],fov);
   // relative rotations: r_j = R_ij r_i  =>  Q_i = Q_j * R_ij
   let E=[];
@@ -125,7 +126,7 @@ async function stitch({images,qs,hfov,fixFov,tol,fullSolve}){
     // self-check: how well do neighbouring photos agree with what their content says? keep whichever is better
     const disagree=Q=>{const v=EL.map(e=>qang(Q[e.i],qmul(Q[e.j],e.R))*180/Math.PI).sort((a,b)=>a-b);return v.length?v[v.length>>1]:1e9;};
     const before=disagree(qs.map(q=>q||[0,0,0,1])),after=disagree(out),use=after<before*.8;
-    return{qs:(use?out:qs.map(q=>q||[0,0,0,1])).map(q=>q.map(v=>+v.toFixed(6))),hfov:+(use?fov:(hfov||64)).toFixed(2),matched:hasY,pairs:M.length,mode:use?'heading':'sensors',check:{before:+before.toFixed(2),after:+after.toFixed(2)},E:E.map(e=>({i:e.i,j:e.j,w:e.w,R:e.R}))};
+    return{qs:(use?out:qs.map(q=>q||[0,0,0,1])).map(q=>q.map(v=>+v.toFixed(6))),hfov:+(use?fov:(hfov||64)).toFixed(2),matched:hasY,pairs:M.length,fovEst,mode:use?'heading':'sensors',check:{before:+before.toFixed(2),after:+after.toFixed(2)},E:E.map(e=>({i:e.i,j:e.j,w:e.w,R:e.R}))};
   }
   // starting point: sensors if we have them, otherwise grow from the first photo
   const Q=new Array(n).fill(null),has=new Array(n).fill(false);E.forEach(e=>{has[e.i]=has[e.j]=true;});
@@ -148,6 +149,6 @@ async function stitch({images,qs,hfov,fixFov,tol,fullSolve}){
     if(k0>=0){const g=qmul(qs[k0],qinv(Q[k0]));for(let i=0;i<n;i++)if(has[i])Q[i]=qnorm(qmul(g,Q[i]));}
     for(let i=0;i<n;i++){if(has[i]||!qs[i])continue;let best=-1,bd=1e9;for(let j=0;j<n;j++)if(has[j]&&qs[j]&&Math.abs(j-i)<bd){bd=Math.abs(j-i);best=j;}
       if(best>=0)Q[i]=qnorm(qmul(qmul(Q[best],qinv(qs[best])),qs[i]));}}
-  return{qs:Q.map(q=>q.map(v=>+v.toFixed(6))),hfov:+fov.toFixed(2),matched:has,pairs:E.length,E:E.map(e=>({i:e.i,j:e.j,w:e.w,R:e.R}))};
+  return{qs:Q.map(q=>q.map(v=>+v.toFixed(6))),hfov:+fov.toFixed(2),fovEst,matched:has,pairs:E.length,E:E.map(e=>({i:e.i,j:e.j,w:e.w,R:e.R}))};
 }
 self.onmessage=async e=>{try{postMessage({result:await stitch(e.data)});}catch(err){postMessage({error:String(err&&err.message||err)});}};
